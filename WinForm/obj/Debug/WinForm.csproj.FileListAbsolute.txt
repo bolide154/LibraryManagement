@@ -8,3 +8,5 @@ E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.csproj.Ge
 E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.exe
 E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.pdb
 E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.MainGUI.resources
+E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\bin\Debug\Core.dll
+E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\bin\Debug\Core.pdb
