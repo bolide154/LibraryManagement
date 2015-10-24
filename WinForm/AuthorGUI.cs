@@ -18,9 +18,7 @@ namespace WinForm
             InitializeComponent();
         }
 
-        
-
-        private void button1_Click(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
             string catalog = this.cboSearch.Text;
             string key = this.txtSearch.Text;
@@ -37,6 +35,17 @@ namespace WinForm
             {
                 this.dgvAuthor.Rows.Add(row.AuthorId, row.Name, row.WorkPlace);
             }
+            int selectedrowindex = dgvAuthor.SelectedCells[0].RowIndex;
+
+            DataGridViewRow selectedRow = dgvAuthor.Rows[selectedrowindex];
+
+            string id = Convert.ToString(selectedRow.Cells["clmnId"].Value);
+            string name = Convert.ToString(selectedRow.Cells["clmnName"].Value);
+            string workPlace = Convert.ToString(selectedRow.Cells["clmnWorkPlace"].Value);
+            this.lblInfor.Text = id + " / " + name;
+            this.txtAuthorName.Text = name;
+            this.txtWorkPlace.Text = workPlace;
+
             this.dgvAuthor.CellClick += new DataGridViewCellEventHandler(dgvAuthor_CellClick);
         }
 

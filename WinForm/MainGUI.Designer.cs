@@ -31,7 +31,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnuAuthor = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuiInfor = new System.Windows.Forms.ToolStripMenuItem();
-            this.bookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuBook = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuiTypeOfBook = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -39,7 +40,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuAuthor,
-            this.bookToolStripMenuItem});
+            this.mnuBook});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(636, 24);
@@ -57,15 +58,24 @@
             // mnuiInfor
             // 
             this.mnuiInfor.Name = "mnuiInfor";
-            this.mnuiInfor.Size = new System.Drawing.Size(152, 22);
+            this.mnuiInfor.Size = new System.Drawing.Size(137, 22);
             this.mnuiInfor.Text = "Information";
             this.mnuiInfor.Click += new System.EventHandler(this.mnuiInfor_Click);
             // 
-            // bookToolStripMenuItem
+            // mnuBook
             // 
-            this.bookToolStripMenuItem.Name = "bookToolStripMenuItem";
-            this.bookToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
-            this.bookToolStripMenuItem.Text = "Book";
+            this.mnuBook.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuiTypeOfBook});
+            this.mnuBook.Name = "mnuBook";
+            this.mnuBook.Size = new System.Drawing.Size(46, 20);
+            this.mnuBook.Text = "Book";
+            // 
+            // mnuiTypeOfBook
+            // 
+            this.mnuiTypeOfBook.Name = "mnuiTypeOfBook";
+            this.mnuiTypeOfBook.Size = new System.Drawing.Size(152, 22);
+            this.mnuiTypeOfBook.Text = "Type Of Book";
+            this.mnuiTypeOfBook.Click += new System.EventHandler(this.mnuiTypeOfBook_Click);
             // 
             // MainGUI
             // 
@@ -87,7 +97,8 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem mnuAuthor;
-        private System.Windows.Forms.ToolStripMenuItem bookToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuBook;
         private System.Windows.Forms.ToolStripMenuItem mnuiInfor;
+        private System.Windows.Forms.ToolStripMenuItem mnuiTypeOfBook;
     }
 }

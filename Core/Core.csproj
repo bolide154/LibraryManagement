@@ -40,8 +40,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\AuthorBLL.cs" />
+    <Compile Include="BLL\TypeOfBookBLL.cs" />
     <Compile Include="DAL\AuthorDAL.cs" />
     <Compile Include="DAL\Connection.cs" />
+    <Compile Include="DAL\TypeOfBookDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
