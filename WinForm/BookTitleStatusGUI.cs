@@ -11,14 +11,14 @@ using System.Windows.Forms;
 
 namespace WinForm
 {
-    public partial class TypeOfBookGUI : Form
+    public partial class BookTitleStatusGUI : Form
     {
-        public TypeOfBookGUI()
+        public BookTitleStatusGUI()
         {
             InitializeComponent();
         }
 
-        private void TypeOfBookGUI_Load(object sender, EventArgs e)
+        private void BookTitleStatusGUI_Load(object sender, EventArgs e)
         {
             this.LoadDataToComBoBox();
             this.LoadDataToGridView();
@@ -35,31 +35,36 @@ namespace WinForm
 
         private void LoadDataToGridView()
         {
-                this.dgvTypeOfBook.Rows.Clear();
-                TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL();
-                List<TypeOfBookBLL> typeOfBookArr = new List<TypeOfBookBLL>();
-                typeOfBookArr = typeOfBookBLL.LoadTypeOfBookList();
-                foreach (TypeOfBookBLL row in typeOfBookArr)
-                {
-                    this.dgvTypeOfBook.Rows.Add(row.TypeOfBookId, row.Name);
-                }
-                this.GetSelectedValue();
-                this.dgvTypeOfBook.CellClick += new DataGridViewCellEventHandler(this.dgvTypeOfBook_CellClick);
-                
+            this.dgvBookTitleStatus.Rows.Clear();
+            BookTitleStatusBLL bookTitleStatusBLL = new BookTitleStatusBLL();
+            List<BookTitleStatusBLL> bookTitleStatusArr = new List<BookTitleStatusBLL>();
+            bookTitleStatusArr = bookTitleStatusBLL.LoadTypeOfBookList();
+            foreach (BookTitleStatusBLL row in bookTitleStatusArr)
+            {
+                this.dgvBookTitleStatus.Rows.Add(row.BookTitleStatusId, row.Name);
+            }
+            this.GetSelectedValue();
+            this.dgvBookTitleStatus.CellClick += new DataGridViewCellEventHandler(this.dgvBookTitleStatus_CellClick);
+
+        }
+
+        private void dgvBookTitleStatus_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.GetSelectedValue();
         }
 
         private void GetSelectedValue()
         {
-            if (dgvTypeOfBook.SelectedCells.Count > 0)
+            if (this.dgvBookTitleStatus.SelectedCells.Count > 0)
             {
-                int selectedrowindex = this.dgvTypeOfBook.SelectedCells[0].RowIndex;
+                int selectedrowindex = this.dgvBookTitleStatus.SelectedCells[0].RowIndex;
 
-                DataGridViewRow selectedRow = this.dgvTypeOfBook.Rows[selectedrowindex];
+                DataGridViewRow selectedRow = this.dgvBookTitleStatus.Rows[selectedrowindex];
 
                 string id = Convert.ToString(selectedRow.Cells["clmnId"].Value);
                 string name = Convert.ToString(selectedRow.Cells["clmnName"].Value);
                 this.lblInfor.Text = id + " / " + name;
-                this.txtTypeOfBookName.Text = name;
+                this.txtBookTitleStatusName.Text = name;
                 if (id == "")
                 {
                     this.btnDelete.Enabled = false;
@@ -74,15 +79,10 @@ namespace WinForm
             else
             {
                 this.lblInfor.Text = "Id / Name";
-                this.txtTypeOfBookName.Text = "";
+                this.txtBookTitleStatusName.Text = "";
                 this.btnDelete.Enabled = false;
                 this.btnSave.Enabled = false;
             }
-        }
-
-        private void dgvTypeOfBook_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            this.GetSelectedValue();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -94,27 +94,25 @@ namespace WinForm
                 MessageBox.Show("Please enter keyword!", "Notice");
                 return;
             }
-            TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL();
-            List<TypeOfBookBLL> typeOfBookArr = new List<TypeOfBookBLL>();
-            typeOfBookArr = typeOfBookBLL.Search(catalog, key);
-            this.dgvTypeOfBook.Rows.Clear();
-            foreach (TypeOfBookBLL row in typeOfBookArr)
+            BookTitleStatusBLL bookTitleStatusBLL = new BookTitleStatusBLL();
+            List<BookTitleStatusBLL> bookTitleStatusArr = new List<BookTitleStatusBLL>();
+            bookTitleStatusArr = bookTitleStatusBLL.Search(catalog, key);
+            this.dgvBookTitleStatus.Rows.Clear();
+            foreach (BookTitleStatusBLL row in bookTitleStatusArr)
             {
-                this.dgvTypeOfBook.Rows.Add(row.TypeOfBookId, row.Name);
+                this.dgvBookTitleStatus.Rows.Add(row.BookTitleStatusId, row.Name);
             }
 
             this.GetSelectedValue();
-
-            this.dgvTypeOfBook.CellClick += new DataGridViewCellEventHandler(dgvTypeOfBook_CellClick);
-
+            this.dgvBookTitleStatus.CellClick += new DataGridViewCellEventHandler(this.dgvBookTitleStatus_CellClick);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-                TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL();
-                typeOfBookBLL.Name = this.txtTypeOfBookName.Text;
+                BookTitleStatusBLL bookTitleStatusBLL = new BookTitleStatusBLL();
+                bookTitleStatusBLL.Name = this.txtBookTitleStatusName.Text;
 
-                if (typeOfBookBLL.AddTypeOfBook(typeOfBookBLL))
+                if (bookTitleStatusBLL.AddBookTitleStatus(bookTitleStatusBLL))
                 {
                     MessageBox.Show("Add success!", "Success");
                 }
@@ -127,13 +125,13 @@ namespace WinForm
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (this.dgvTypeOfBook.SelectedCells.Count > 0)
+            if (this.dgvBookTitleStatus.SelectedCells.Count > 0)
             {
-                int selectedrowindex = this.dgvTypeOfBook.SelectedCells[0].RowIndex;
-                DataGridViewRow selectedRow = this.dgvTypeOfBook.Rows[selectedrowindex];
+                int selectedrowindex = this.dgvBookTitleStatus.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = this.dgvBookTitleStatus.Rows[selectedrowindex];
                 int id = Convert.ToInt32(selectedRow.Cells["clmnId"].Value);
-                TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL();
-                if (typeOfBookBLL.DeleteTypeOfBook(id))
+                BookTitleStatusBLL bookTitleStatusBLL = new BookTitleStatusBLL();
+                if (bookTitleStatusBLL.DeleteBookTitleStatus(id))
                 {
                     MessageBox.Show("Delete complete!", "Success");
                 }
@@ -143,22 +141,21 @@ namespace WinForm
                 }
                 this.LoadDataToGridView();
             }
-            
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (this.dgvTypeOfBook.SelectedCells.Count > 0)
+            if (this.dgvBookTitleStatus.SelectedCells.Count > 0)
             {
 
-                int selectedrowindex = this.dgvTypeOfBook.SelectedCells[0].RowIndex;
+                int selectedrowindex = this.dgvBookTitleStatus.SelectedCells[0].RowIndex;
 
-                DataGridViewRow selectedRow = this.dgvTypeOfBook.Rows[selectedrowindex];
+                DataGridViewRow selectedRow = this.dgvBookTitleStatus.Rows[selectedrowindex];
 
-                TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL();
-                typeOfBookBLL.TypeOfBookId = Convert.ToInt32(selectedRow.Cells["clmnId"].Value);
-                typeOfBookBLL.Name = txtTypeOfBookName.Text;
-                if (typeOfBookBLL.UpdateTypeOfBook(typeOfBookBLL))
+                BookTitleStatusBLL bookTitleStatusBLL = new BookTitleStatusBLL();
+                bookTitleStatusBLL.BookTitleStatusId = Convert.ToInt32(selectedRow.Cells["clmnId"].Value);
+                bookTitleStatusBLL.Name = this.txtBookTitleStatusName.Text;
+                if (bookTitleStatusBLL.UpdateBookTitleStatus(bookTitleStatusBLL))
                 {
                     MessageBox.Show("Update success!", "Success");
                 }
@@ -174,7 +171,5 @@ namespace WinForm
         {
             this.Hide();
         }
-
-
     }
 }

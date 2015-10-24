@@ -34,5 +34,11 @@ namespace WinForm
             PublisherGUI publisherGUI = new PublisherGUI();
             publisherGUI.Show();
         }
+
+        private void mnuiBookTitleStatus_Click(object sender, EventArgs e)
+        {
+            BookTitleStatusGUI bookTitleStatusGUI = new BookTitleStatusGUI();
+            bookTitleStatusGUI.Show();
+        }
     }
 }

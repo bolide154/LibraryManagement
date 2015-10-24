@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace Core.DAL
 {
-    class TypeOfBookDAL
+    class BookTitleStatusDAL
     {
-        public DataTable LoadTypeOfBookList()
+        public DataTable LoadBookTitleStatusList()
         {
             try
             {
                 SqlConnection conn = Connection.ConnectionData();
-                String sql = "SELECT * FROM [theloai]";
+                String sql = "SELECT * FROM [tinhtrangdausach]";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
                 SqlDataAdapter da = new SqlDataAdapter();
@@ -30,6 +30,7 @@ namespace Core.DAL
                 return null;
             }
         }
+
         public DataTable Search(string catalog, string key)
         {
             string sql = "";
@@ -37,11 +38,11 @@ namespace Core.DAL
             {
                 if (catalog == "" || catalog == "Serch by...")
                 {
-                    sql = "SELECT * FROM [theloai] WHERE tentheloai LIKE '%" + key + "%'";
+                    sql = "SELECT * FROM [tinhtrangdausach] WHERE tentinhtrang LIKE '%" + key + "%'";
                 }
                 else if (catalog == "Name")
                 {
-                    sql = "SELECT * FROM [theloai] WHERE tentheloai LIKE '%" + key + "%'";
+                    sql = "SELECT * FROM [tinhtrangdausach] WHERE tentinhtrang LIKE '%" + key + "%'";
                 }
             }
             SqlConnection conn = Connection.ConnectionData();
@@ -55,12 +56,12 @@ namespace Core.DAL
             return dt;
         }
 
-        public bool AddTypeOfBook(TypeOfBookBLL typeOfBookBLL)
+        public bool AddBookTitleStatus(BookTitleStatusBLL bookTitleStatus)
         {
             try
             {
                 SqlConnection conn = Connection.ConnectionData();
-                String sql = "INSERT INTO [theloai] (tentheloai) VALUES ( N'" + typeOfBookBLL.Name + "')";
+                String sql = "INSERT INTO [tinhtrangdausach] (tentinhtrang) VALUES ( N'" + bookTitleStatus.Name + "')";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();
@@ -72,12 +73,12 @@ namespace Core.DAL
             }
         }
 
-        public bool DeleteTypeOfBook(int id)
+        public bool DeleteBookTitleStatus(int id)
         {
             try
             {
                 SqlConnection conn = Connection.ConnectionData();
-                String sql = "DELETE FROM [theloai] WHERE matheloai=" + id;
+                String sql = "DELETE FROM [tinhtrangdausach] WHERE matinhtrang=" + id;
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();
@@ -88,12 +89,12 @@ namespace Core.DAL
                 return false;
             }
         }
-        public bool UpdateTypeOfBook(TypeOfBookBLL typeOfBookBLL)
+        public bool UpdateBookTitleStatus(BookTitleStatusBLL bookTitleStatusBLL)
         {
             try
             {
                 SqlConnection conn = Connection.ConnectionData();
-                String sql = "UPDATE [theloai] SET tentheloai=N'" + typeOfBookBLL.Name + "' WHERE matheloai="+typeOfBookBLL.TypeOfBookId;
+                String sql = "UPDATE [tinhtrangdausach] SET tentinhtrang=N'" + bookTitleStatusBLL.Name + "' WHERE matinhtrang=" + bookTitleStatusBLL.BookTitleStatusId;
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();
