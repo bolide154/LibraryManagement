@@ -210,3 +210,6 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+*.exe
+WinForm/bin/Debug/WinForm.pdb
+WinForm/obj/Debug/WinForm.exe
