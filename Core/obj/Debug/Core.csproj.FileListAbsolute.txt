@@ -1,5 +1,0 @@
-E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\Core\bin\Debug\Core.dll
-E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\Core\bin\Debug\Core.pdb
-E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\Core\obj\Debug\Core.csprojResolveAssemblyReference.cache
-E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\Core\obj\Debug\Core.dll
-E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\Core\obj\Debug\Core.pdb
