@@ -36,6 +36,7 @@
             this.mnuiPublisher = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuiBookTitle = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuiBookTitleStatus = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuiStatus = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,9 +69,10 @@
             // mnuBook
             // 
             this.mnuBook.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuiTypeOfBook,
+            this.mnuiBookTitle,
             this.mnuiPublisher,
-            this.mnuiBookTitle});
+            this.mnuiStatus,
+            this.mnuiTypeOfBook});
             this.mnuBook.Name = "mnuBook";
             this.mnuBook.Size = new System.Drawing.Size(46, 20);
             this.mnuBook.Text = "Book";
@@ -104,6 +106,13 @@
             this.mnuiBookTitleStatus.Text = "Status";
             this.mnuiBookTitleStatus.Click += new System.EventHandler(this.mnuiBookTitleStatus_Click);
             // 
+            // mnuiStatus
+            // 
+            this.mnuiStatus.Name = "mnuiStatus";
+            this.mnuiStatus.Size = new System.Drawing.Size(152, 22);
+            this.mnuiStatus.Text = "Status";
+            this.mnuiStatus.Click += new System.EventHandler(this.mnuiStatus_Click);
+            // 
             // MainGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -130,5 +139,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnuiPublisher;
         private System.Windows.Forms.ToolStripMenuItem mnuiBookTitle;
         private System.Windows.Forms.ToolStripMenuItem mnuiBookTitleStatus;
+        private System.Windows.Forms.ToolStripMenuItem mnuiStatus;
     }
 }

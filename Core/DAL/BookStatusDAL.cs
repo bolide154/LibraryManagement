@@ -61,7 +61,7 @@ namespace Core.DAL
             try
             {
                 SqlConnection conn = Connection.ConnectionData();
-                String sql = "INSERT INTO [tinhtrangsachs] (tentinhtrangsach) VALUES ( N'" + bookStatusBLL.Name + "')";
+                String sql = "INSERT INTO [tinhtrangsach] (tentinhtrangsach) VALUES ( N'" + bookStatusBLL.Name + "')";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();
@@ -78,7 +78,7 @@ namespace Core.DAL
             try
             {
                 SqlConnection conn = Connection.ConnectionData();
-                String sql = "DELETE FROM [tinhtrangsachs] WHERE matinhtrangsach=" + id;
+                String sql = "DELETE FROM [tinhtrangsach] WHERE matinhtrangsach=" + id;
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();

@@ -40,5 +40,11 @@ namespace WinForm
             BookTitleStatusGUI bookTitleStatusGUI = new BookTitleStatusGUI();
             bookTitleStatusGUI.Show();
         }
+
+        private void mnuiStatus_Click(object sender, EventArgs e)
+        {
+            BookStatusGUI bookStatusGUI = new BookStatusGUI();
+            bookStatusGUI.Show();
+        }
     }
 }
