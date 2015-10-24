@@ -79,6 +79,7 @@ namespace WinForm
             foreach(AuthorBLL row in authorArr){
                 this.dgvAuthor.Rows.Add(row.AuthorId, row.Name, row.WorkPlace);
             }
+            this.getSelectedValue();
             this.dgvAuthor.CellClick += new DataGridViewCellEventHandler(dgvAuthor_CellClick);
         }
 

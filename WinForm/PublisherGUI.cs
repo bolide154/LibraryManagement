@@ -22,7 +22,17 @@ namespace WinForm
         {
             this.LoadDataToCombobox();
             this.LoadDataToGridView();
+            this.GetSelectedValue();
+            this.dgvPublisher.CellClick += new DataGridViewCellEventHandler(dgvPublisher_Click);
+        }
 
+        private void dgvPublisher_Click(object sender, DataGridViewCellEventArgs e)
+        {
+            this.GetSelectedValue();
+        }
+
+        private void GetSelectedValue()
+        {
             if (this.dgvPublisher.SelectedCells.Count > 0)
             {
                 int selectedrowindex = this.dgvPublisher.SelectedCells[0].RowIndex;
@@ -37,6 +47,13 @@ namespace WinForm
                 this.txtPublisherName.Text = name;
                 this.txtPhone.Text = phone;
                 this.txtAddress.Text = address;
+            }
+            else
+            {
+                this.lblInfor.Text = "Id / Name";
+                this.txtPublisherName.Text = "";
+                this.txtPhone.Text = "";
+                this.txtAddress.Text = "";
             }
         }
 
@@ -64,21 +81,7 @@ namespace WinForm
 
         private void dgvPublisher_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.dgvPublisher.SelectedCells.Count > 0)
-            {
-                int selectedrowindex = this.dgvPublisher.SelectedCells[0].RowIndex;
-
-                DataGridViewRow selectedRow = this.dgvPublisher.Rows[selectedrowindex];
-
-                string id = Convert.ToString(selectedRow.Cells["clmnId"].Value);
-                string name = Convert.ToString(selectedRow.Cells["clmnName"].Value);
-                string phone = Convert.ToString(selectedRow.Cells["clmnPhone"].Value);
-                string address = Convert.ToString(selectedRow.Cells["clmnAddress"].Value);
-                this.lblInfor.Text = id + " / " + name;
-                this.txtPublisherName.Text = name;
-                this.txtPhone.Text = phone;
-                this.txtAddress.Text = address;
-            }
+            this.GetSelectedValue();
         }
     }
 }
