@@ -102,6 +102,22 @@ namespace Core.BLL
             }
             return publisherArr;
         }
+
+        public bool CheckDelete(int id)
+        {
+            DataTable dt = new DataTable();
+            PublisherDAL publisherDAL = new PublisherDAL();
+            dt = publisherDAL.CheckDelete(id);
+            if (dt.Rows.Count > 0)
+            {
+                //Tồn tại nxb trong bảng đầu sách. Không cho xóa
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }
 

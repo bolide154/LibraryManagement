@@ -88,5 +88,21 @@ namespace Core.BLL
             }
             return authorArr;
         }
+
+        public bool CheckDelete(int id)
+        {
+            DataTable dt = new DataTable();
+            AuthorDAL authorDAL = new AuthorDAL();
+            dt = authorDAL.CheckDelete(id);
+            if (dt.Rows.Count > 0)
+            {
+                //Tồn tại tác giả trong bảng tác giả - đầu sách. Không cho xóa
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }

@@ -44,27 +44,28 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAuthor)).BeginInit();
             this.SuspendLayout();
             // 
             // cboSearch
             // 
             this.cboSearch.DisplayMember = "a";
+            this.cboSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSearch.FormattingEnabled = true;
             this.cboSearch.Items.AddRange(new object[] {
             "Tên tác giả",
             "Nơi công tác"});
-            this.cboSearch.Location = new System.Drawing.Point(12, 12);
+            this.cboSearch.Location = new System.Drawing.Point(74, 12);
             this.cboSearch.Name = "cboSearch";
-            this.cboSearch.Size = new System.Drawing.Size(121, 21);
+            this.cboSearch.Size = new System.Drawing.Size(91, 21);
             this.cboSearch.TabIndex = 0;
-            this.cboSearch.Text = "Search by....";
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(334, 10);
+            this.btnSearch.Location = new System.Drawing.Point(343, 10);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.Size = new System.Drawing.Size(66, 23);
             this.btnSearch.TabIndex = 1;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
@@ -72,9 +73,9 @@
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(154, 12);
+            this.txtSearch.Location = new System.Drawing.Point(171, 12);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(159, 20);
+            this.txtSearch.Size = new System.Drawing.Size(166, 20);
             this.txtSearch.TabIndex = 2;
             // 
             // dgvAuthor
@@ -190,11 +191,21 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(58, 13);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Search by:";
+            // 
             // AuthorGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(429, 480);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnDelete);
@@ -235,6 +246,7 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Label label1;
     }
 }
 

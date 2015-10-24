@@ -125,6 +125,11 @@ namespace WinForm
             publisherBLL.Name = this.txtPublisherName.Text;
             publisherBLL.Phone = this.txtPhone.Text;
             publisherBLL.Address = this.txtAddress.Text;
+            if (publisherBLL.Name == "")
+            {
+                MessageBox.Show("Author name is not null!", "Notice");
+                return;
+            }
             if (publisherBLL.AddPublisher(publisherBLL))
             {
                 MessageBox.Show("Add success!", "Success");
@@ -143,16 +148,32 @@ namespace WinForm
                 int selectedrowindex = this.dgvPublisher.SelectedCells[0].RowIndex;
                 DataGridViewRow selectedRow = this.dgvPublisher.Rows[selectedrowindex];
                 int id = Convert.ToInt32(selectedRow.Cells["clmnId"].Value);
-                PublisherBLL publisherBLL = new PublisherBLL();
-                if (publisherBLL.DeletePublisher(id))
+                DialogResult result = MessageBox.Show("Do you want to delete publisher: " + selectedRow.Cells["clmnName"].Value+ "?", "Warning", MessageBoxButtons.OKCancel);
+                switch (result)
                 {
-                    MessageBox.Show("Delete complete!", "Success");
+                    case DialogResult.Cancel:
+                        break;
+                    case DialogResult.OK:
+                        PublisherBLL publisherBLL = new PublisherBLL();
+                        if (!publisherBLL.CheckDelete(id))
+                        {
+                            MessageBox.Show("Can't delete! Please delete all book title has publisher " + selectedRow.Cells["clmnName"].Value + " before delete this publisher!", "Error");
+                            break;
+                        }
+                        else
+                        {
+                            if (publisherBLL.DeletePublisher(id))
+                            {
+                                MessageBox.Show("Delete complete!", "Success");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Fail!", "Error");
+                            }
+                            this.LoadDataToGridView();
+                            break;
+                        }
                 }
-                else
-                {
-                    MessageBox.Show("Fail!", "Error");
-                }
-                this.LoadDataToGridView();
             }
         }
 
@@ -170,6 +191,11 @@ namespace WinForm
                 publisherBLL.Name = this.txtPublisherName.Text;
                 publisherBLL.Phone = this.txtPhone.Text;
                 publisherBLL.Address = this.txtAddress.Text;
+                if (publisherBLL.Name == "")
+                {
+                    MessageBox.Show("Author name is not null!", "Notice");
+                    return;
+                }
                 if (publisherBLL.UpdatePublisher(publisherBLL))
                 {
                     MessageBox.Show("Update success!", "Success");

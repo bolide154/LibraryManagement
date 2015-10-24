@@ -33,7 +33,7 @@ namespace Core.BLL
 
         public BookTitleStatusBLL() { }
 
-        public List<BookTitleStatusBLL> LoadTypeOfBookList()
+        public List<BookTitleStatusBLL> LoadBookTitleStatusList()
         {
             List<BookTitleStatusBLL> bookTitleStatusArr = new List<BookTitleStatusBLL>();
             BookTitleStatusDAL bookTitleStatusDAL = new BookTitleStatusDAL();
@@ -81,6 +81,22 @@ namespace Core.BLL
         {
             BookTitleStatusDAL bookTitleStatusDAL = new BookTitleStatusDAL();
             return bookTitleStatusDAL.UpdateBookTitleStatus(bookTitleStatusBLL);
+        }
+
+        public bool CheckDelete(int id)
+        {
+            DataTable dt = new DataTable();
+            BookTitleStatusDAL bookTitleStatusDAL = new BookTitleStatusDAL();
+            dt = bookTitleStatusDAL.CheckDelete(id);
+            if (dt.Rows.Count > 0)
+            {
+                //Tồn tại tình trạng trong bảng đầu sách. Không thể xóa được
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

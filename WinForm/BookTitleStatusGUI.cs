@@ -38,7 +38,7 @@ namespace WinForm
             this.dgvBookTitleStatus.Rows.Clear();
             BookTitleStatusBLL bookTitleStatusBLL = new BookTitleStatusBLL();
             List<BookTitleStatusBLL> bookTitleStatusArr = new List<BookTitleStatusBLL>();
-            bookTitleStatusArr = bookTitleStatusBLL.LoadTypeOfBookList();
+            bookTitleStatusArr = bookTitleStatusBLL.LoadBookTitleStatusList();
             foreach (BookTitleStatusBLL row in bookTitleStatusArr)
             {
                 this.dgvBookTitleStatus.Rows.Add(row.BookTitleStatusId, row.Name);
@@ -111,7 +111,11 @@ namespace WinForm
         {
                 BookTitleStatusBLL bookTitleStatusBLL = new BookTitleStatusBLL();
                 bookTitleStatusBLL.Name = this.txtBookTitleStatusName.Text;
-
+                if (bookTitleStatusBLL.Name == "")
+                {
+                    MessageBox.Show("Author name is not null!", "Notice");
+                    return;
+                }
                 if (bookTitleStatusBLL.AddBookTitleStatus(bookTitleStatusBLL))
                 {
                     MessageBox.Show("Add success!", "Success");
@@ -130,16 +134,32 @@ namespace WinForm
                 int selectedrowindex = this.dgvBookTitleStatus.SelectedCells[0].RowIndex;
                 DataGridViewRow selectedRow = this.dgvBookTitleStatus.Rows[selectedrowindex];
                 int id = Convert.ToInt32(selectedRow.Cells["clmnId"].Value);
-                BookTitleStatusBLL bookTitleStatusBLL = new BookTitleStatusBLL();
-                if (bookTitleStatusBLL.DeleteBookTitleStatus(id))
+                DialogResult result = MessageBox.Show("Do you want to delete book title status: " + selectedRow.Cells["clmnName"].Value + "?", "Warning", MessageBoxButtons.OKCancel);
+                switch (result)
                 {
-                    MessageBox.Show("Delete complete!", "Success");
+                    case DialogResult.Cancel:
+                        break;
+                    case DialogResult.OK:
+                        BookTitleStatusBLL bookTitleStatusDLL = new BookTitleStatusBLL();
+                        if (!bookTitleStatusDLL.CheckDelete(id))
+                        {
+                            MessageBox.Show("Can't delete! Please delete all book title has status: '" + selectedRow.Cells["clmnName"].Value + "' before delete this status!", "Error");
+                            break;
+                        }
+                        else
+                        {
+                            if (bookTitleStatusDLL.DeleteBookTitleStatus(id))
+                            {
+                                MessageBox.Show("Delete complete!", "Success");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Fail!", "Error");
+                            }
+                            this.LoadDataToGridView();
+                            break;
+                        }
                 }
-                else
-                {
-                    MessageBox.Show("Fail!", "Error");
-                }
-                this.LoadDataToGridView();
             }
         }
 
@@ -155,6 +175,11 @@ namespace WinForm
                 BookTitleStatusBLL bookTitleStatusBLL = new BookTitleStatusBLL();
                 bookTitleStatusBLL.BookTitleStatusId = Convert.ToInt32(selectedRow.Cells["clmnId"].Value);
                 bookTitleStatusBLL.Name = this.txtBookTitleStatusName.Text;
+                if (bookTitleStatusBLL.Name == "")
+                {
+                    MessageBox.Show("Author name is not null!", "Notice");
+                    return;
+                }
                 if (bookTitleStatusBLL.UpdateBookTitleStatus(bookTitleStatusBLL))
                 {
                     MessageBox.Show("Update success!", "Success");

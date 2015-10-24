@@ -9,68 +9,25 @@ using System.Threading.Tasks;
 
 namespace Core.DAL
 {
-    class PublisherDAL
+    class BookStatusDAL
     {
-        public DataTable LoadPublisherList()
-        {
-            SqlConnection conn = Connection.ConnectionData();
-            String sql = "SELECT * FROM [nhaxuatban]";
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.ExecuteNonQuery();
-            SqlDataAdapter da = new SqlDataAdapter();
-            DataTable dt = new DataTable();
-            da.SelectCommand = cmd;
-            da.Fill(dt);
-            return dt;
-        }
-
-        public bool AddPublisher(PublisherBLL publisherBLL)
+        public DataTable LoadBookStatusList()
         {
             try
             {
                 SqlConnection conn = Connection.ConnectionData();
-                String sql = "INSERT INTO [nhaxuatban] (tennxb, sdtnxb, diachinxb)"
-                    + " VALUES ( N'" + publisherBLL.Name + "', N'" + publisherBLL.Phone + "', N'"+publisherBLL.Address+"')";
+                String sql = "SELECT * FROM [tinhtrangsach]";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
-                conn.Close();
-                return true;
+                SqlDataAdapter da = new SqlDataAdapter();
+                DataTable dt = new DataTable();
+                da.SelectCommand = cmd;
+                da.Fill(dt);
+                return dt;
             }
             catch
             {
-                return false;
-            }
-        }
-        public bool DeletePublisher(int id)
-        {
-            try
-            {
-                SqlConnection conn = Connection.ConnectionData();
-                String sql = "DELETE FROM [nhaxuatban] WHERE manxb=" + id;
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-        public bool UpdatePublisher(PublisherBLL publisherBLL)
-        {
-            try
-            {
-                SqlConnection conn = Connection.ConnectionData();
-                String sql = "UPDATE [nhaxuatban] SET tennxb=N'" + publisherBLL.Name + "', sdtnxb=N'" + publisherBLL.Phone + "', diachinxb=N'" + publisherBLL.Address + "' WHERE manxb=" + publisherBLL.PublisherId;
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                return true;
-            }
-            catch
-            {
-                return false;
+                return null;
             }
         }
 
@@ -81,19 +38,11 @@ namespace Core.DAL
             {
                 if (catalog == "" || catalog == "Serch by...")
                 {
-                    sql = "SELECT * FROM [nhaxuatban] WHERE tennxb LIKE '%" + key + "%'";
+                    sql = "SELECT * FROM [tinhtrangsach] WHERE tentinhtrangsach LIKE '%" + key + "%'";
                 }
                 else if (catalog == "Name")
                 {
-                    sql = "SELECT * FROM [nhaxuatban] WHERE tennxb LIKE '%" + key + "%'";
-                }
-                else if (catalog == "Phone Number")
-                {
-                    sql = "SELECT * FROM [nhaxuatban] WHERE sdtnxb LIKE '%" + key + "%'";
-                }
-                else if (catalog == "Address")
-                {
-                    sql = "SELECT * FROM [nhaxuatban] WHERE diachinxb LIKE '%" + key + "%'";
+                    sql = "SELECT * FROM [tinhtrangsach] WHERE tentinhtrangsach LIKE '%" + key + "%'";
                 }
             }
             SqlConnection conn = Connection.ConnectionData();
@@ -107,12 +56,63 @@ namespace Core.DAL
             return dt;
         }
 
+        public bool AddBookStatus(BookStatusBLL bookStatusBLL)
+        {
+            try
+            {
+                SqlConnection conn = Connection.ConnectionData();
+                String sql = "INSERT INTO [tinhtrangsachs] (tentinhtrangsach) VALUES ( N'" + bookStatusBLL.Name + "')";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool DeleteBookStatus(int id)
+        {
+            try
+            {
+                SqlConnection conn = Connection.ConnectionData();
+                String sql = "DELETE FROM [tinhtrangsachs] WHERE matinhtrangsach=" + id;
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateBookStatus(BookStatusBLL bookStatusBLL)
+        {
+            try
+            {
+                SqlConnection conn = Connection.ConnectionData();
+                String sql = "UPDATE [tinhtrangsach] SET tentinhtrangsach=N'" + bookStatusBLL.Name + "' WHERE matinhtrangsach=" + bookStatusBLL.BookStatusId;
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public DataTable CheckDelete(int id)
         {
             try
             {
                 SqlConnection conn = Connection.ConnectionData();
-                String sql = "SELECT * FROM [dausach] WHERE manxb=" + id;
+                String sql = "SELECT * FROM [sach] WHERE matinhtrangsach=" + id;
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
                 SqlDataAdapter da = new SqlDataAdapter();

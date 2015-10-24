@@ -101,5 +101,24 @@ namespace Core.DAL
             da.Fill(dt);
             return dt;
         }
+
+        public DataTable CheckDelete(int id){
+            try
+            {
+                SqlConnection conn = Connection.ConnectionData();
+                String sql = "SELECT * FROM [tacgia_dausach] WHERE matacgia="+id;
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter();
+                DataTable dt = new DataTable();
+                da.SelectCommand = cmd;
+                da.Fill(dt);
+                return dt;
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

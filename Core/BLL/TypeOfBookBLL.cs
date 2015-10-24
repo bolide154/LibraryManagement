@@ -82,5 +82,21 @@ namespace Core.BLL
             TypeOfBookDAL typeOfBookDAL = new TypeOfBookDAL();
             return typeOfBookDAL.UpdateTypeOfBook(typeOfBookBLL);
         }
+
+        public bool CheckDelete(int id)
+        {
+            DataTable dt = new DataTable();
+            TypeOfBookDAL typeOfBookDAL = new TypeOfBookDAL();
+            dt = typeOfBookDAL.CheckDelete(id);
+            if (dt.Rows.Count > 0)
+            {
+                //Tồn tại loại sách trong bảng đầu sách. Không cho xóa
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }

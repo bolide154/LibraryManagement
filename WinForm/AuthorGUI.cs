@@ -112,7 +112,11 @@ namespace WinForm
             AuthorBLL authorBLL = new AuthorBLL();
             authorBLL.Name = this.txtAuthorName.Text;
             authorBLL.WorkPlace = this.txtWorkPlace.Text;
-
+            if (authorBLL.Name == "")
+            {
+                MessageBox.Show("Author name is not null!", "Notice");
+                return;
+            }
             if (authorBLL.AddAuthor(authorBLL))
             {
                 MessageBox.Show("Add success!", "Success");
@@ -130,16 +134,32 @@ namespace WinForm
 				int selectedrowindex = dgvAuthor.SelectedCells[0].RowIndex;
 				DataGridViewRow selectedRow = dgvAuthor.Rows[selectedrowindex];
 				int id = Convert.ToInt32(selectedRow.Cells["clmnId"].Value);
-				AuthorBLL authorBLL = new AuthorBLL();
-				if (authorBLL.DeleteAuthor(id))
-				{
-					MessageBox.Show("Delete complete!", "Success");
-				}
-				else
-				{
-					MessageBox.Show("Fail!", "Error");
-				}
-				this.LoadDataToGridView();
+                DialogResult result = MessageBox.Show("Do you want to delete author: " + selectedRow.Cells["clmnName"].Value + "?", "Warning", MessageBoxButtons.OKCancel);
+                switch (result)
+                {
+                    case DialogResult.Cancel:
+                        break;
+                    case DialogResult.OK:
+                        AuthorBLL authorBLL = new AuthorBLL();
+                        if (!authorBLL.CheckDelete(id))
+                        {
+                            MessageBox.Show("Can't delete! Please delete all book of " + selectedRow.Cells["clmnName"].Value + " before delete this author!", "Error");
+                            break;
+                        }
+                        else
+                        {
+                            if (authorBLL.DeleteAuthor(id))
+                            {
+                                MessageBox.Show("Delete complete!", "Success");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Fail!", "Error");
+                            }
+                            this.LoadDataToGridView();
+                            break;
+                        }
+                }
 			}
         }
 
@@ -156,6 +176,11 @@ namespace WinForm
                 authorBLL.AuthorId = Convert.ToInt32(selectedRow.Cells["clmnId"].Value);
                 authorBLL.Name = txtAuthorName.Text;
                 authorBLL.WorkPlace = txtWorkPlace.Text;
+                if (authorBLL.Name == "")
+                {
+                    MessageBox.Show("Author name is not null!", "Notice");
+                    return;
+                }
                 if (authorBLL.UpdateAuthor(authorBLL))
                 {
                     MessageBox.Show("Update success!", "Success");
