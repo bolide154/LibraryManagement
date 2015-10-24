@@ -35,48 +35,12 @@ namespace WinForm
             {
                 this.dgvAuthor.Rows.Add(row.AuthorId, row.Name, row.WorkPlace);
             }
-            int selectedrowindex = dgvAuthor.SelectedCells[0].RowIndex;
-
-            DataGridViewRow selectedRow = dgvAuthor.Rows[selectedrowindex];
-
-            string id = Convert.ToString(selectedRow.Cells["clmnId"].Value);
-            string name = Convert.ToString(selectedRow.Cells["clmnName"].Value);
-            string workPlace = Convert.ToString(selectedRow.Cells["clmnWorkPlace"].Value);
-            this.lblInfor.Text = id + " / " + name;
-            this.txtAuthorName.Text = name;
-            this.txtWorkPlace.Text = workPlace;
+            this.getSelectedValue();
 
             this.dgvAuthor.CellClick += new DataGridViewCellEventHandler(dgvAuthor_CellClick);
         }
 
-        private void AuthorGUI_Load(object sender, EventArgs e)
-        {
-            LoadDataToComBoBox();
-            LoadDataToGridView();
-            int selectedrowindex = dgvAuthor.SelectedCells[0].RowIndex;
-
-            DataGridViewRow selectedRow = dgvAuthor.Rows[selectedrowindex];
-
-            string id = Convert.ToString(selectedRow.Cells["clmnId"].Value);
-            string name = Convert.ToString(selectedRow.Cells["clmnName"].Value);
-            string workPlace = Convert.ToString(selectedRow.Cells["clmnWorkPlace"].Value);
-            this.lblInfor.Text = id + " / " + name;
-            this.txtAuthorName.Text = name;
-            this.txtWorkPlace.Text = workPlace;
-        }
-
-        private void LoadDataToGridView()
-        {
-            AuthorBLL authorBLL = new AuthorBLL();
-            List<AuthorBLL> authorArr = new List<AuthorBLL>();
-            authorArr = authorBLL.LoadAuthorList();
-            foreach(AuthorBLL row in authorArr){
-                this.dgvAuthor.Rows.Add(row.AuthorId, row.Name, row.WorkPlace);
-            }
-            this.dgvAuthor.CellClick += new DataGridViewCellEventHandler(dgvAuthor_CellClick);
-        }
-
-        private void dgvAuthor_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void getSelectedValue()
         {
             if (dgvAuthor.SelectedCells.Count > 0)
             {
@@ -91,6 +55,36 @@ namespace WinForm
                 this.txtAuthorName.Text = name;
                 this.txtWorkPlace.Text = workPlace;
             }
+            else
+            {
+                this.lblInfor.Text = "Id / Name";
+                this.txtAuthorName.Text = "";
+                this.txtWorkPlace.Text = "";
+            }
+        }
+
+        private void AuthorGUI_Load(object sender, EventArgs e)
+        {
+            LoadDataToComBoBox();
+            LoadDataToGridView();
+            this.getSelectedValue();
+        }
+
+        private void LoadDataToGridView()
+        {
+            this.dgvAuthor.Rows.Clear();
+            AuthorBLL authorBLL = new AuthorBLL();
+            List<AuthorBLL> authorArr = new List<AuthorBLL>();
+            authorArr = authorBLL.LoadAuthorList();
+            foreach(AuthorBLL row in authorArr){
+                this.dgvAuthor.Rows.Add(row.AuthorId, row.Name, row.WorkPlace);
+            }
+            this.dgvAuthor.CellClick += new DataGridViewCellEventHandler(dgvAuthor_CellClick);
+        }
+
+        private void dgvAuthor_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.getSelectedValue();
         }
 
         private void LoadDataToComBoBox(){

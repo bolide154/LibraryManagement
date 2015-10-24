@@ -14,7 +14,7 @@ namespace Core.DAL
         public DataTable LoadAuthorList()
         {
             SqlConnection conn = Connection.ConnectionData();
-            String sql = "SELECT * FROM tacgia";
+            String sql = "SELECT * FROM [tacgia]";
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter();
@@ -46,7 +46,7 @@ namespace Core.DAL
             try
             {
                 SqlConnection conn = Connection.ConnectionData();
-                String sql = "DELETE FROM TABLE [tacgia] WHERE matacgia="+id;
+                String sql = "DELETE FROM [tacgia] WHERE matacgia="+id;
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();

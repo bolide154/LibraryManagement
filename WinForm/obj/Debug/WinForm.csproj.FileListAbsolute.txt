@@ -11,3 +11,4 @@ E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.MainGUI.r
 E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\bin\Debug\Core.dll
 E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\bin\Debug\Core.pdb
 E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.TypeOfBookGUI.resources
+E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.PublisherGUI.resources

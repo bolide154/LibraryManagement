@@ -33,6 +33,7 @@
             this.mnuiInfor = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuBook = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuiTypeOfBook = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuiPublisher = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,14 +59,15 @@
             // mnuiInfor
             // 
             this.mnuiInfor.Name = "mnuiInfor";
-            this.mnuiInfor.Size = new System.Drawing.Size(137, 22);
+            this.mnuiInfor.Size = new System.Drawing.Size(152, 22);
             this.mnuiInfor.Text = "Information";
             this.mnuiInfor.Click += new System.EventHandler(this.mnuiInfor_Click);
             // 
             // mnuBook
             // 
             this.mnuBook.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuiTypeOfBook});
+            this.mnuiTypeOfBook,
+            this.mnuiPublisher});
             this.mnuBook.Name = "mnuBook";
             this.mnuBook.Size = new System.Drawing.Size(46, 20);
             this.mnuBook.Text = "Book";
@@ -76,6 +78,13 @@
             this.mnuiTypeOfBook.Size = new System.Drawing.Size(152, 22);
             this.mnuiTypeOfBook.Text = "Type Of Book";
             this.mnuiTypeOfBook.Click += new System.EventHandler(this.mnuiTypeOfBook_Click);
+            // 
+            // mnuiPublisher
+            // 
+            this.mnuiPublisher.Name = "mnuiPublisher";
+            this.mnuiPublisher.Size = new System.Drawing.Size(152, 22);
+            this.mnuiPublisher.Text = "Publisher";
+            this.mnuiPublisher.Click += new System.EventHandler(this.mnuiPublisher_Click);
             // 
             // MainGUI
             // 
@@ -100,5 +109,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnuBook;
         private System.Windows.Forms.ToolStripMenuItem mnuiInfor;
         private System.Windows.Forms.ToolStripMenuItem mnuiTypeOfBook;
+        private System.Windows.Forms.ToolStripMenuItem mnuiPublisher;
     }
 }

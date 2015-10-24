@@ -11,12 +11,19 @@ namespace Core.DAL
     {
         public static SqlConnection ConnectionData()
         {
-            string server = "VIEN\\SQLEXPRESS";
-            string database = "library_management_db";
-            string connStr = "Server=" + server + "; Database=" + database + "; Trusted_Connection=True";
-            SqlConnection conn = new SqlConnection(connStr);
-            conn.Open();
-            return conn;
+                string server = ".\\SQLEXPRESS";
+                string database = "library_management_db";
+                string connStr = "Server=" + server + "; Database=" + database + "; Trusted_Connection=True";
+                SqlConnection conn = new SqlConnection(connStr); ;
+                try
+                {
+                    conn.Open();
+                }
+                catch (Exception ex) {
+                    throw ex;
+                }
+                return conn;
+                
         }
     }
 }

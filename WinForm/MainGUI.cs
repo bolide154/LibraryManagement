@@ -28,5 +28,11 @@ namespace WinForm
             TypeOfBookGUI typeOfBookGUI = new TypeOfBookGUI();
             typeOfBookGUI.Show();
         }
+
+        private void mnuiPublisher_Click(object sender, EventArgs e)
+        {
+            PublisherGUI publisherGUI = new PublisherGUI();
+            publisherGUI.Show();
+        }
     }
 }

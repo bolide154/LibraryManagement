@@ -58,6 +58,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublisherGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PublisherGUI.Designer.cs">
+      <DependentUpon>PublisherGUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="TypeOfBookGUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,6 +85,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="PublisherGUI.resx">
+      <DependentUpon>PublisherGUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TypeOfBookGUI.resx">
       <DependentUpon>TypeOfBookGUI.cs</DependentUpon>
     </EmbeddedResource>

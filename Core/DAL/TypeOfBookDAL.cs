@@ -13,15 +13,22 @@ namespace Core.DAL
     {
         public DataTable LoadTypeOfBookList()
         {
-            SqlConnection conn = Connection.ConnectionData();
-            String sql = "SELECT * FROM [theloai]";
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.ExecuteNonQuery();
-            SqlDataAdapter da = new SqlDataAdapter();
-            DataTable dt = new DataTable();
-            da.SelectCommand = cmd;
-            da.Fill(dt);
-            return dt;
+            try
+            {
+                SqlConnection conn = Connection.ConnectionData();
+                String sql = "SELECT * FROM [theloai]";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter();
+                DataTable dt = new DataTable();
+                da.SelectCommand = cmd;
+                da.Fill(dt);
+                return dt;
+            }
+            catch
+            {
+                return null;
+            }
         }
         public DataTable Search(string catalog, string key)
         {
@@ -67,19 +74,12 @@ namespace Core.DAL
 
         public bool DeleteTypeOfBook(int id)
         {
-            try
-            {
                 SqlConnection conn = Connection.ConnectionData();
-                String sql = "DELETE FROM TABLE [theloai] WHERE matheloai=" + id;
+                String sql = "DELETE FROM [theloai] WHERE matheloai=" + id;
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();
                 return true;
-            }
-            catch
-            {
-                return false;
-            }
         }
         public bool UpdateTypeOfBook(TypeOfBookBLL typeOfBookBLL)
         {

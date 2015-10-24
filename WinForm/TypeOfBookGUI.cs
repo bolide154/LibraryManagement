@@ -22,14 +22,7 @@ namespace WinForm
         {
             LoadDataToComBoBox();
             LoadDataToGridView();
-            int selectedrowindex = this.dgvTypeOfBook.SelectedCells[0].RowIndex;
-
-            DataGridViewRow selectedRow = this.dgvTypeOfBook.Rows[selectedrowindex];
-
-            string id = Convert.ToString(selectedRow.Cells["clmnId"].Value);
-            string name = Convert.ToString(selectedRow.Cells["clmnName"].Value);
-            this.lblInfor.Text = id + " / " + name;
-            this.txtTypeOfBookName.Text = name;
+            this.GetSelectedValue();
         }
 
         private void LoadDataToComBoBox()
@@ -42,29 +35,42 @@ namespace WinForm
 
         private void LoadDataToGridView()
         {
-            TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL();
-            List<TypeOfBookBLL> typeOfBookArr = new List<TypeOfBookBLL>();
-            typeOfBookArr = typeOfBookBLL.LoadTypeOfBookList();
-            foreach (TypeOfBookBLL row in typeOfBookArr)
-            {
-                this.dgvTypeOfBook.Rows.Add(row.TypeOfBookId, row.Name);
-            }
-            this.dgvTypeOfBook.CellClick += new DataGridViewCellEventHandler(this.dgvTypeOfBook_CellClick);
+                this.dgvTypeOfBook.Rows.Clear();
+                TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL();
+                List<TypeOfBookBLL> typeOfBookArr = new List<TypeOfBookBLL>();
+                typeOfBookArr = typeOfBookBLL.LoadTypeOfBookList();
+                foreach (TypeOfBookBLL row in typeOfBookArr)
+                {
+                    this.dgvTypeOfBook.Rows.Add(row.TypeOfBookId, row.Name);
+                }
+                this.GetSelectedValue();
+                this.dgvTypeOfBook.CellClick += new DataGridViewCellEventHandler(this.dgvTypeOfBook_CellClick);
+                
         }
 
-        private void dgvTypeOfBook_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void GetSelectedValue()
         {
             if (dgvTypeOfBook.SelectedCells.Count > 0)
             {
-                int selectedrowindex = dgvTypeOfBook.SelectedCells[0].RowIndex;
+                int selectedrowindex = this.dgvTypeOfBook.SelectedCells[0].RowIndex;
 
-                DataGridViewRow selectedRow = dgvTypeOfBook.Rows[selectedrowindex];
+                DataGridViewRow selectedRow = this.dgvTypeOfBook.Rows[selectedrowindex];
 
                 string id = Convert.ToString(selectedRow.Cells["clmnId"].Value);
                 string name = Convert.ToString(selectedRow.Cells["clmnName"].Value);
                 this.lblInfor.Text = id + " / " + name;
                 this.txtTypeOfBookName.Text = name;
             }
+            else
+            {
+                this.lblInfor.Text = "Id / Name";
+                this.txtTypeOfBookName.Text = "";
+            }
+        }
+
+        private void dgvTypeOfBook_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.GetSelectedValue();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -85,16 +91,7 @@ namespace WinForm
                 this.dgvTypeOfBook.Rows.Add(row.TypeOfBookId, row.Name);
             }
 
-            int selectedrowindex = this.dgvTypeOfBook.SelectedCells[0].RowIndex;
-
-            DataGridViewRow selectedRow = this.dgvTypeOfBook.Rows[selectedrowindex];
-
-            string id = Convert.ToString(selectedRow.Cells["clmnId"].Value);
-            string name = Convert.ToString(selectedRow.Cells["clmnName"].Value);
-            this.lblInfor.Text = id + " / " + name;
-            this.txtTypeOfBookName.Text = name;
-
-            this.dgvTypeOfBook.CellClick += new DataGridViewCellEventHandler(this.dgvTypeOfBook_CellClick);
+            this.GetSelectedValue();
 
         }
 
