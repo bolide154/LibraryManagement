@@ -24,12 +24,12 @@ namespace Core.DAL
             return dt;
         }
 
-        public bool AddPublisher(PublisherBLL publisherBLL)
+        public bool AddAuthor(PublisherBLL publisherBLL)
         {
             try
             {
                 SqlConnection conn = Connection.ConnectionData();
-                String sql = "INSERT INTO [nhaxuatban] (tennxb, sdtnxb, diachinxb)"
+                String sql = "INSERT INTO [tacgia] (tennxb, sdtnxb, diachinxb)"
                     + " VALUES ( N'" + publisherBLL.Name + "', N'" + publisherBLL.Phone + "', N'"+publisherBLL.Address+"')";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
@@ -41,12 +41,12 @@ namespace Core.DAL
                 return false;
             }
         }
-        public bool DeletePublisher(int id)
+        public bool DeleteAuthor(int id)
         {
             try
             {
                 SqlConnection conn = Connection.ConnectionData();
-                String sql = "DELETE FROM [nhaxuatban] WHERE manxb=" + id;
+                String sql = "DELETE FROM [tacgia] WHERE manxb=" + id;
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();
@@ -57,12 +57,12 @@ namespace Core.DAL
                 return false;
             }
         }
-        public bool UpdatePublisher(PublisherBLL publisherBLL)
+        public bool UpdateAuthor(AuthorBLL authorBLL)
         {
             try
             {
                 SqlConnection conn = Connection.ConnectionData();
-                String sql = "UPDATE [nhaxuatban] SET tennxb=N'" + publisherBLL.Name + "', sdtnxb=N'" + publisherBLL.Phone + "', diachinxb=N'" + publisherBLL.Address + "' WHERE manxb=" + publisherBLL.PublisherId;
+                String sql = "UPDATE [tacgia] SET tentacgia=N'" + authorBLL.Name + "', noicongtac=N'" + authorBLL.WorkPlace + "' WHERE matacgia=" + authorBLL.AuthorId;
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();
@@ -81,19 +81,15 @@ namespace Core.DAL
             {
                 if (catalog == "" || catalog == "Serch by...")
                 {
-                    sql = "SELECT * FROM [nhaxuatban] WHERE tennxb LIKE '%" + key + "%'";
+                    sql = "SELECT * FROM [tacgia] WHERE tentacgia LIKE '%" + key + "%'";
                 }
                 else if (catalog == "Name")
                 {
-                    sql = "SELECT * FROM [nhaxuatban] WHERE tennxb LIKE '%" + key + "%'";
+                    sql = "SELECT * FROM [tacgia] WHERE tentacgia LIKE '%" + key + "%'";
                 }
-                else if (catalog == "Phone Number")
+                else if (catalog == "Work Place")
                 {
-                    sql = "SELECT * FROM [nhaxuatban] WHERE sdtnxb LIKE '%" + key + "%'";
-                }
-                else if (catalog == "Address")
-                {
-                    sql = "SELECT * FROM [nhaxuatban] WHERE diachinxb LIKE '%" + key + "%'";
+                    sql = "SELECT * FROM [tacgia] WHERE noicongtac LIKE '%" + key + "%'";
                 }
             }
             SqlConnection conn = Connection.ConnectionData();

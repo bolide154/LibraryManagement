@@ -29,7 +29,7 @@ namespace Core.DAL
             try
             {
                 SqlConnection conn = Connection.ConnectionData();
-                String sql = "INSERT INTO [nhaxuatban] (tennxb, sdtnxb, diachinxb)"
+                String sql = "INSERT INTO [tacgia] (tennxb, sdtnxb, diachinxb)"
                     + " VALUES ( N'" + publisherBLL.Name + "', N'" + publisherBLL.Phone + "', N'"+publisherBLL.Address+"')";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();

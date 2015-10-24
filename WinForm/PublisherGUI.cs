@@ -88,6 +88,7 @@ namespace WinForm
             {
                 this.dgvPublisher.Rows.Add(row.PublisherId, row.Name, row.Phone, row.Address);
             }
+            this.GetSelectedValue();
             this.dgvPublisher.CellClick += new DataGridViewCellEventHandler(dgvPublisher_CellClick);
         }
 
@@ -98,27 +99,92 @@ namespace WinForm
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            string catalog = this.cboSearch.Text;
+            string key = this.txtSearch.Text;
+            if (key == "")
+            {
+                MessageBox.Show("Please enter keyword!", "Notice");
+                return;
+            }
+            PublisherBLL publisherBLL = new PublisherBLL();
+            List<PublisherBLL> publisherArr = new List<PublisherBLL>();
+            publisherArr = publisherBLL.Search(catalog, key);
+            this.dgvPublisher.Rows.Clear();
+            foreach (PublisherBLL row in publisherArr)
+            {
+                this.dgvPublisher.Rows.Add(row.PublisherId, row.Name, row.Phone, row.Address);
+            }
+            this.GetSelectedValue();
 
+            this.dgvPublisher.CellClick += new DataGridViewCellEventHandler(dgvPublisher_CellClick);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-
+            PublisherBLL publisherBLL = new PublisherBLL();
+            publisherBLL.Name = this.txtPublisherName.Text;
+            publisherBLL.Phone = this.txtPhone.Text;
+            publisherBLL.Address = this.txtAddress.Text;
+            if (publisherBLL.AddPublisher(publisherBLL))
+            {
+                MessageBox.Show("Add success!", "Success");
+            }
+            else
+            {
+                MessageBox.Show("Fail!", "Error");
+            }
+            this.LoadDataToGridView();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-
+            if (this.dgvPublisher.SelectedCells.Count > 0)
+            {
+                int selectedrowindex = this.dgvPublisher.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = this.dgvPublisher.Rows[selectedrowindex];
+                int id = Convert.ToInt32(selectedRow.Cells["clmnId"].Value);
+                PublisherBLL publisherBLL = new PublisherBLL();
+                if (publisherBLL.DeletePublisher(id))
+                {
+                    MessageBox.Show("Delete complete!", "Success");
+                }
+                else
+                {
+                    MessageBox.Show("Fail!", "Error");
+                }
+                this.LoadDataToGridView();
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (this.dgvPublisher.SelectedCells.Count > 0)
+            {
 
+                int selectedrowindex = this.dgvPublisher.SelectedCells[0].RowIndex;
+
+                DataGridViewRow selectedRow = this.dgvPublisher.Rows[selectedrowindex];
+
+                PublisherBLL publisherBLL = new PublisherBLL();
+                publisherBLL.PublisherId = Convert.ToInt32(selectedRow.Cells["clmnId"].Value);
+                publisherBLL.Name = this.txtPublisherName.Text;
+                publisherBLL.Phone = this.txtPhone.Text;
+                publisherBLL.Address = this.txtAddress.Text;
+                if (publisherBLL.UpdatePublisher(publisherBLL))
+                {
+                    MessageBox.Show("Update success!", "Success");
+                }
+                else
+                {
+                    MessageBox.Show("Fail", "Error");
+                }
+                this.LoadDataToGridView();
+            }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
         }
 
 

@@ -125,19 +125,22 @@ namespace WinForm
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int selectedrowindex = dgvAuthor.SelectedCells[0].RowIndex;
-            DataGridViewRow selectedRow = dgvAuthor.Rows[selectedrowindex];
-            int id = Convert.ToInt32(selectedRow.Cells["clmnId"].Value);
-            AuthorBLL authorBLL = new AuthorBLL();
-            if (authorBLL.DeleteAuthor(id))
+			if (dgvAuthor.SelectedCells.Count > 0)
             {
-                MessageBox.Show("Delete complete!", "Success");
-            }
-            else
-            {
-                MessageBox.Show("Fail!", "Error");
-            }
-            this.LoadDataToGridView();
+				int selectedrowindex = dgvAuthor.SelectedCells[0].RowIndex;
+				DataGridViewRow selectedRow = dgvAuthor.Rows[selectedrowindex];
+				int id = Convert.ToInt32(selectedRow.Cells["clmnId"].Value);
+				AuthorBLL authorBLL = new AuthorBLL();
+				if (authorBLL.DeleteAuthor(id))
+				{
+					MessageBox.Show("Delete complete!", "Success");
+				}
+				else
+				{
+					MessageBox.Show("Fail!", "Error");
+				}
+				this.LoadDataToGridView();
+			}
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -161,8 +164,8 @@ namespace WinForm
                 {
                     MessageBox.Show("Fail", "Error");
                 }
+				this.LoadDataToGridView();
             }
-            this.LoadDataToGridView();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
