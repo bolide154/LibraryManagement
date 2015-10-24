@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.dgvPublisher = new System.Windows.Forms.DataGridView();
+            this.clmnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.cboSearch = new System.Windows.Forms.ComboBox();
@@ -41,10 +45,6 @@
             this.lblPhone = new System.Windows.Forms.Label();
             this.lblPublisher = new System.Windows.Forms.Label();
             this.lblInfor = new System.Windows.Forms.Label();
-            this.clmnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmnPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmnAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.lblAddress = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPublisher)).BeginInit();
@@ -63,6 +63,32 @@
             this.dgvPublisher.Size = new System.Drawing.Size(397, 210);
             this.dgvPublisher.TabIndex = 16;
             // 
+            // clmnId
+            // 
+            this.clmnId.HeaderText = "Id";
+            this.clmnId.Name = "clmnId";
+            this.clmnId.Visible = false;
+            // 
+            // clmnName
+            // 
+            this.clmnName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clmnName.HeaderText = "Name";
+            this.clmnName.Name = "clmnName";
+            this.clmnName.ReadOnly = true;
+            // 
+            // clmnPhone
+            // 
+            this.clmnPhone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clmnPhone.HeaderText = "Phone Number";
+            this.clmnPhone.Name = "clmnPhone";
+            this.clmnPhone.ReadOnly = true;
+            // 
+            // clmnAddress
+            // 
+            this.clmnAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clmnAddress.HeaderText = "Address";
+            this.clmnAddress.Name = "clmnAddress";
+            // 
             // txtSearch
             // 
             this.txtSearch.Location = new System.Drawing.Point(159, 19);
@@ -78,6 +104,7 @@
             this.btnSearch.TabIndex = 14;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // cboSearch
             // 
@@ -100,6 +127,7 @@
             this.btnClose.TabIndex = 25;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnSave
             // 
@@ -109,6 +137,7 @@
             this.btnSave.TabIndex = 24;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnDelete
             // 
@@ -118,6 +147,7 @@
             this.btnDelete.TabIndex = 23;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnAdd
             // 
@@ -127,6 +157,7 @@
             this.btnAdd.TabIndex = 22;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // txtPhone
             // 
@@ -168,32 +199,6 @@
             this.lblInfor.Size = new System.Drawing.Size(55, 13);
             this.lblInfor.TabIndex = 17;
             this.lblInfor.Text = "Id / Name";
-            // 
-            // clmnId
-            // 
-            this.clmnId.HeaderText = "Id";
-            this.clmnId.Name = "clmnId";
-            this.clmnId.Visible = false;
-            // 
-            // clmnName
-            // 
-            this.clmnName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clmnName.HeaderText = "Name";
-            this.clmnName.Name = "clmnName";
-            this.clmnName.ReadOnly = true;
-            // 
-            // clmnPhone
-            // 
-            this.clmnPhone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clmnPhone.HeaderText = "Phone Number";
-            this.clmnPhone.Name = "clmnPhone";
-            this.clmnPhone.ReadOnly = true;
-            // 
-            // clmnAddress
-            // 
-            this.clmnAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clmnAddress.HeaderText = "Address";
-            this.clmnAddress.Name = "clmnAddress";
             // 
             // txtAddress
             // 

@@ -35,12 +35,12 @@ namespace WinForm
             {
                 this.dgvAuthor.Rows.Add(row.AuthorId, row.Name, row.WorkPlace);
             }
-            this.getSelectedValue();
+            this.GetSelectedValue();
 
             this.dgvAuthor.CellClick += new DataGridViewCellEventHandler(dgvAuthor_CellClick);
         }
 
-        private void getSelectedValue()
+        private void GetSelectedValue()
         {
             if (dgvAuthor.SelectedCells.Count > 0)
             {
@@ -54,12 +54,23 @@ namespace WinForm
                 this.lblInfor.Text = id + " / " + name;
                 this.txtAuthorName.Text = name;
                 this.txtWorkPlace.Text = workPlace;
+                if (id == "")
+                {
+                    this.btnDelete.Enabled = false;
+                    this.btnSave.Enabled = false;
+                }
+                else {
+                    this.btnDelete.Enabled = true;
+                    this.btnSave.Enabled = true;
+                }
             }
             else
             {
                 this.lblInfor.Text = "Id / Name";
                 this.txtAuthorName.Text = "";
                 this.txtWorkPlace.Text = "";
+                this.btnDelete.Enabled = false;
+                this.btnSave.Enabled = false;
             }
         }
 
@@ -67,7 +78,7 @@ namespace WinForm
         {
             LoadDataToComBoBox();
             LoadDataToGridView();
-            this.getSelectedValue();
+            this.GetSelectedValue();
         }
 
         private void LoadDataToGridView()
@@ -79,13 +90,13 @@ namespace WinForm
             foreach(AuthorBLL row in authorArr){
                 this.dgvAuthor.Rows.Add(row.AuthorId, row.Name, row.WorkPlace);
             }
-            this.getSelectedValue();
+            this.GetSelectedValue();
             this.dgvAuthor.CellClick += new DataGridViewCellEventHandler(dgvAuthor_CellClick);
         }
 
         private void dgvAuthor_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.getSelectedValue();
+            this.GetSelectedValue();
         }
 
         private void LoadDataToComBoBox(){

@@ -60,11 +60,23 @@ namespace WinForm
                 string name = Convert.ToString(selectedRow.Cells["clmnName"].Value);
                 this.lblInfor.Text = id + " / " + name;
                 this.txtTypeOfBookName.Text = name;
+                if (id == "")
+                {
+                    this.btnDelete.Enabled = false;
+                    this.btnSave.Enabled = false;
+                }
+                else
+                {
+                    this.btnDelete.Enabled = true;
+                    this.btnSave.Enabled = true;
+                }
             }
             else
             {
                 this.lblInfor.Text = "Id / Name";
                 this.txtTypeOfBookName.Text = "";
+                this.btnDelete.Enabled = false;
+                this.btnSave.Enabled = false;
             }
         }
 
@@ -91,24 +103,27 @@ namespace WinForm
                 this.dgvTypeOfBook.Rows.Add(row.TypeOfBookId, row.Name);
             }
 
-            this.GetSelectedValue();
+            this.LoadDataToGridView();
 
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL();
-            typeOfBookBLL.Name = this.txtTypeOfBookName.Text;
+            if (this.dgvTypeOfBook.SelectedCells.Count > 0)
+            {
+                TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL();
+                typeOfBookBLL.Name = this.txtTypeOfBookName.Text;
 
-            if (typeOfBookBLL.AddTypeOfBook(typeOfBookBLL))
-            {
-                MessageBox.Show("Add success!", "Success");
+                if (typeOfBookBLL.AddTypeOfBook(typeOfBookBLL))
+                {
+                    MessageBox.Show("Add success!", "Success");
+                }
+                else
+                {
+                    MessageBox.Show("Fail!", "Error");
+                }
+                this.LoadDataToGridView();
             }
-            else
-            {
-                MessageBox.Show("Fail!", "Error");
-            }
-            this.LoadDataToGridView();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -127,8 +142,9 @@ namespace WinForm
                 {
                     MessageBox.Show("Fail!", "Error");
                 }
+                this.LoadDataToGridView();
             }
-            this.LoadDataToGridView();
+            
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -151,8 +167,8 @@ namespace WinForm
                 {
                     MessageBox.Show("Fail", "Error");
                 }
+                this.LoadDataToGridView();
             }
-            this.LoadDataToGridView();
         }
 
         private void btnClose_Click(object sender, EventArgs e)

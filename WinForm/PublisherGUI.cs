@@ -47,6 +47,16 @@ namespace WinForm
                 this.txtPublisherName.Text = name;
                 this.txtPhone.Text = phone;
                 this.txtAddress.Text = address;
+                if (id == "")
+                {
+                    this.btnDelete.Enabled = false;
+                    this.btnSave.Enabled = false;
+                }
+                else
+                {
+                    this.btnDelete.Enabled = true;
+                    this.btnSave.Enabled = true;
+                }
             }
             else
             {
@@ -54,6 +64,8 @@ namespace WinForm
                 this.txtPublisherName.Text = "";
                 this.txtPhone.Text = "";
                 this.txtAddress.Text = "";
+                this.btnDelete.Enabled = false;
+                this.btnSave.Enabled = false;
             }
         }
 
@@ -83,5 +95,32 @@ namespace WinForm
         {
             this.GetSelectedValue();
         }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }

@@ -74,19 +74,26 @@ namespace Core.DAL
 
         public bool DeleteTypeOfBook(int id)
         {
+            try
+            {
                 SqlConnection conn = Connection.ConnectionData();
                 String sql = "DELETE FROM [theloai] WHERE matheloai=" + id;
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();
                 return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
         public bool UpdateTypeOfBook(TypeOfBookBLL typeOfBookBLL)
         {
             try
             {
                 SqlConnection conn = Connection.ConnectionData();
-                String sql = "UPDATE [theloai] SET tentheloai=N'" + typeOfBookBLL.Name + "'";
+                String sql = "UPDATE [theloai] SET tentheloai=N'" + typeOfBookBLL.Name + "' WHERE matheloai="+typeOfBookBLL.TypeOfBookId;
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();
