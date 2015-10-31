@@ -30,7 +30,6 @@ namespace WinForm
             List<string> keyArr = new List<string>();
             keyArr.Add("Name");
             this.cboSearch.DataSource = keyArr;
-            this.cboSearch.Text = "Serch by...";
         }
 
         private void LoadDataToGridView()
@@ -86,16 +85,20 @@ namespace WinForm
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            string catalog = this.cboSearch.Text;
-            string key = this.txtSearch.Text;
-            if (key == "")
+            string value = this.txtSearch.Text;
+            if (value == "".Trim())
             {
                 MessageBox.Show("Please enter keyword!", "Notice");
                 return;
             }
+            string key = "";
+            if (this.cboSearch.SelectedItem.ToString() == "Name")
+            {
+                key = "tentinhtrangsach";
+            }
             BookStatusBLL bookStatusBLL = new BookStatusBLL();
             List<BookStatusBLL> bookStatusArr = new List<BookStatusBLL>();
-            bookStatusArr = bookStatusBLL.Search(catalog, key);
+            bookStatusArr = bookStatusBLL.Search(key, value);
             this.dgvBookStatus.Rows.Clear();
             foreach (BookStatusBLL row in bookStatusArr)
             {
@@ -103,7 +106,7 @@ namespace WinForm
             }
             this.GetSelectedValue();
 
-            this.dgvBookStatus.CellClick += new DataGridViewCellEventHandler(dgvBookStatus_CellClick);
+            this.dgvBookStatus.CellClick += new DataGridViewCellEventHandler(this.dgvBookStatus_CellClick);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -139,15 +142,15 @@ namespace WinForm
                     case DialogResult.Cancel:
                         break;
                     case DialogResult.OK:
-                        BookStatusBLL bookStatusBLL = new BookStatusBLL();
-                        if (!bookStatusBLL.CheckDelete(id))
+                        BookStatusBLL bookStatusBLL = new BookStatusBLL(Convert.ToInt32(selectedRow.Cells["clmnId"].Value), selectedRow.Cells["clmnName"].Value.ToString());
+                        if (!bookStatusBLL.CheckDelete(bookStatusBLL))
                         {
                             MessageBox.Show("Can't delete! Please delete all book has status " + selectedRow.Cells["clmnName"].Value + " before delete this status!", "Error");
                             break;
                         }
                         else
                         {
-                            if (bookStatusBLL.DeleteBookStatus(id))
+                            if (bookStatusBLL.DeleteBookStatus(bookStatusBLL))
                             {
                                 MessageBox.Show("Delete complete!", "Success");
                             }

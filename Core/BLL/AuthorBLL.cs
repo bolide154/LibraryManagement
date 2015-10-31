@@ -60,27 +60,12 @@ namespace Core.BLL
 
         public List<AuthorBLL> Search(string key, string value)
         {
-            List<AuthorBLL> authorArr = new List<AuthorBLL>();
-            authorArr = AuthorDAL.Search(key, value);
-            foreach (AuthorBLL author in authorArr)
-            {
-                AuthorBLL authorBLL
-                    = new AuthorBLL(Int32.Parse(author.AuthorId.ToString()), author.Name.ToString(), author.WorkPlace.ToString());
-                authorArr.Add(authorBLL);
-            }
-            return authorArr;
+			return AuthorDAL.Search(key, value);
         }
 
         public bool CheckDelete(AuthorBLL authorBLL)
         {
-            if (AuthorDAL.GetAuThor(authorBLL) == null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return AuthorDAL.CheckDelete(authorBLL);
         }
     }
 }

@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Core.DAL
 {
-    public class BookStatusDAL
+    public static class BookStatusDAL
     {
-        public DataTable LoadBookStatusList()
+        public static List<BookStatusBLL> LoadBookStatusList()
         {
             try
             {
@@ -23,7 +23,18 @@ namespace Core.DAL
                 DataTable dt = new DataTable();
                 da.SelectCommand = cmd;
                 da.Fill(dt);
-                return dt;
+                if (dt.Rows.Count > 0)
+                {
+                    List<BookStatusBLL> bookStatusList = new List<BookStatusBLL>();
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        BookStatusBLL authorBLL = new BookStatusBLL(Int32.Parse(row["matinhtrangsach"].ToString()), row["tentinhtrangsach"].ToString());
+                        bookStatusList.Add(authorBLL);
+                    }
+                    return bookStatusList;
+                }
+                else
+                    return null;
             }
             catch
             {
@@ -31,32 +42,39 @@ namespace Core.DAL
             }
         }
 
-        public DataTable Search(string catalog, string key)
+        public static List<BookStatusBLL> Search(string key, string value)
         {
-            string sql = "";
-            if (key != "")
+            try
             {
-                if (catalog == "" || catalog == "Serch by...")
+                string sql = "SELECT * FROM [tinhtrangsach] WHERE " + key + " LIKE '%" + value + "%'";
+                SqlConnection conn = Connection.ConnectionData();
+                System.Console.Write(sql);
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter();
+                DataTable dt = new DataTable();
+                da.SelectCommand = cmd;
+                da.Fill(dt);
+                if (dt.Rows.Count > 0)
                 {
-                    sql = "SELECT * FROM [tinhtrangsach] WHERE tentinhtrangsach LIKE '%" + key + "%'";
+                    List<BookStatusBLL> bookStatusList = new List<BookStatusBLL>();
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        BookStatusBLL bookStatusBLL = new BookStatusBLL(Int32.Parse(row["matinhtrangsach"].ToString()), row["tentinhtrangsach"].ToString());
+                        bookStatusList.Add(bookStatusBLL);
+                    }
+                    return bookStatusList;
                 }
-                else if (catalog == "Name")
-                {
-                    sql = "SELECT * FROM [tinhtrangsach] WHERE tentinhtrangsach LIKE '%" + key + "%'";
-                }
+                else
+                    return null;
             }
-            SqlConnection conn = Connection.ConnectionData();
-            System.Console.Write(sql);
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.ExecuteNonQuery();
-            SqlDataAdapter da = new SqlDataAdapter();
-            DataTable dt = new DataTable();
-            da.SelectCommand = cmd;
-            da.Fill(dt);
-            return dt;
+            catch
+            {
+                return null;
+            }
         }
 
-        public bool AddBookStatus(BookStatusBLL bookStatusBLL)
+        public static bool AddBookStatus(BookStatusBLL bookStatusBLL)
         {
             try
             {
@@ -73,12 +91,12 @@ namespace Core.DAL
             }
         }
 
-        public bool DeleteBookStatus(int id)
+        public static bool DeleteBookStatus(BookStatusBLL bookStatusBLL)
         {
             try
             {
                 SqlConnection conn = Connection.ConnectionData();
-                String sql = "DELETE FROM [tinhtrangsach] WHERE matinhtrangsach=" + id;
+                String sql = "DELETE FROM [tinhtrangsach] WHERE matinhtrangsach=" + bookStatusBLL.BookStatusId;
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();
@@ -90,7 +108,7 @@ namespace Core.DAL
             }
         }
 
-        public bool UpdateBookStatus(BookStatusBLL bookStatusBLL)
+        public static bool UpdateBookStatus(BookStatusBLL bookStatusBLL)
         {
             try
             {
@@ -107,23 +125,28 @@ namespace Core.DAL
             }
         }
 
-        public DataTable CheckDelete(int id)
+        public static bool CheckDelete(BookStatusBLL bookStatusBLL)
         {
             try
             {
                 SqlConnection conn = Connection.ConnectionData();
-                String sql = "SELECT * FROM [sach] WHERE matinhtrangsach=" + id;
+                String sql = "SELECT * FROM [sach] WHERE matinhtrangsach=" + bookStatusBLL.BookStatusId;
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
                 SqlDataAdapter da = new SqlDataAdapter();
                 DataTable dt = new DataTable();
                 da.SelectCommand = cmd;
                 da.Fill(dt);
-                return dt;
+                if (dt.Rows.Count > 0)
+                {
+                    return false;
+                }
+                else
+                    return true;
             }
             catch
             {
-                return null;
+                return false;
             }
         }
     }

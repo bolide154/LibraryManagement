@@ -108,12 +108,12 @@ namespace Core.DAL
             }
         }
 
-        public static List<AuthorBLL> GetAuThor(AuthorBLL _authorBLL)
+        public static bool CheckDelete(AuthorBLL authorBLL)
         {
             try
             {
                 SqlConnection conn = Connection.ConnectionData();
-                String sql = "SELECT * FROM [tacgia_dausach] WHERE matacgia="+_authorBLL.AuthorId;
+                String sql = "SELECT * FROM [tacgia_dausach] WHERE matacgia="+authorBLL.AuthorId;
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
                 SqlDataAdapter da = new SqlDataAdapter();
@@ -122,22 +122,16 @@ namespace Core.DAL
                 da.Fill(dt);
                 if (dt.Rows.Count > 0)
                 {
-                    List<AuthorBLL> authorList = new List<AuthorBLL>();
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        AuthorBLL authorBLL = new AuthorBLL(Int32.Parse(row["matacgia"].ToString()), row["tentacgia"].ToString(), row["noicongtac"].ToString());
-                        authorList.Add(authorBLL);
-                    }
-                    return authorList;
+                    return false;
                 }
                 else
                 {
-                    return null;
+                    return true;
                 }
             }
             catch
             {
-                return null;
+                return false;
             }
         }
     }

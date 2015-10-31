@@ -10,91 +10,55 @@ namespace Core.BLL
 {
     public class BookStatusBLL
     {
-        private int bookStatusId;
-        private string name;
+        private int _bookStatusId;
+        private string _name;
 
         public int BookStatusId
         {
-            get { return bookStatusId; }
-            set { bookStatusId = value; }
+            get { return _bookStatusId; }
+            set { _bookStatusId = value; }
         }
 
         public string Name
         {
-            get { return name; }
-            set { name = value; }
+            get { return _name; }
+            set { _name = value; }
         }
 
         public BookStatusBLL(int _bookStatusId, string _name)
         {
-            this.bookStatusId = _bookStatusId;
-            this.name = _name;
+            this._bookStatusId = _bookStatusId;
+            this._name = _name;
         }
 
         public BookStatusBLL() { }
 
         public List<BookStatusBLL> LoadBookStatusList()
         {
-            List<BookStatusBLL> bookStatusArr = new List<BookStatusBLL>();
-            BookStatusDAL bookStatusDAL = new BookStatusDAL();
-            DataTable dtBookStatus = new DataTable();
-            dtBookStatus = bookStatusDAL.LoadBookStatusList();
-            foreach (DataRow row in dtBookStatus.Rows)
-            {
-                BookStatusBLL bookStatusBLL = new BookStatusBLL();
-                bookStatusBLL.BookStatusId = Int32.Parse(row["matinhtrangsach"].ToString());
-                bookStatusBLL.Name = row["tentinhtrangsach"].ToString();
-                bookStatusArr.Add(bookStatusBLL);
-            }
-            return bookStatusArr;
+            return BookStatusDAL.LoadBookStatusList();
         }
 
         public bool AddBookStatus(BookStatusBLL bookStatusBLL)
         {
-            BookStatusDAL bookStatusDAL = new BookStatusDAL();
-            return bookStatusDAL.AddBookStatus(bookStatusBLL);
+            return BookStatusDAL.AddBookStatus(bookStatusBLL);
         }
-        public bool DeleteBookStatus(int id)
+        public bool DeleteBookStatus(BookStatusBLL bookStatusBLL)
         {
-            BookStatusDAL bookStatusDAL = new BookStatusDAL();
-            return bookStatusDAL.DeleteBookStatus(id);
+            return BookStatusDAL.DeleteBookStatus(bookStatusBLL);
         }
         public bool UpdateBookStatus(BookStatusBLL bookStatusBLL)
         {
-            BookStatusDAL bookStatusDAL = new BookStatusDAL();
-            return bookStatusDAL.UpdateBookStatus(bookStatusBLL);
+            return BookStatusDAL.UpdateBookStatus(bookStatusBLL);
         }
 
-        public List<BookStatusBLL> Search(string catalog, string key)
+        public List<BookStatusBLL> Search(string key, string value)
         {
-            List<BookStatusBLL> bookStatusArr = new List<BookStatusBLL>();
-            BookStatusDAL bookStatusDAL = new BookStatusDAL();
-            DataTable dtBookStatus = new DataTable();
-            dtBookStatus = bookStatusDAL.Search(catalog, key);
-            foreach (DataRow row in dtBookStatus.Rows)
-            {
-                BookStatusBLL bookStatusBLL = new BookStatusBLL();
-                bookStatusBLL.BookStatusId = Int32.Parse(row["matinhtrangsach"].ToString());
-                bookStatusBLL.Name = row["tentinhtrangsach"].ToString();
-                bookStatusArr.Add(bookStatusBLL);
-            }
-            return bookStatusArr;
+            return BookStatusDAL.Search(key, value);
         }
 
-        public bool CheckDelete(int id)
+        public bool CheckDelete(BookStatusBLL bookStatusBLL)
         {
-            DataTable dt = new DataTable();
-            BookStatusDAL bookStatusDAL = new BookStatusDAL();
-            dt = bookStatusDAL.CheckDelete(id);
-            if (dt.Rows.Count > 0)
-            {
-                //Tồn tại tình trạng sách này trong bảng sách. Không cho xóa
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return BookStatusDAL.CheckDelete(bookStatusBLL);
         }
     }
 }
