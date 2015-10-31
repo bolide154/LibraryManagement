@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Core.DAL
 {
-    class AuthorDAL
+    public static class AuthorDAL
     {
-        public DataTable LoadAuthorList()
+        public static List<AuthorBLL> LoadAuthorList()
         {
             SqlConnection conn = Connection.ConnectionData();
             String sql = "SELECT * FROM [tacgia]";
@@ -21,10 +21,18 @@ namespace Core.DAL
             DataTable dt = new DataTable();
             da.SelectCommand = cmd;
             da.Fill(dt);
-            return dt;
+            //return dt;
+
+            List<AuthorBLL> authorList = new List<AuthorBLL>();
+            foreach (DataRow row in dt.Rows)
+            {
+                AuthorBLL authorBLL = new AuthorBLL(Int32.Parse(row["matacgia"].ToString()), row["tentacgia"].ToString(), row["noicongtac"].ToString());
+                authorList.Add(authorBLL);
+            }
+            return authorList;
         }
 
-        public bool AddAuthor(AuthorBLL authorBLL)
+        public static bool AddAuthor(AuthorBLL authorBLL)
         {
             try
             {
@@ -41,12 +49,12 @@ namespace Core.DAL
                 return false;
             }
         }
-        public bool DeleteAuthor(int id)
+        public static bool DeleteAuthor(AuthorBLL authorBLL)
         {
             try
             {
                 SqlConnection conn = Connection.ConnectionData();
-                String sql = "DELETE FROM [tacgia] WHERE matacgia="+id;
+                String sql = "DELETE FROM [tacgia] WHERE matacgia="+authorBLL.AuthorId;
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();
@@ -56,7 +64,7 @@ namespace Core.DAL
                 return false;
             }
         }
-        public bool UpdateAuthor(AuthorBLL authorBLL)
+        public static bool UpdateAuthor(AuthorBLL authorBLL)
         {
             try
             {
@@ -73,47 +81,59 @@ namespace Core.DAL
             }
         }
 
-        public DataTable Search(string catalog, string key)
+        public static List<AuthorBLL> Search(string key, string value)
         {
-            string sql = "";
-            if (key != "")
-            {
-                if (catalog == "" || catalog == "Serch by...")
-                {
-                        sql = "SELECT * FROM [tacgia] WHERE tentacgia LIKE '%" + key + "%'";
-                }
-                else if (catalog == "Name")
-                {
-                    sql = "SELECT * FROM [tacgia] WHERE tentacgia LIKE '%" + key + "%'";
-                }
-                else if (catalog == "Work Place")
-                {
-                    sql = "SELECT * FROM [tacgia] WHERE noicongtac LIKE '%" + key + "%'";
-                }
-            }
-            SqlConnection conn = Connection.ConnectionData();
-            System.Console.Write(sql);
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.ExecuteNonQuery();
-            SqlDataAdapter da = new SqlDataAdapter();
-            DataTable dt = new DataTable();
-            da.SelectCommand = cmd;
-            da.Fill(dt);
-            return dt;
-        }
-
-        public DataTable CheckDelete(int id){
             try
             {
+                string sql = "SELECT * FROM [tacgia] WHERE " + key + " LIKE '%" + value + "%'";
                 SqlConnection conn = Connection.ConnectionData();
-                String sql = "SELECT * FROM [tacgia_dausach] WHERE matacgia="+id;
+                System.Console.Write(sql);
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
                 SqlDataAdapter da = new SqlDataAdapter();
                 DataTable dt = new DataTable();
                 da.SelectCommand = cmd;
                 da.Fill(dt);
-                return dt;
+                List<AuthorBLL> authorList = new List<AuthorBLL>();
+                foreach (DataRow row in dt.Rows)
+                {
+                    AuthorBLL authorBLL = new AuthorBLL(Int32.Parse(row["matacgia"].ToString()), row["tentacgia"].ToString(), row["noicongtac"].ToString());
+                    authorList.Add(authorBLL);
+                }
+                return authorList;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public static List<AuthorBLL> GetAuThor(AuthorBLL _authorBLL)
+        {
+            try
+            {
+                SqlConnection conn = Connection.ConnectionData();
+                String sql = "SELECT * FROM [tacgia_dausach] WHERE matacgia="+_authorBLL.AuthorId;
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter();
+                DataTable dt = new DataTable();
+                da.SelectCommand = cmd;
+                da.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    List<AuthorBLL> authorList = new List<AuthorBLL>();
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        AuthorBLL authorBLL = new AuthorBLL(Int32.Parse(row["matacgia"].ToString()), row["tentacgia"].ToString(), row["noicongtac"].ToString());
+                        authorList.Add(authorBLL);
+                    }
+                    return authorList;
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch
             {

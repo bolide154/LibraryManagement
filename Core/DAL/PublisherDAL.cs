@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Core.DAL
 {
-    class PublisherDAL
+    public class PublisherDAL
     {
         public DataTable LoadPublisherList()
         {

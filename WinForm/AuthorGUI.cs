@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Core.BLL;
+using Core.DAL;
 
 namespace WinForm
 {
@@ -20,17 +21,25 @@ namespace WinForm
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            string catalog = this.cboSearch.Text;
-            string key = this.txtSearch.Text;
-            if (key == "")
+            string value = this.txtSearch.Text;
+            if (value == "".Trim())
             {
                 MessageBox.Show("Please enter keyword!", "Notice");
                 return;
             }
+            string key = "";
+            if (this.cboSearch.SelectedItem.ToString()=="Work Place")
+            {
+                key = "noicongtac";
+            }
+            else
+            {
+                key = "tentacgia";
+            }
             AuthorBLL authorBLL = new AuthorBLL();
             List<AuthorBLL> authorArr = new List<AuthorBLL>();
-            authorArr = authorBLL.Search(catalog, key);
-            this.dgvAuthor.Rows.Clear();
+            authorArr = AuthorDAL.Search(key, value);
+            this.dgvAuthor.Rows.Clear(); 
             foreach (AuthorBLL row in authorArr)
             {
                 this.dgvAuthor.Rows.Add(row.AuthorId, row.Name, row.WorkPlace);
@@ -104,7 +113,6 @@ namespace WinForm
             keyArr.Add("Name");
             keyArr.Add("Work Place");
             this.cboSearch.DataSource = keyArr;
-            this.cboSearch.Text = "Serch by...";
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -140,15 +148,15 @@ namespace WinForm
                     case DialogResult.Cancel:
                         break;
                     case DialogResult.OK:
-                        AuthorBLL authorBLL = new AuthorBLL();
-                        if (!authorBLL.CheckDelete(id))
+                        AuthorBLL authorBLL = new AuthorBLL(Convert.ToInt32(selectedRow.Cells["clmnId"].Value), selectedRow.Cells["clmnName"].Value.ToString(), selectedRow.Cells["clmnWorkPlace"].Value.ToString());
+                        if (!authorBLL.CheckDelete(authorBLL))
                         {
                             MessageBox.Show("Can't delete! Please delete all book of " + selectedRow.Cells["clmnName"].Value + " before delete this author!", "Error");
                             break;
                         }
                         else
                         {
-                            if (authorBLL.DeleteAuthor(id))
+                            if (authorBLL.DeleteAuthor(authorBLL))
                             {
                                 MessageBox.Show("Delete complete!", "Success");
                             }

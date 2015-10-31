@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Core.DAL
 {
-    class BookStatusDAL
+    public class BookStatusDAL
     {
         public DataTable LoadBookStatusList()
         {
