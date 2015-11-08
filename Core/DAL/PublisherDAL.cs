@@ -9,119 +9,76 @@ using System.Threading.Tasks;
 
 namespace Core.DAL
 {
-    public class PublisherDAL
+    public static class PublisherDAL
     {
-        public DataTable LoadPublisherList()
+        public static Connection _condb = new Connection();
+        public static List<PublisherBLL> getPublisherList()
         {
-            SqlConnection conn = Connection.ConnectionData();
             String sql = "SELECT * FROM [nhaxuatban]";
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.ExecuteNonQuery();
-            SqlDataAdapter da = new SqlDataAdapter();
-            DataTable dt = new DataTable();
-            da.SelectCommand = cmd;
-            da.Fill(dt);
-            return dt;
+            DataTable dt = PublisherDAL._condb.getDataTable(sql);
+            List<PublisherBLL> publisherBLLList = new List<PublisherBLL>();
+            if (dt.Rows.Count > 1)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    PublisherBLL publisherBLL = new PublisherBLL(Int32.Parse(row["manxb"].ToString()), row["tennxb"].ToString(), row["sdtnxb"].ToString(), row["diachinxb"].ToString());
+                    publisherBLLList.Add(publisherBLL);
+                }
+                return publisherBLLList;
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        public bool AddPublisher(PublisherBLL publisherBLL)
+        public static void addPublisher(PublisherBLL publisherBLL)
         {
-            try
-            {
-                SqlConnection conn = Connection.ConnectionData();
                 String sql = "INSERT INTO [nhaxuatban] (tennxb, sdtnxb, diachinxb)"
                     + " VALUES ( N'" + publisherBLL.Name + "', N'" + publisherBLL.Phone + "', N'"+publisherBLL.Address+"')";
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+                PublisherDAL._condb.ExecuteNonQuery(sql);
         }
-        public bool DeletePublisher(int id)
+        public static void deletePublisher(PublisherBLL publisherBLL)
         {
-            try
-            {
-                SqlConnection conn = Connection.ConnectionData();
-                String sql = "DELETE FROM [nhaxuatban] WHERE manxb=" + id;
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+                String sql = "DELETE FROM [nhaxuatban] WHERE manxb=" + publisherBLL.PublisherId;
+                PublisherDAL._condb.ExecuteNonQuery(sql);
         }
-        public bool UpdatePublisher(PublisherBLL publisherBLL)
+        public static void updatePublisher(PublisherBLL publisherBLL)
         {
-            try
-            {
-                SqlConnection conn = Connection.ConnectionData();
                 String sql = "UPDATE [nhaxuatban] SET tennxb=N'" + publisherBLL.Name + "', sdtnxb=N'" + publisherBLL.Phone + "', diachinxb=N'" + publisherBLL.Address + "' WHERE manxb=" + publisherBLL.PublisherId;
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                return true;
-            }
-            catch
+                PublisherDAL._condb.ExecuteNonQuery(sql);
+        }
+
+        public static List<PublisherBLL> search(string catalog, string key)
+        {
+            string sql = "SELECT * FROM [nhaxuatban] WHERE "+catalog+" LIKE '%" + key + "%'";
+            DataTable dt = PublisherDAL._condb.getDataTable(sql);
+            List<PublisherBLL> publisherBLLList = new List<PublisherBLL>();
+            if (dt.Rows.Count > 1)
             {
-                return false;
+                foreach (DataRow row in dt.Rows)
+                {
+                    PublisherBLL publisherBLL = new PublisherBLL(Int32.Parse(row["manxb"].ToString()), row["tennxb"].ToString(), row["sdtnxb"].ToString(), row["diachinxb"].ToString());
+                    publisherBLLList.Add(publisherBLL);
+                }
+                return publisherBLLList;
+            }
+            else
+            {
+                return null;
             }
         }
 
-        public DataTable Search(string catalog, string key)
+        public static PublisherBLL getPublisherItem(PublisherBLL publiserBLL)
         {
-            string sql = "";
-            if (key != "")
+            String sql = "SELECT * FROM [dausach] WHERE manxb=" + publiserBLL.PublisherId;
+            DataTable dt = PublisherDAL._condb.getDataTable(sql);
+            if (dt.Rows.Count > 0)
             {
-                if (catalog == "" || catalog == "Serch by...")
-                {
-                    sql = "SELECT * FROM [nhaxuatban] WHERE tennxb LIKE '%" + key + "%'";
-                }
-                else if (catalog == "Name")
-                {
-                    sql = "SELECT * FROM [nhaxuatban] WHERE tennxb LIKE '%" + key + "%'";
-                }
-                else if (catalog == "Phone Number")
-                {
-                    sql = "SELECT * FROM [nhaxuatban] WHERE sdtnxb LIKE '%" + key + "%'";
-                }
-                else if (catalog == "Address")
-                {
-                    sql = "SELECT * FROM [nhaxuatban] WHERE diachinxb LIKE '%" + key + "%'";
-                }
+                DataRow row = dt.Rows[0];
+                return new PublisherBLL(Int32.Parse(row["manxb"].ToString()), row["tennxb"].ToString(), row["sdtnxb"].ToString(), row["diachinxb"].ToString());
             }
-            SqlConnection conn = Connection.ConnectionData();
-            System.Console.Write(sql);
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.ExecuteNonQuery();
-            SqlDataAdapter da = new SqlDataAdapter();
-            DataTable dt = new DataTable();
-            da.SelectCommand = cmd;
-            da.Fill(dt);
-            return dt;
-        }
-
-        public DataTable CheckDelete(int id)
-        {
-            try
-            {
-                SqlConnection conn = Connection.ConnectionData();
-                String sql = "SELECT * FROM [dausach] WHERE manxb=" + id;
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-                SqlDataAdapter da = new SqlDataAdapter();
-                DataTable dt = new DataTable();
-                da.SelectCommand = cmd;
-                da.Fill(dt);
-                return dt;
-            }
-            catch
+            else
             {
                 return null;
             }

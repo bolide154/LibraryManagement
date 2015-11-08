@@ -49,75 +49,7 @@ namespace Core.BLL
 
         public PublisherBLL() { }
 
-        public List<PublisherBLL> LoadPublisherList()
-        {
-            List<PublisherBLL> publisherArr = new List<PublisherBLL>();
-            PublisherDAL publisherDAL = new PublisherDAL();
-            DataTable dtPublisher = new DataTable();
-            dtPublisher = publisherDAL.LoadPublisherList();
-            foreach (DataRow row in dtPublisher.Rows)
-            {
-                PublisherBLL publisherBLL = new PublisherBLL();
-                publisherBLL.PublisherId = Int32.Parse(row["manxb"].ToString());
-                publisherBLL.Name = row["tennxb"].ToString();
-                publisherBLL.Phone = row["sdtnxb"].ToString();
-                publisherBLL.Address = row["diachinxb"].ToString();
-                publisherArr.Add(publisherBLL);
-            }
-            return publisherArr;
-        }
-
-        public bool AddPublisher(PublisherBLL publisherBLL)
-        {
-            PublisherDAL publisherDAL = new PublisherDAL();
-            return publisherDAL.AddPublisher(publisherBLL);
-        }
-
-        public bool DeletePublisher(int id)
-        {
-            PublisherDAL publisherDAL = new PublisherDAL();
-            return publisherDAL.DeletePublisher(id);
-        }
-
-        public bool UpdatePublisher(PublisherBLL publisherBLL)
-        {
-            PublisherDAL publisherDAL = new PublisherDAL();
-            return publisherDAL.UpdatePublisher(publisherBLL);
-        }
-
-        public List<PublisherBLL> Search(string catalog, string key)
-        {
-            List<PublisherBLL> publisherArr = new List<PublisherBLL>();
-            PublisherDAL publisherDAL = new PublisherDAL();
-            DataTable dtPublisher = new DataTable();
-            dtPublisher = publisherDAL.Search(catalog, key);
-            foreach (DataRow row in dtPublisher.Rows)
-            {
-                PublisherBLL publisherBLL = new PublisherBLL();
-                publisherBLL.PublisherId = Int32.Parse(row["manxb"].ToString());
-                publisherBLL.Name = row["tennxb"].ToString();
-                publisherBLL.Phone = row["sdtnxb"].ToString();
-                publisherBLL.Address = row["diachinxb"].ToString();
-                publisherArr.Add(publisherBLL);
-            }
-            return publisherArr;
-        }
-
-        public bool CheckDelete(int id)
-        {
-            DataTable dt = new DataTable();
-            PublisherDAL publisherDAL = new PublisherDAL();
-            dt = publisherDAL.CheckDelete(id);
-            if (dt.Rows.Count > 0)
-            {
-                //Tồn tại nxb trong bảng đầu sách. Không cho xóa
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
+        
     }
 }
 

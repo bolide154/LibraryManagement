@@ -1,4 +1,5 @@
 ﻿using Core.BLL;
+using Core.DAL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,22 +31,21 @@ namespace WinForm
             List<string> keyArr = new List<string>();
             keyArr.Add("Name");
             this.cboSearch.DataSource = keyArr;
-            this.cboSearch.Text = "Serch by...";
         }
 
         private void LoadDataToGridView()
         {
-                this.dgvTypeOfBook.Rows.Clear();
-                TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL();
-                List<TypeOfBookBLL> typeOfBookArr = new List<TypeOfBookBLL>();
-                typeOfBookArr = typeOfBookBLL.LoadTypeOfBookList();
-                foreach (TypeOfBookBLL row in typeOfBookArr)
-                {
-                    this.dgvTypeOfBook.Rows.Add(row.TypeOfBookId, row.Name);
-                }
-                this.GetSelectedValue();
-                this.dgvTypeOfBook.CellClick += new DataGridViewCellEventHandler(this.dgvTypeOfBook_CellClick);
-                
+            this.dgvTypeOfBook.Rows.Clear();
+            TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL();
+            List<TypeOfBookBLL> typeOfBookArr = new List<TypeOfBookBLL>();
+            typeOfBookArr = TypeOfBookDAL.getTypeOfBookList();
+            foreach (TypeOfBookBLL row in typeOfBookArr)
+            {
+                this.dgvTypeOfBook.Rows.Add(row.TypeOfBookId, row.Name);
+            }
+            this.GetSelectedValue();
+            this.dgvTypeOfBook.CellClick += new DataGridViewCellEventHandler(this.dgvTypeOfBook_CellClick);
+
         }
 
         private void GetSelectedValue()
@@ -96,7 +96,7 @@ namespace WinForm
             }
             TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL();
             List<TypeOfBookBLL> typeOfBookArr = new List<TypeOfBookBLL>();
-            typeOfBookArr = typeOfBookBLL.Search(catalog, key);
+            typeOfBookArr = TypeOfBookDAL.search(catalog, key);
             this.dgvTypeOfBook.Rows.Clear();
             foreach (TypeOfBookBLL row in typeOfBookArr)
             {
@@ -111,22 +111,16 @@ namespace WinForm
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-                TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL();
-                typeOfBookBLL.Name = this.txtTypeOfBookName.Text;
-                if (typeOfBookBLL.Name == "")
-                {
-                    MessageBox.Show("Author name is not null!", "Notice");
-                    return;
-                }
-                if (typeOfBookBLL.AddTypeOfBook(typeOfBookBLL))
-                {
-                    MessageBox.Show("Add success!", "Success");
-                }
-                else
-                {
-                    MessageBox.Show("Fail!", "Error");
-                }
-                this.LoadDataToGridView();
+            TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL();
+            typeOfBookBLL.Name = this.txtTypeOfBookName.Text;
+            if (typeOfBookBLL.Name == "")
+            {
+                MessageBox.Show("Author name is not null!", "Notice");
+                return;
+            }
+            TypeOfBookDAL.addTypeOfBook(typeOfBookBLL);
+            MessageBox.Show("Add success!", "Success");
+            this.LoadDataToGridView();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -135,35 +129,28 @@ namespace WinForm
             {
                 int selectedrowindex = this.dgvTypeOfBook.SelectedCells[0].RowIndex;
                 DataGridViewRow selectedRow = this.dgvTypeOfBook.Rows[selectedrowindex];
-                int id = Convert.ToInt32(selectedRow.Cells["clmnId"].Value);
+                TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL(Convert.ToInt32(selectedRow.Cells["clmnId"].Value), selectedRow.Cells["clmnId"].Value.ToString());
                 DialogResult result = MessageBox.Show("Do you want to delete type of book: " + selectedRow.Cells["clmnName"].Value + "?", "Warning", MessageBoxButtons.OKCancel);
                 switch (result)
                 {
                     case DialogResult.Cancel:
                         break;
                     case DialogResult.OK:
-                        TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL();
-                        if (!typeOfBookBLL.CheckDelete(id))
+                        if (TypeOfBookDAL.getTypeOfBookItem(typeOfBookBLL) != null)
                         {
                             MessageBox.Show("Can't delete! Please delete all book title has type " + selectedRow.Cells["clmnName"].Value + " before delete this type!", "Error");
                             break;
                         }
                         else
                         {
-                            if (typeOfBookBLL.DeleteTypeOfBook(id))
-                            {
-                                MessageBox.Show("Delete complete!", "Success");
-                            }
-                            else
-                            {
-                                MessageBox.Show("Fail!", "Error");
-                            }
+                            TypeOfBookDAL.deleteTypeOfBook(typeOfBookBLL);
+                            MessageBox.Show("Delete complete!", "Success");
                             this.LoadDataToGridView();
                             break;
                         }
                 }
             }
-            
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -175,22 +162,15 @@ namespace WinForm
 
                 DataGridViewRow selectedRow = this.dgvTypeOfBook.Rows[selectedrowindex];
 
-                TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL();
-                typeOfBookBLL.TypeOfBookId = Convert.ToInt32(selectedRow.Cells["clmnId"].Value);
-                typeOfBookBLL.Name = txtTypeOfBookName.Text;
+                TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL(Convert.ToInt32(selectedRow.Cells["clmnId"].Value), txtTypeOfBookName.Text);
+                
                 if (typeOfBookBLL.Name == "")
                 {
                     MessageBox.Show("Author name is not null!", "Notice");
                     return;
                 }
-                if (typeOfBookBLL.UpdateTypeOfBook(typeOfBookBLL))
-                {
-                    MessageBox.Show("Update success!", "Success");
-                }
-                else
-                {
-                    MessageBox.Show("Fail", "Error");
-                }
+                TypeOfBookDAL.updateTypeOfBook(typeOfBookBLL);
+                MessageBox.Show("Update success!", "Success");
                 this.LoadDataToGridView();
             }
         }
@@ -199,7 +179,5 @@ namespace WinForm
         {
             this.Hide();
         }
-
-
     }
 }

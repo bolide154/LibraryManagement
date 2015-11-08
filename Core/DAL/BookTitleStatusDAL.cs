@@ -11,118 +11,69 @@ namespace Core.DAL
 {
     public class BookTitleStatusDAL
     {
-        public DataTable LoadBookTitleStatusList()
+        public static Connection _condb = new Connection();
+        public static List<BookTitleStatusBLL> getBookTitleStatusList()
         {
-            try
-            {
-                SqlConnection conn = Connection.ConnectionData();
-                String sql = "SELECT * FROM [tinhtrangdausach]";
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-                SqlDataAdapter da = new SqlDataAdapter();
-                DataTable dt = new DataTable();
-                da.SelectCommand = cmd;
-                da.Fill(dt);
-                return dt;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public DataTable Search(string catalog, string key)
-        {
-            string sql = "";
-            if (key != "")
-            {
-                if (catalog == "" || catalog == "Serch by...")
-                {
-                    sql = "SELECT * FROM [tinhtrangdausach] WHERE tentinhtrang LIKE '%" + key + "%'";
-                }
-                else if (catalog == "Name")
-                {
-                    sql = "SELECT * FROM [tinhtrangdausach] WHERE tentinhtrang LIKE '%" + key + "%'";
-                }
-            }
-            SqlConnection conn = Connection.ConnectionData();
-            System.Console.Write(sql);
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.ExecuteNonQuery();
-            SqlDataAdapter da = new SqlDataAdapter();
+            String sql = "SELECT * FROM [tinhtrangdausach]";
             DataTable dt = new DataTable();
-            da.SelectCommand = cmd;
-            da.Fill(dt);
-            return dt;
+            dt = BookTitleStatusDAL._condb.getDataTable(sql);
+            List<BookTitleStatusBLL> bookTitleStatusBLLList = new List<BookTitleStatusBLL>();
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    BookTitleStatusBLL bookTitleStatusBLL = new BookTitleStatusBLL(Int32.Parse(row["matinhtrang"].ToString()), row["tentinhtrang"].ToString());
+                    bookTitleStatusBLLList.Add(bookTitleStatusBLL);
+                }
+                return bookTitleStatusBLLList;
+            }
+            return null;
         }
 
-        public bool AddBookTitleStatus(BookTitleStatusBLL bookTitleStatus)
+        public static List<BookTitleStatusBLL> search(string catalog, string key)
         {
-            try
+            string sql = "SELECT * FROM [tinhtrangdausach] WHERE " + catalog + " LIKE '%" + key + "%'";
+            DataTable dt = new DataTable();
+            dt = BookTitleStatusDAL._condb.getDataTable(sql);
+            List<BookTitleStatusBLL> bookTitleStatusBLLList = new List<BookTitleStatusBLL>();
+            if (dt.Rows.Count > 0)
             {
-                SqlConnection conn = Connection.ConnectionData();
-                String sql = "INSERT INTO [tinhtrangdausach] (tentinhtrang) VALUES ( N'" + bookTitleStatus.Name + "')";
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                return true;
+                foreach (DataRow row in dt.Rows)
+                {
+                    BookTitleStatusBLL bookTitleStatusBLL = new BookTitleStatusBLL(Int32.Parse(row["matinhtrang"].ToString()), row["tentinhtrang"].ToString());
+                    bookTitleStatusBLLList.Add(bookTitleStatusBLL);
+                }
+                return bookTitleStatusBLLList;
             }
-            catch
-            {
-                return false;
-            }
+            return null;
         }
 
-        public bool DeleteBookTitleStatus(int id)
+        public static void addBookTitleStatus(BookTitleStatusBLL bookTitleStatus)
         {
-            try
-            {
-                SqlConnection conn = Connection.ConnectionData();
-                String sql = "DELETE FROM [tinhtrangdausach] WHERE matinhtrang=" + id;
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            String sql = "INSERT INTO [tinhtrangdausach] (tentinhtrang) VALUES ( N'" + bookTitleStatus.Name + "')";
+            BookTitleStatusDAL._condb.ExecuteNonQuery(sql);
         }
-        public bool UpdateBookTitleStatus(BookTitleStatusBLL bookTitleStatusBLL)
+
+        public static void deleteBookTitleStatus(BookTitleStatusBLL bookTitleStatus)
         {
-            try
-            {
-                SqlConnection conn = Connection.ConnectionData();
-                String sql = "UPDATE [tinhtrangdausach] SET tentinhtrang=N'" + bookTitleStatusBLL.Name + "' WHERE matinhtrang=" + bookTitleStatusBLL.BookTitleStatusId;
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            String sql = "DELETE FROM [tinhtrangdausach] WHERE matinhtrang=" + bookTitleStatus.BookTitleStatusId;
+            BookTitleStatusDAL._condb.ExecuteNonQuery(sql);
         }
-        public DataTable CheckDelete(int id)
+        public static void updateBookTitleStatus(BookTitleStatusBLL bookTitleStatusBLL)
         {
-            try
+            String sql = "UPDATE [tinhtrangdausach] SET tentinhtrang=N'" + bookTitleStatusBLL.Name + "' WHERE matinhtrang=" + bookTitleStatusBLL.BookTitleStatusId;
+            BookTitleStatusDAL._condb.ExecuteNonQuery(sql);
+        }
+        public static BookTitleStatusBLL getBookTitleStatusItem(BookTitleStatusBLL bookTitleStatusBLL)
+        {
+            String sql = "SELECT * FROM [dausach] WHERE matinhtrang=" + bookTitleStatusBLL.BookTitleStatusId;
+            DataTable dt = BookTitleStatusDAL._condb.getDataTable(sql);
+            if (dt.Rows.Count > 0)
             {
-                SqlConnection conn = Connection.ConnectionData();
-                String sql = "SELECT * FROM [dausach] WHERE matinhtrang=" + id;
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-                SqlDataAdapter da = new SqlDataAdapter();
-                DataTable dt = new DataTable();
-                da.SelectCommand = cmd;
-                da.Fill(dt);
-                return dt;
+                DataRow row = dt.Rows[0];
+                return new BookTitleStatusBLL(Int32.Parse(row["matinhtrang"].ToString()), row["tentinhtrang"].ToString());
             }
-            catch
-            {
-                return null;
-            }
+            return null;
         }
     }
 }

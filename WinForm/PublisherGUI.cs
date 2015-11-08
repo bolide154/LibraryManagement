@@ -1,4 +1,5 @@
 ﻿using Core.BLL;
+using Core.DAL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -83,7 +84,7 @@ namespace WinForm
             this.dgvPublisher.Rows.Clear();
             PublisherBLL publiserBLL = new PublisherBLL();
             List<PublisherBLL> publisherArr = new List<PublisherBLL>();
-            publisherArr = publiserBLL.LoadPublisherList();
+            publisherArr = PublisherDAL.getPublisherList();
             foreach (PublisherBLL row in publisherArr)
             {
                 this.dgvPublisher.Rows.Add(row.PublisherId, row.Name, row.Phone, row.Address);
@@ -108,7 +109,7 @@ namespace WinForm
             }
             PublisherBLL publisherBLL = new PublisherBLL();
             List<PublisherBLL> publisherArr = new List<PublisherBLL>();
-            publisherArr = publisherBLL.Search(catalog, key);
+            publisherArr = PublisherDAL.search(catalog, key);
             this.dgvPublisher.Rows.Clear();
             foreach (PublisherBLL row in publisherArr)
             {
@@ -130,14 +131,8 @@ namespace WinForm
                 MessageBox.Show("Author name is not null!", "Notice");
                 return;
             }
-            if (publisherBLL.AddPublisher(publisherBLL))
-            {
-                MessageBox.Show("Add success!", "Success");
-            }
-            else
-            {
-                MessageBox.Show("Fail!", "Error");
-            }
+            PublisherDAL.addPublisher(publisherBLL);
+            MessageBox.Show("Add success!", "Success");
             this.LoadDataToGridView();
         }
 
@@ -147,29 +142,22 @@ namespace WinForm
             {
                 int selectedrowindex = this.dgvPublisher.SelectedCells[0].RowIndex;
                 DataGridViewRow selectedRow = this.dgvPublisher.Rows[selectedrowindex];
-                int id = Convert.ToInt32(selectedRow.Cells["clmnId"].Value);
-                DialogResult result = MessageBox.Show("Do you want to delete publisher: " + selectedRow.Cells["clmnName"].Value+ "?", "Warning", MessageBoxButtons.OKCancel);
+                PublisherBLL publisherBLL = new PublisherBLL(Convert.ToInt32(selectedRow.Cells["clmnId"].Value), selectedRow.Cells["clmnName"].Value.ToString(), selectedRow.Cells["clmnPhone"].Value.ToString(), selectedRow.Cells["clmnAddress"].Value.ToString());
+                DialogResult result = MessageBox.Show("Do you want to delete publisher: " + selectedRow.Cells["clmnName"].Value + "?", "Warning", MessageBoxButtons.OKCancel);
                 switch (result)
                 {
                     case DialogResult.Cancel:
                         break;
                     case DialogResult.OK:
-                        PublisherBLL publisherBLL = new PublisherBLL();
-                        if (!publisherBLL.CheckDelete(id))
+                        if (PublisherDAL.getPublisherItem(publisherBLL) != null)
                         {
                             MessageBox.Show("Can't delete! Please delete all book title has publisher " + selectedRow.Cells["clmnName"].Value + " before delete this publisher!", "Error");
                             break;
                         }
                         else
                         {
-                            if (publisherBLL.DeletePublisher(id))
-                            {
-                                MessageBox.Show("Delete complete!", "Success");
-                            }
-                            else
-                            {
-                                MessageBox.Show("Fail!", "Error");
-                            }
+                            PublisherDAL.deletePublisher(publisherBLL);
+                            MessageBox.Show("Delete complete!", "Success");
                             this.LoadDataToGridView();
                             break;
                         }
@@ -186,24 +174,15 @@ namespace WinForm
 
                 DataGridViewRow selectedRow = this.dgvPublisher.Rows[selectedrowindex];
 
-                PublisherBLL publisherBLL = new PublisherBLL();
-                publisherBLL.PublisherId = Convert.ToInt32(selectedRow.Cells["clmnId"].Value);
-                publisherBLL.Name = this.txtPublisherName.Text;
-                publisherBLL.Phone = this.txtPhone.Text;
-                publisherBLL.Address = this.txtAddress.Text;
+                PublisherBLL publisherBLL = new PublisherBLL(Convert.ToInt32(selectedRow.Cells["clmnId"].Value), this.txtPublisherName.Text, this.txtPhone.Text, this.txtAddress.Text);
+                
                 if (publisherBLL.Name == "")
                 {
                     MessageBox.Show("Author name is not null!", "Notice");
                     return;
                 }
-                if (publisherBLL.UpdatePublisher(publisherBLL))
-                {
-                    MessageBox.Show("Update success!", "Success");
-                }
-                else
-                {
-                    MessageBox.Show("Fail", "Error");
-                }
+                PublisherDAL.updatePublisher(publisherBLL);
+                MessageBox.Show("Update success!", "Success");
                 this.LoadDataToGridView();
             }
         }

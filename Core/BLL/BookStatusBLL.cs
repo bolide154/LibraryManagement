@@ -32,33 +32,5 @@ namespace Core.BLL
         }
 
         public BookStatusBLL() { }
-
-        public List<BookStatusBLL> LoadBookStatusList()
-        {
-            return BookStatusDAL.LoadBookStatusList();
-        }
-
-        public bool AddBookStatus(BookStatusBLL bookStatusBLL)
-        {
-            return BookStatusDAL.AddBookStatus(bookStatusBLL);
-        }
-        public bool DeleteBookStatus(BookStatusBLL bookStatusBLL)
-        {
-            return BookStatusDAL.DeleteBookStatus(bookStatusBLL);
-        }
-        public bool UpdateBookStatus(BookStatusBLL bookStatusBLL)
-        {
-            return BookStatusDAL.UpdateBookStatus(bookStatusBLL);
-        }
-
-        public List<BookStatusBLL> Search(string key, string value)
-        {
-            return BookStatusDAL.Search(key, value);
-        }
-
-        public bool CheckDelete(BookStatusBLL bookStatusBLL)
-        {
-            return BookStatusDAL.CheckDelete(bookStatusBLL);
-        }
     }
 }

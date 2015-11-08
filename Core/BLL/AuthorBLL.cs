@@ -41,31 +41,6 @@ namespace Core.BLL
 
         public AuthorBLL() { }
 
-        public List<AuthorBLL> LoadAuthorList()
-        {
-            return AuthorDAL.LoadAuthorList();
-        }
-        public bool AddAuthor(AuthorBLL authorBLL) {
-            return AuthorDAL.AddAuthor(authorBLL);
-        }
-        public bool DeleteAuthor(AuthorBLL authorBLL)
-        {
-
-            return AuthorDAL.DeleteAuthor(authorBLL);
-        }
-        public bool UpdateAuthor(AuthorBLL authorBLL)
-        {
-            return AuthorDAL.UpdateAuthor(authorBLL);
-        }
-
-        public List<AuthorBLL> Search(string key, string value)
-        {
-			return AuthorDAL.Search(key, value);
-        }
-
-        public bool CheckDelete(AuthorBLL authorBLL)
-        {
-            return AuthorDAL.CheckDelete(authorBLL);
-        }
+        
     }
 }

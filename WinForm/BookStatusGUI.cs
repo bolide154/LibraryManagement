@@ -1,4 +1,5 @@
 ﻿using Core.BLL;
+using Core.DAL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,7 +38,7 @@ namespace WinForm
             this.dgvBookStatus.Rows.Clear();
             BookStatusBLL bookStatusBLL = new BookStatusBLL();
             List<BookStatusBLL> bookStatusArr = new List<BookStatusBLL>();
-            bookStatusArr = bookStatusBLL.LoadBookStatusList();
+            bookStatusArr = BookStatusDAL.getBookStatusList();
             foreach (BookStatusBLL row in bookStatusArr)
             {
                 this.dgvBookStatus.Rows.Add(row.BookStatusId, row.Name);
@@ -85,20 +86,20 @@ namespace WinForm
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            string value = this.txtSearch.Text;
-            if (value == "".Trim())
+            string key = this.txtSearch.Text;
+            if (key == "".Trim())
             {
                 MessageBox.Show("Please enter keyword!", "Notice");
                 return;
             }
-            string key = "";
+            string catalog = "";
             if (this.cboSearch.SelectedItem.ToString() == "Name")
             {
-                key = "tentinhtrangsach";
+                catalog = "tentinhtrangsach";
             }
             BookStatusBLL bookStatusBLL = new BookStatusBLL();
             List<BookStatusBLL> bookStatusArr = new List<BookStatusBLL>();
-            bookStatusArr = bookStatusBLL.Search(key, value);
+            bookStatusArr = BookStatusDAL.search(catalog, key);
             this.dgvBookStatus.Rows.Clear();
             foreach (BookStatusBLL row in bookStatusArr)
             {
@@ -118,14 +119,8 @@ namespace WinForm
                 MessageBox.Show("Book status name is not null!", "Notice");
                 return;
             }
-            if (bookStatusBLL.AddBookStatus(bookStatusBLL))
-            {
-                MessageBox.Show("Add success!", "Success");
-            }
-            else
-            {
-                MessageBox.Show("Fail!", "Error");
-            }
+            BookStatusDAL.addBookStatus(bookStatusBLL);
+            MessageBox.Show("Add success!", "Success");
             this.LoadDataToGridView();
         }
 
@@ -135,29 +130,23 @@ namespace WinForm
             {
                 int selectedrowindex = this.dgvBookStatus.SelectedCells[0].RowIndex;
                 DataGridViewRow selectedRow = this.dgvBookStatus.Rows[selectedrowindex];
-                int id = Convert.ToInt32(selectedRow.Cells["clmnId"].Value);
+                BookStatusBLL bookStatusBLL = new BookStatusBLL(Convert.ToInt32(selectedRow.Cells["clmnId"].Value), selectedRow.Cells["clmnName"].Value.ToString());
                 DialogResult result = MessageBox.Show("Do you want to delete book status: " + selectedRow.Cells["clmnName"].Value + "?", "Warning", MessageBoxButtons.OKCancel);
                 switch (result)
                 {
                     case DialogResult.Cancel:
                         break;
                     case DialogResult.OK:
-                        BookStatusBLL bookStatusBLL = new BookStatusBLL(Convert.ToInt32(selectedRow.Cells["clmnId"].Value), selectedRow.Cells["clmnName"].Value.ToString());
-                        if (!bookStatusBLL.CheckDelete(bookStatusBLL))
+
+                        if (BookStatusDAL.getBookStatusItem(bookStatusBLL) != null)
                         {
                             MessageBox.Show("Can't delete! Please delete all book has status " + selectedRow.Cells["clmnName"].Value + " before delete this status!", "Error");
                             break;
                         }
                         else
                         {
-                            if (bookStatusBLL.DeleteBookStatus(bookStatusBLL))
-                            {
-                                MessageBox.Show("Delete complete!", "Success");
-                            }
-                            else
-                            {
-                                MessageBox.Show("Fail!", "Error");
-                            }
+                            BookStatusDAL.deleteBookStatus(bookStatusBLL);
+                            MessageBox.Show("Delete complete!", "Success");
                             this.LoadDataToGridView();
                             break;
                         }
@@ -174,22 +163,15 @@ namespace WinForm
 
                 DataGridViewRow selectedRow = this.dgvBookStatus.Rows[selectedrowindex];
 
-                BookStatusBLL bookStatusBLL = new BookStatusBLL();
-                bookStatusBLL.BookStatusId = Convert.ToInt32(selectedRow.Cells["clmnId"].Value);
-                bookStatusBLL.Name = this.txtBookStatusName.Text;
+                BookStatusBLL bookStatusBLL = new BookStatusBLL(Convert.ToInt32(selectedRow.Cells["clmnId"].Value), this.txtBookStatusName.Text);
+
                 if (bookStatusBLL.Name == "")
                 {
                     MessageBox.Show("Book status name is not null!", "Notice");
                     return;
                 }
-                if (bookStatusBLL.UpdateBookStatus(bookStatusBLL))
-                {
-                    MessageBox.Show("Update success!", "Success");
-                }
-                else
-                {
-                    MessageBox.Show("Fail", "Error");
-                }
+                BookStatusDAL.updateBookStatus(bookStatusBLL);
+                MessageBox.Show("Update success!", "Success");
                 this.LoadDataToGridView();
             }
         }

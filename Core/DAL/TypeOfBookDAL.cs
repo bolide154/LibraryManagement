@@ -3,123 +3,84 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Core.DAL
 {
-    public class TypeOfBookDAL
+    public static class TypeOfBookDAL
     {
-        public DataTable LoadTypeOfBookList()
+        public static Connection _condb = new Connection();
+        public static List<TypeOfBookBLL> getTypeOfBookList()
         {
-            try
+            String sql = "SELECT * FROM [theloai]";
+            DataTable dt = new DataTable();
+            dt = TypeOfBookDAL._condb.getDataTable(sql);
+            List<TypeOfBookBLL> typeOfBookBLLList = new List<TypeOfBookBLL>();
+            if (dt.Rows.Count > 0)
             {
-                SqlConnection conn = Connection.ConnectionData();
-                String sql = "SELECT * FROM [theloai]";
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-                SqlDataAdapter da = new SqlDataAdapter();
-                DataTable dt = new DataTable();
-                da.SelectCommand = cmd;
-                da.Fill(dt);
-                return dt;
+                foreach (DataRow row in dt.Rows)
+                {
+                    TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL(Int32.Parse(row["matinhtrangsach"].ToString()), row["tentinhtrangsach"].ToString());
+                    typeOfBookBLLList.Add(typeOfBookBLL);
+                }
+                return typeOfBookBLLList;
             }
-            catch
+            else
             {
                 return null;
             }
         }
-        public DataTable Search(string catalog, string key)
+        public static List<TypeOfBookBLL> search(string catalog, string keyword)
         {
-            string sql = "";
-            if (key != "")
-            {
-                if (catalog == "" || catalog == "Serch by...")
-                {
-                    sql = "SELECT * FROM [theloai] WHERE tentheloai LIKE '%" + key + "%'";
-                }
-                else if (catalog == "Name")
-                {
-                    sql = "SELECT * FROM [theloai] WHERE tentheloai LIKE '%" + key + "%'";
-                }
-            }
-            SqlConnection conn = Connection.ConnectionData();
-            System.Console.Write(sql);
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.ExecuteNonQuery();
-            SqlDataAdapter da = new SqlDataAdapter();
+            String sql = "SELECT * FROM [theloai] WHERE " + catalog + " LIKE '%" + keyword + "%'";
             DataTable dt = new DataTable();
-            da.SelectCommand = cmd;
-            da.Fill(dt);
-            return dt;
-        }
-
-        public bool AddTypeOfBook(TypeOfBookBLL typeOfBookBLL)
-        {
-            try
+            dt = TypeOfBookDAL._condb.getDataTable(sql);
+            List<TypeOfBookBLL> typeOfBookBLLList = new List<TypeOfBookBLL>();
+            if (dt.Rows.Count > 0)
             {
-                SqlConnection conn = Connection.ConnectionData();
-                String sql = "INSERT INTO [theloai] (tentheloai) VALUES ( N'" + typeOfBookBLL.Name + "')";
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                return true;
+                foreach (DataRow row in dt.Rows)
+                {
+                    TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL(Int32.Parse(row["matinhtrangsach"].ToString()), row["tentinhtrangsach"].ToString());
+                    typeOfBookBLLList.Add(typeOfBookBLL);
+                }
+                return typeOfBookBLLList;
             }
-            catch
+            else
             {
-                return false;
+                return null;
             }
         }
 
-        public bool DeleteTypeOfBook(int id)
+        public static void addTypeOfBook(TypeOfBookBLL typeOfBookBLL)
         {
-            try
-            {
-                SqlConnection conn = Connection.ConnectionData();
-                String sql = "DELETE FROM [theloai] WHERE matheloai=" + id;
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-        public bool UpdateTypeOfBook(TypeOfBookBLL typeOfBookBLL)
-        {
-            try
-            {
-                SqlConnection conn = Connection.ConnectionData();
-                String sql = "UPDATE [theloai] SET tentheloai=N'" + typeOfBookBLL.Name + "' WHERE matheloai="+typeOfBookBLL.TypeOfBookId;
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            String sql = "INSERT INTO [theloai] (tentheloai) VALUES ( N'" + typeOfBookBLL.Name + "')";
+            TypeOfBookDAL._condb.ExecuteNonQuery(sql);
         }
 
-        public DataTable CheckDelete(int id)
+        public static void deleteTypeOfBook(TypeOfBookBLL typeOfBookBLL)
         {
-            try
+            String sql = "DELETE FROM [theloai] WHERE matheloai=" + typeOfBookBLL.TypeOfBookId;
+            TypeOfBookDAL._condb.ExecuteNonQuery(sql);
+        }
+        public static void updateTypeOfBook(TypeOfBookBLL typeOfBookBLL)
+        {
+            String sql = "UPDATE [theloai] SET tentheloai=N'" + typeOfBookBLL.Name + "' WHERE matheloai=" + typeOfBookBLL.TypeOfBookId;
+            TypeOfBookDAL._condb.ExecuteNonQuery(sql);
+        }
+
+        public static TypeOfBookBLL getTypeOfBookItem(TypeOfBookBLL typeOfBookBLL)
+        {
+            String sql = "SELECT * FROM [dausach] WHERE matheloai=" + typeOfBookBLL.TypeOfBookId;
+            DataTable dt = TypeOfBookDAL._condb.getDataTable(sql);
+            if (dt.Rows.Count > 0)
             {
-                SqlConnection conn = Connection.ConnectionData();
-                String sql = "SELECT * FROM [dausach] WHERE matheloai=" + id;
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-                SqlDataAdapter da = new SqlDataAdapter();
-                DataTable dt = new DataTable();
-                da.SelectCommand = cmd;
-                da.Fill(dt);
-                return dt;
+                DataRow row = dt.Rows[0];
+                return new TypeOfBookBLL(Int32.Parse(row["matinhtrangsach"].ToString()), row["tentinhtrangsach"].ToString());
             }
-            catch
+            else
             {
                 return null;
             }

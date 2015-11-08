@@ -11,18 +11,11 @@ namespace Core.DAL
 {
     public static class AuthorDAL
     {
-        public static List<AuthorBLL> LoadAuthorList()
+        public static Connection _condb = new Connection();
+        public static List<AuthorBLL> getAuthorList()
         {
-            SqlConnection conn = Connection.ConnectionData();
-            String sql = "SELECT * FROM [tacgia]";
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.ExecuteNonQuery();
-            SqlDataAdapter da = new SqlDataAdapter();
-            DataTable dt = new DataTable();
-            da.SelectCommand = cmd;
-            da.Fill(dt);
-            //return dt;
-
+            string sql = "SELECT * FROM [tacgia]";
+            DataTable dt = AuthorDAL._condb.getDataTable(sql);
             List<AuthorBLL> authorList = new List<AuthorBLL>();
             foreach (DataRow row in dt.Rows)
             {
@@ -32,107 +25,45 @@ namespace Core.DAL
             return authorList;
         }
 
-        public static bool AddAuthor(AuthorBLL authorBLL)
+        public static void addAuthor(AuthorBLL authorBLL)
         {
-            try
-            {
-                SqlConnection conn = Connection.ConnectionData();
-                String sql = "INSERT INTO [tacgia] (tentacgia, noicongtac)"
-                    + " VALUES ( N'" + authorBLL.Name + "', N'" + authorBLL.WorkPlace + "')";
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            String sql = "INSERT INTO [tacgia] (tentacgia, noicongtac) VALUES ( N'" + authorBLL.Name + "', N'" + authorBLL.WorkPlace + "')";
+            AuthorDAL._condb.ExecuteNonQuery(sql);
         }
-        public static bool DeleteAuthor(AuthorBLL authorBLL)
+        public static void deleteAuthor(AuthorBLL authorBLL)
         {
-            try
-            {
-                SqlConnection conn = Connection.ConnectionData();
-                String sql = "DELETE FROM [tacgia] WHERE matacgia="+authorBLL.AuthorId;
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                return true;
-            }
-            catch{
-                return false;
-            }
+            String sql = "DELETE FROM [tacgia] WHERE matacgia=" + authorBLL.AuthorId;
+            AuthorDAL._condb.ExecuteNonQuery(sql);
         }
-        public static bool UpdateAuthor(AuthorBLL authorBLL)
+        public static void updateAuthor(AuthorBLL authorBLL)
         {
-            try
-            {
-                SqlConnection conn = Connection.ConnectionData();
                 String sql = "UPDATE [tacgia] SET tentacgia=N'" + authorBLL.Name + "', noicongtac=N'" + authorBLL.WorkPlace + "' WHERE matacgia=" + authorBLL.AuthorId;
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+                AuthorDAL._condb.ExecuteNonQuery(sql);
         }
 
-        public static List<AuthorBLL> Search(string key, string value)
+        public static List<AuthorBLL> search(string catalog, string key)
         {
-            try
+            string sql = "SELECT * FROM [tacgia] WHERE " + catalog + " LIKE '%" + key + "%'";
+            DataTable dt = AuthorDAL._condb.getDataTable(sql);
+            List<AuthorBLL> authorList = new List<AuthorBLL>();
+            foreach (DataRow row in dt.Rows)
             {
-                string sql = "SELECT * FROM [tacgia] WHERE " + key + " LIKE '%" + value + "%'";
-                SqlConnection conn = Connection.ConnectionData();
-                System.Console.Write(sql);
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-                SqlDataAdapter da = new SqlDataAdapter();
-                DataTable dt = new DataTable();
-                da.SelectCommand = cmd;
-                da.Fill(dt);
-                List<AuthorBLL> authorList = new List<AuthorBLL>();
-                foreach (DataRow row in dt.Rows)
-                {
-                    AuthorBLL authorBLL = new AuthorBLL(Int32.Parse(row["matacgia"].ToString()), row["tentacgia"].ToString(), row["noicongtac"].ToString());
-                    authorList.Add(authorBLL);
-                }
-                return authorList;
+                AuthorBLL authorBLL = new AuthorBLL(Int32.Parse(row["matacgia"].ToString()), row["tentacgia"].ToString(), row["noicongtac"].ToString());
+                authorList.Add(authorBLL);
             }
-            catch
-            {
-                return null;
-            }
+            return authorList;
         }
 
-        public static bool CheckDelete(AuthorBLL authorBLL)
+        public static AuthorBLL getAuthorItem(AuthorBLL authorBLL)
         {
-            try
+                String sql = "SELECT * FROM [tacgia_dausach] WHERE matacgia=" + authorBLL.AuthorId;
+            DataTable dt = TypeOfBookDAL._condb.getDataTable(sql);
+            if (dt.Rows.Count > 0)
             {
-                SqlConnection conn = Connection.ConnectionData();
-                String sql = "SELECT * FROM [tacgia_dausach] WHERE matacgia="+authorBLL.AuthorId;
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-                SqlDataAdapter da = new SqlDataAdapter();
-                DataTable dt = new DataTable();
-                da.SelectCommand = cmd;
-                da.Fill(dt);
-                if (dt.Rows.Count > 0)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
+                DataRow row = dt.Rows[0];
+                return new AuthorBLL(Int32.Parse(row["matacgia"].ToString()), row["tentacgia"].ToString(), row["noicongtac"].ToString());
             }
-            catch
-            {
-                return false;
-            }
+            return null;
         }
     }
 }

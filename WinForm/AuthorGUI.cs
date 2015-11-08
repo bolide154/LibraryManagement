@@ -21,25 +21,25 @@ namespace WinForm
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            string value = this.txtSearch.Text;
-            if (value == "".Trim())
+            string key = this.txtSearch.Text;
+            string catalog = "";
+            if (key == "".Trim())
             {
                 MessageBox.Show("Please enter keyword!", "Notice");
                 return;
             }
-            string key = "";
-            if (this.cboSearch.SelectedItem.ToString()=="Work Place")
+            if (this.cboSearch.SelectedItem.ToString() == "Work Place")
             {
-                key = "noicongtac";
+                catalog = "noicongtac";
             }
             else
             {
-                key = "tentacgia";
+                catalog = "tentacgia";
             }
             AuthorBLL authorBLL = new AuthorBLL();
             List<AuthorBLL> authorArr = new List<AuthorBLL>();
-            authorArr = AuthorDAL.Search(key, value);
-            this.dgvAuthor.Rows.Clear(); 
+            authorArr = AuthorDAL.search(catalog, key);
+            this.dgvAuthor.Rows.Clear();
             foreach (AuthorBLL row in authorArr)
             {
                 this.dgvAuthor.Rows.Add(row.AuthorId, row.Name, row.WorkPlace);
@@ -68,7 +68,8 @@ namespace WinForm
                     this.btnDelete.Enabled = false;
                     this.btnSave.Enabled = false;
                 }
-                else {
+                else
+                {
                     this.btnDelete.Enabled = true;
                     this.btnSave.Enabled = true;
                 }
@@ -93,10 +94,10 @@ namespace WinForm
         private void LoadDataToGridView()
         {
             this.dgvAuthor.Rows.Clear();
-            AuthorBLL authorBLL = new AuthorBLL();
             List<AuthorBLL> authorArr = new List<AuthorBLL>();
-            authorArr = authorBLL.LoadAuthorList();
-            foreach(AuthorBLL row in authorArr){
+            authorArr = AuthorDAL.getAuthorList();
+            foreach (AuthorBLL row in authorArr)
+            {
                 this.dgvAuthor.Rows.Add(row.AuthorId, row.Name, row.WorkPlace);
             }
             this.GetSelectedValue();
@@ -108,7 +109,8 @@ namespace WinForm
             this.GetSelectedValue();
         }
 
-        private void LoadDataToComBoBox(){
+        private void LoadDataToComBoBox()
+        {
             List<string> keyArr = new List<string>();
             keyArr.Add("Name");
             keyArr.Add("Work Place");
@@ -125,23 +127,18 @@ namespace WinForm
                 MessageBox.Show("Author name is not null!", "Notice");
                 return;
             }
-            if (authorBLL.AddAuthor(authorBLL))
-            {
-                MessageBox.Show("Add success!", "Success");
-            }
-            else{
-                MessageBox.Show("Fail!", "Error");
-            }
+            AuthorDAL.addAuthor(authorBLL);
+            MessageBox.Show("Add success!", "Success");
             this.LoadDataToGridView();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-			if (dgvAuthor.SelectedCells.Count > 0)
+            if (dgvAuthor.SelectedCells.Count > 0)
             {
-				int selectedrowindex = dgvAuthor.SelectedCells[0].RowIndex;
-				DataGridViewRow selectedRow = dgvAuthor.Rows[selectedrowindex];
-				int id = Convert.ToInt32(selectedRow.Cells["clmnId"].Value);
+                int selectedrowindex = dgvAuthor.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = dgvAuthor.Rows[selectedrowindex];
+                int id = Convert.ToInt32(selectedRow.Cells["clmnId"].Value);
                 DialogResult result = MessageBox.Show("Do you want to delete author: " + selectedRow.Cells["clmnName"].Value + "?", "Warning", MessageBoxButtons.OKCancel);
                 switch (result)
                 {
@@ -149,26 +146,20 @@ namespace WinForm
                         break;
                     case DialogResult.OK:
                         AuthorBLL authorBLL = new AuthorBLL(Convert.ToInt32(selectedRow.Cells["clmnId"].Value), selectedRow.Cells["clmnName"].Value.ToString(), selectedRow.Cells["clmnWorkPlace"].Value.ToString());
-                        if (!authorBLL.CheckDelete(authorBLL))
+                        if (AuthorDAL.getAuthorItem(authorBLL) != null)
                         {
                             MessageBox.Show("Can't delete! Please delete all book of " + selectedRow.Cells["clmnName"].Value + " before delete this author!", "Error");
                             break;
                         }
                         else
                         {
-                            if (authorBLL.DeleteAuthor(authorBLL))
-                            {
-                                MessageBox.Show("Delete complete!", "Success");
-                            }
-                            else
-                            {
-                                MessageBox.Show("Fail!", "Error");
-                            }
+                            AuthorDAL.deleteAuthor(authorBLL);
+                            MessageBox.Show("Delete complete!", "Success");
                             this.LoadDataToGridView();
                             break;
                         }
                 }
-			}
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -180,24 +171,16 @@ namespace WinForm
 
                 DataGridViewRow selectedRow = dgvAuthor.Rows[selectedrowindex];
 
-                AuthorBLL authorBLL = new AuthorBLL();
-                authorBLL.AuthorId = Convert.ToInt32(selectedRow.Cells["clmnId"].Value);
-                authorBLL.Name = txtAuthorName.Text;
-                authorBLL.WorkPlace = txtWorkPlace.Text;
+                AuthorBLL authorBLL = new AuthorBLL(Convert.ToInt32(selectedRow.Cells["clmnId"].Value), txtAuthorName.Text, txtWorkPlace.Text);
+                
                 if (authorBLL.Name == "")
                 {
                     MessageBox.Show("Author name is not null!", "Notice");
                     return;
                 }
-                if (authorBLL.UpdateAuthor(authorBLL))
-                {
-                    MessageBox.Show("Update success!", "Success");
-                }
-                else
-                {
-                    MessageBox.Show("Fail", "Error");
-                }
-				this.LoadDataToGridView();
+                AuthorDAL.updateAuthor(authorBLL);
+                MessageBox.Show("Update success!", "Success");
+                this.LoadDataToGridView();
             }
         }
 

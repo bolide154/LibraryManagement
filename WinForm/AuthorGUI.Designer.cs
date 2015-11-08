@@ -141,14 +141,14 @@
             // 
             this.txtAuthorName.Location = new System.Drawing.Point(12, 334);
             this.txtAuthorName.Name = "txtAuthorName";
-            this.txtAuthorName.Size = new System.Drawing.Size(221, 20);
+            this.txtAuthorName.Size = new System.Drawing.Size(280, 20);
             this.txtAuthorName.TabIndex = 7;
             // 
             // txtWorkPlace
             // 
             this.txtWorkPlace.Location = new System.Drawing.Point(12, 395);
             this.txtWorkPlace.Name = "txtWorkPlace";
-            this.txtWorkPlace.Size = new System.Drawing.Size(221, 20);
+            this.txtWorkPlace.Size = new System.Drawing.Size(280, 20);
             this.txtWorkPlace.TabIndex = 8;
             // 
             // btnAdd
@@ -204,7 +204,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(429, 480);
+            this.ClientSize = new System.Drawing.Size(419, 480);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
