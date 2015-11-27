@@ -32,7 +32,9 @@ namespace Core.BLL
 
         public BookBLL(int bookId, int bookTitleId, int bookStatusId)
         {
-
+            this._bookId = bookId;
+            this._bookTitleId = bookTitleId;
+            this._bookStatusId = bookStatusId;
         }
 
         public BookBLL() { }

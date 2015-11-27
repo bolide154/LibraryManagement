@@ -27,11 +27,45 @@ namespace Core.DAL
             }
             return null;
         }
+        public static List<BookBLL> getBookList()
+        {
+            string sql = "SELECT * FROM [sach]";
+            DataTable dt = BookDAL._condb.getDataTable(sql);
+            if (dt.Rows.Count > 0)
+            {
+                List<BookBLL> bookList = new List<BookBLL>();
+                foreach (DataRow row in dt.Rows)
+                {
+                    BookBLL bookBLL = new BookBLL(Int32.Parse(row["masach"].ToString()), Int32.Parse(row["madausach"].ToString()), Int32.Parse(row["matinhtrangsach"].ToString()));
+                    bookList.Add(bookBLL);
+                }
+                return bookList;
+            }
+            return null;
+        }
         public static void addBook(BookBLL bookBLL)
         {
             String sql = "INSERT INTO [sach] (madausach, matinhtrangsach) VALUES ( '" + bookBLL.BookTitleId + "', '" + bookBLL.BookStatusId + "')";
             BookDAL._condb.ExecuteNonQuery(sql);
         }
 
+
+        public static List<BookBLL> getBookList(BookTitleBLL bookTitleBLL)
+        {
+            string sql = "SELECT * FROM [sach] WHERE madausach=" + bookTitleBLL.BookTitleId;
+            DataTable dt = BookDAL._condb.getDataTable(sql);
+            if (dt.Rows.Count > 0)
+            {
+                List<BookBLL> bookList = new List<BookBLL>();
+                foreach (DataRow row in dt.Rows)
+                {
+                    BookBLL bookBLL = new BookBLL(Int32.Parse(row["masach"].ToString()), Int32.Parse(row["madausach"].ToString()), Int32.Parse(row["matinhtrangsach"].ToString()));
+                    bookList.Add(bookBLL);
+                }
+                return bookList;
+            }
+            return null;
+            
+        }
     }
 }

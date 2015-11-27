@@ -296,11 +296,24 @@ namespace WinForm
 
         private void btnViewInStore_Click(object sender, EventArgs e)
         {
-            BookGUI bookGUI = new BookGUI();
-            if (IsFormAlreadyOpen(typeof(BookGUI)) == null)
+            if (this.dgvBookTitle.SelectedCells.Count > 0 && this.dgvBookTitle.CurrentRow.Index < this.dgvBookTitle.Rows.Count - 1)
             {
-                bookGUI = new BookGUI();
-                bookGUI.Show();
+                DataGridViewRow selectedRow = this.dgvBookTitle.Rows[this.dgvBookTitle.CurrentRow.Index];
+
+                int id = Convert.ToInt32(selectedRow.Cells["clmnBookTitleId"].Value);
+                string name = Convert.ToString(selectedRow.Cells["clmnBookTitleName"].Value);
+                int bookTitleStatusId = Convert.ToInt32(selectedRow.Cells["clmnBookTitleStatusId"].Value.ToString());
+                int publisherId = Convert.ToInt32(selectedRow.Cells["clmnPublisherId"].Value);
+                int typeOfBookId = Convert.ToInt32(selectedRow.Cells["clmnTypeOfBookId"].Value);
+                string summary = Convert.ToString(selectedRow.Cells["clmnSummary"].Value);
+                BookTitleBLL bookTitleBLL = new BookTitleBLL(id, bookTitleStatusId, publisherId, typeOfBookId, name, summary);
+
+                BookGUI bookGUI;
+                if (IsFormAlreadyOpen(typeof(BookGUI)) == null)
+                {
+                    bookGUI = new BookGUI(bookTitleBLL);
+                    bookGUI.Show();
+                }
             }
         }
     }

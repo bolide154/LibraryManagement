@@ -85,5 +85,17 @@ namespace Core.DAL
             }
             return null;
         }
+
+        public static BookTitleBLL getBookTitleItem(int bookTitleId)
+        {
+            String sql = "SELECT * FROM [dausach] WHERE madausach=" + bookTitleId;
+            DataTable dt = BookTitleDAL._condb.getDataTable(sql);
+            if (dt.Rows.Count > 0)
+            {
+                DataRow row = dt.Rows[0];
+                return new BookTitleBLL(Int32.Parse(row["madausach"].ToString()), Int32.Parse(row["matinhtrang"].ToString()), Int32.Parse(row["manxb"].ToString()), Int32.Parse(row["matheloai"].ToString()), row["tensach"].ToString(), row["tomtat"].ToString());
+            }
+            return null;
+        }
     }
 }

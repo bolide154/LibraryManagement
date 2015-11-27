@@ -74,7 +74,7 @@ namespace Core.DAL
 
         public static BookStatusBLL getBookStatusItem(BookStatusBLL bookStatusBLL)
         {
-                String sql = "SELECT * FROM [sach] WHERE matinhtrangsach=" + bookStatusBLL.BookStatusId;
+            String sql = "SELECT * FROM [tinhtrangsach] WHERE matinhtrangsach=" + bookStatusBLL.BookStatusId;
                 DataTable dt = BookStatusDAL._condb.getDataTable(sql);
                 if (dt.Rows.Count > 0)
                 {
@@ -86,6 +86,18 @@ namespace Core.DAL
                     return null;
                 }
                 
+        }
+
+        public static BookStatusBLL getBookStatusItem(int bookStatusId)
+        {
+            String sql = "SELECT * FROM [tinhtrangsach] WHERE matinhtrangsach=" + bookStatusId;
+            DataTable dt = BookStatusDAL._condb.getDataTable(sql);
+            if (dt.Rows.Count > 0)
+            {
+                DataRow row = dt.Rows[0];
+                return new BookStatusBLL(Int32.Parse(row["matinhtrangsach"].ToString()), row["tentinhtrangsach"].ToString());
+            }
+                return null;
         }
     }
 }
