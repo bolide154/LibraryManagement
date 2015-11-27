@@ -84,30 +84,7 @@ namespace WinForm
         {
             this.GetSelectedValue();
         }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            string catalog = this.cboSearch.Text;
-            string key = this.txtSearch.Text;
-            if (key == "")
-            {
-                MessageBox.Show("Please enter keyword!", "Notice");
-                return;
-            }
-            TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL();
-            List<TypeOfBookBLL> typeOfBookArr = new List<TypeOfBookBLL>();
-            typeOfBookArr = TypeOfBookDAL.search(catalog, key);
-            this.dgvTypeOfBook.Rows.Clear();
-            foreach (TypeOfBookBLL row in typeOfBookArr)
-            {
-                this.dgvTypeOfBook.Rows.Add(row.TypeOfBookId, row.Name);
-            }
-
-            this.GetSelectedValue();
-
-            this.dgvTypeOfBook.CellClick += new DataGridViewCellEventHandler(dgvTypeOfBook_CellClick);
-
-        }
+        
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -178,6 +155,31 @@ namespace WinForm
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void btnSearch_Click_1(object sender, EventArgs e)
+        {
+            //string catalog = this.cboSearch.Text;
+            string key = this.txtSearch.Text;
+            if (key == "")
+            {
+                MessageBox.Show("Please enter keyword!", "Notice");
+                return;
+            }
+            string catalog = "tentheloai";
+            TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL();
+            List<TypeOfBookBLL> typeOfBookArr = new List<TypeOfBookBLL>();
+            //MessageBox.Show(catalog + " " + key);
+            typeOfBookArr = TypeOfBookDAL.search(catalog, key);
+            this.dgvTypeOfBook.Rows.Clear();
+            foreach (TypeOfBookBLL row in typeOfBookArr)
+            {
+                this.dgvTypeOfBook.Rows.Add(row.TypeOfBookId, row.Name);
+            }
+
+            this.GetSelectedValue();
+
+            this.dgvTypeOfBook.CellClick += new DataGridViewCellEventHandler(dgvTypeOfBook_CellClick);
         }
     }
 }
