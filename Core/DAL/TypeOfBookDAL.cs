@@ -23,7 +23,7 @@ namespace Core.DAL
             {
                 foreach (DataRow row in dt.Rows)
                 {
-                    TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL(Int32.Parse(row["matinhtrangsach"].ToString()), row["tentinhtrangsach"].ToString());
+                    TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL(Int32.Parse(row["matheloai"].ToString()), row["tentheloai"].ToString());
                     typeOfBookBLLList.Add(typeOfBookBLL);
                 }
                 return typeOfBookBLLList;
@@ -43,7 +43,7 @@ namespace Core.DAL
             {
                 foreach (DataRow row in dt.Rows)
                 {
-                    TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL(Int32.Parse(row["matinhtrangsach"].ToString()), row["tentinhtrangsach"].ToString());
+                    TypeOfBookBLL typeOfBookBLL = new TypeOfBookBLL(Int32.Parse(row["matheloai"].ToString()), row["tentheloai"].ToString());
                     typeOfBookBLLList.Add(typeOfBookBLL);
                 }
                 return typeOfBookBLLList;
@@ -73,12 +73,43 @@ namespace Core.DAL
 
         public static TypeOfBookBLL getTypeOfBookItem(TypeOfBookBLL typeOfBookBLL)
         {
-            String sql = "SELECT * FROM [dausach] WHERE matheloai=" + typeOfBookBLL.TypeOfBookId;
+            String sql = "SELECT * FROM [theloai] WHERE matheloai=" + typeOfBookBLL.TypeOfBookId;
             DataTable dt = TypeOfBookDAL._condb.getDataTable(sql);
             if (dt.Rows.Count > 0)
             {
                 DataRow row = dt.Rows[0];
-                return new TypeOfBookBLL(Int32.Parse(row["matinhtrangsach"].ToString()), row["tentinhtrangsach"].ToString());
+                return new TypeOfBookBLL(Int32.Parse(row["matheloai"].ToString()), row["tentheloai"].ToString());
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public static List<TypeOfBookBLL> getTypeOfBookItem(string typeOfBookName)
+        {
+            String sql = "SELECT * FROM [theloai] WHERE tentheloai LIKE N'%" + typeOfBookName + "%'";
+            DataTable dt = TypeOfBookDAL._condb.getDataTable(sql);
+            List<TypeOfBookBLL> typeOfBookList = new List<TypeOfBookBLL>();
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    typeOfBookList.Add(new TypeOfBookBLL(Int32.Parse(row["matheloai"].ToString()), row["tentheloai"].ToString()));
+                }
+                return typeOfBookList;
+            }
+                return null;
+        }
+
+
+        public static TypeOfBookBLL getTypeOfBookItem(int typeOfBookId)
+        {
+            String sql = "SELECT * FROM [theloai] WHERE matheloai=" + typeOfBookId;
+            DataTable dt = TypeOfBookDAL._condb.getDataTable(sql);
+            if (dt.Rows.Count > 0)
+            {
+                DataRow row = dt.Rows[0];
+                return new TypeOfBookBLL(Int32.Parse(row["matheloai"].ToString()), row["tentheloai"].ToString());
             }
             else
             {

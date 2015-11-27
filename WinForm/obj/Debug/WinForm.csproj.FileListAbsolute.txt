@@ -14,3 +14,4 @@ E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.TypeOfBoo
 E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.PublisherGUI.resources
 E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.BookTitleStatusGUI.resources
 E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.BookStatusGUI.resources
+E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.BookTitleGUI.resources

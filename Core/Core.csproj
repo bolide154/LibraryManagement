@@ -40,12 +40,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\AuthorBLL.cs" />
+    <Compile Include="BLL\BookBLL.cs" />
     <Compile Include="BLL\BookStatusBLL.cs" />
+    <Compile Include="BLL\BookTitleBLL.cs" />
     <Compile Include="BLL\BookTitleStatusBLL.cs" />
     <Compile Include="BLL\PublisherBLL.cs" />
     <Compile Include="BLL\TypeOfBookBLL.cs" />
+    <Compile Include="ComboboxItem.cs" />
+    <Compile Include="DAL\AuthorBookTitleDAL.cs" />
     <Compile Include="DAL\AuthorDAL.cs" />
+    <Compile Include="DAL\BookDAL.cs" />
     <Compile Include="DAL\BookStatusDAL.cs" />
+    <Compile Include="DAL\BookTitleDAL.cs" />
     <Compile Include="DAL\BookTitleStatusDAL.cs" />
     <Compile Include="DAL\Connection.cs" />
     <Compile Include="DAL\PublisherDAL.cs" />

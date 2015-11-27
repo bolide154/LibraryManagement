@@ -56,11 +56,22 @@
     <Compile Include="BookStatusGUI.Designer.cs">
       <DependentUpon>BookStatusGUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="BookTitleGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BookTitleGUI.Designer.cs">
+      <DependentUpon>BookTitleGUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="BookTitleStatusGUI.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="BookTitleStatusGUI.Designer.cs">
       <DependentUpon>BookTitleStatusGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="library_management_dbDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>library_management_dbDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="MainGUI.cs">
       <SubType>Form</SubType>
@@ -88,6 +99,9 @@
     <EmbeddedResource Include="BookStatusGUI.resx">
       <DependentUpon>BookStatusGUI.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BookTitleGUI.resx">
+      <DependentUpon>BookTitleGUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BookTitleStatusGUI.resx">
       <DependentUpon>BookTitleStatusGUI.cs</DependentUpon>
     </EmbeddedResource>
@@ -102,6 +116,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="PublisherGUI.resx">
       <DependentUpon>PublisherGUI.cs</DependentUpon>
@@ -109,6 +124,17 @@
     <EmbeddedResource Include="TypeOfBookGUI.resx">
       <DependentUpon>TypeOfBookGUI.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="library_management_dbDataSet.xsc">
+      <DependentUpon>library_management_dbDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="library_management_dbDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>library_management_dbDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="library_management_dbDataSet.xss">
+      <DependentUpon>library_management_dbDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -127,6 +153,9 @@
       <Project>{eae06b22-04b2-4ac2-84f8-c61e0e1adf85}</Project>
       <Name>Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
