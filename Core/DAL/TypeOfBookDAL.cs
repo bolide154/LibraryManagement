@@ -79,6 +79,40 @@ namespace Core.DAL
             {
                 DataRow row = dt.Rows[0];
                 return new TypeOfBookBLL(Int32.Parse(row["matheloai"].ToString()), row["tentheloai"].ToString());
+<<<<<<< HEAD
+=======
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public static List<TypeOfBookBLL> getTypeOfBookItem(string typeOfBookName)
+        {
+            String sql = "SELECT * FROM [theloai] WHERE tentheloai LIKE N'%" + typeOfBookName + "%'";
+            DataTable dt = TypeOfBookDAL._condb.getDataTable(sql);
+            List<TypeOfBookBLL> typeOfBookList = new List<TypeOfBookBLL>();
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    typeOfBookList.Add(new TypeOfBookBLL(Int32.Parse(row["matheloai"].ToString()), row["tentheloai"].ToString()));
+                }
+                return typeOfBookList;
+            }
+                return null;
+        }
+
+
+        public static TypeOfBookBLL getTypeOfBookItem(int typeOfBookId)
+        {
+            String sql = "SELECT * FROM [theloai] WHERE matheloai=" + typeOfBookId;
+            DataTable dt = TypeOfBookDAL._condb.getDataTable(sql);
+            if (dt.Rows.Count > 0)
+            {
+                DataRow row = dt.Rows[0];
+                return new TypeOfBookBLL(Int32.Parse(row["matheloai"].ToString()), row["tentheloai"].ToString());
+>>>>>>> origin/master
             }
             else
             {

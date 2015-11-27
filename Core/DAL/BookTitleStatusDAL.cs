@@ -75,5 +75,20 @@ namespace Core.DAL
             }
             return null;
         }
+        public static List<BookTitleStatusBLL> getBookTitleStatusItem(string bookTitleStatusName)
+        {
+            String sql = "SELECT * FROM [tinhtrangdausach] WHERE tentinhtrang LIKE N'%" + bookTitleStatusName + "%'";
+            DataTable dt = BookTitleStatusDAL._condb.getDataTable(sql);
+            List<BookTitleStatusBLL> bookTitleStatusList = new List<BookTitleStatusBLL>();
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    bookTitleStatusList.Add(new BookTitleStatusBLL(Int32.Parse(row["matinhtrang"].ToString()), row["tentinhtrang"].ToString()));
+                }
+                return bookTitleStatusList;
+            }
+            return null;
+        }
     }
 }

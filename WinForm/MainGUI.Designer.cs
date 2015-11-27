@@ -32,11 +32,11 @@
             this.mnuAuthor = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuiInfor = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuBook = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuiTypeOfBook = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuiPublisher = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuiBookTitle = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuiBookTitleStatus = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuiPublisher = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuiStatus = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuiTypeOfBook = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,20 +77,6 @@
             this.mnuBook.Size = new System.Drawing.Size(46, 20);
             this.mnuBook.Text = "Book";
             // 
-            // mnuiTypeOfBook
-            // 
-            this.mnuiTypeOfBook.Name = "mnuiTypeOfBook";
-            this.mnuiTypeOfBook.Size = new System.Drawing.Size(152, 22);
-            this.mnuiTypeOfBook.Text = "Type Of Book";
-            this.mnuiTypeOfBook.Click += new System.EventHandler(this.mnuiTypeOfBook_Click);
-            // 
-            // mnuiPublisher
-            // 
-            this.mnuiPublisher.Name = "mnuiPublisher";
-            this.mnuiPublisher.Size = new System.Drawing.Size(152, 22);
-            this.mnuiPublisher.Text = "Publisher";
-            this.mnuiPublisher.Click += new System.EventHandler(this.mnuiPublisher_Click);
-            // 
             // mnuiBookTitle
             // 
             this.mnuiBookTitle.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -98,6 +84,7 @@
             this.mnuiBookTitle.Name = "mnuiBookTitle";
             this.mnuiBookTitle.Size = new System.Drawing.Size(152, 22);
             this.mnuiBookTitle.Text = "Book Title";
+            this.mnuiBookTitle.Click += new System.EventHandler(this.mnuiBookTitle_Click);
             // 
             // mnuiBookTitleStatus
             // 
@@ -106,12 +93,26 @@
             this.mnuiBookTitleStatus.Text = "Status";
             this.mnuiBookTitleStatus.Click += new System.EventHandler(this.mnuiBookTitleStatus_Click);
             // 
+            // mnuiPublisher
+            // 
+            this.mnuiPublisher.Name = "mnuiPublisher";
+            this.mnuiPublisher.Size = new System.Drawing.Size(152, 22);
+            this.mnuiPublisher.Text = "Publisher";
+            this.mnuiPublisher.Click += new System.EventHandler(this.mnuiPublisher_Click);
+            // 
             // mnuiStatus
             // 
             this.mnuiStatus.Name = "mnuiStatus";
             this.mnuiStatus.Size = new System.Drawing.Size(152, 22);
             this.mnuiStatus.Text = "Status";
             this.mnuiStatus.Click += new System.EventHandler(this.mnuiStatus_Click);
+            // 
+            // mnuiTypeOfBook
+            // 
+            this.mnuiTypeOfBook.Name = "mnuiTypeOfBook";
+            this.mnuiTypeOfBook.Size = new System.Drawing.Size(152, 22);
+            this.mnuiTypeOfBook.Text = "Type Of Book";
+            this.mnuiTypeOfBook.Click += new System.EventHandler(this.mnuiTypeOfBook_Click);
             // 
             // MainGUI
             // 

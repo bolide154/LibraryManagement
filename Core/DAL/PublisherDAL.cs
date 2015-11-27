@@ -71,12 +71,30 @@ namespace Core.DAL
 
         public static PublisherBLL getPublisherItem(PublisherBLL publiserBLL)
         {
-            String sql = "SELECT * FROM [dausach] WHERE manxb=" + publiserBLL.PublisherId;
+            String sql = "SELECT * FROM [nhaxuatban] WHERE manxb=" + publiserBLL.PublisherId;
             DataTable dt = PublisherDAL._condb.getDataTable(sql);
             if (dt.Rows.Count > 0)
             {
                 DataRow row = dt.Rows[0];
                 return new PublisherBLL(Int32.Parse(row["manxb"].ToString()), row["tennxb"].ToString(), row["sdtnxb"].ToString(), row["diachinxb"].ToString());
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public static List<PublisherBLL> getPublisherItem(string publisherName)
+        {
+            String sql = "SELECT * FROM [nhaxuatban] WHERE tennxb LIKE N'%" + publisherName + "%'";
+            DataTable dt = PublisherDAL._condb.getDataTable(sql);
+            List<PublisherBLL> publisherList = new List<PublisherBLL>();
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    publisherList.Add(new PublisherBLL(Int32.Parse(row["manxb"].ToString()), row["tennxb"].ToString(), row["sdtnxb"].ToString(), row["diachinxb"].ToString()));
+                }
+                return publisherList;
             }
             else
             {

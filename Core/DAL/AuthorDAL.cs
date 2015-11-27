@@ -16,13 +16,17 @@ namespace Core.DAL
         {
             string sql = "SELECT * FROM [tacgia]";
             DataTable dt = AuthorDAL._condb.getDataTable(sql);
-            List<AuthorBLL> authorList = new List<AuthorBLL>();
-            foreach (DataRow row in dt.Rows)
+            if (dt.Rows.Count > 0)
             {
-                AuthorBLL authorBLL = new AuthorBLL(Int32.Parse(row["matacgia"].ToString()), row["tentacgia"].ToString(), row["noicongtac"].ToString());
-                authorList.Add(authorBLL);
+                List<AuthorBLL> authorList = new List<AuthorBLL>();
+                foreach (DataRow row in dt.Rows)
+                {
+                    AuthorBLL authorBLL = new AuthorBLL(Int32.Parse(row["matacgia"].ToString()), row["tentacgia"].ToString(), row["noicongtac"].ToString());
+                    authorList.Add(authorBLL);
+                }
+                return authorList;
             }
-            return authorList;
+            return null;
         }
 
         public static void addAuthor(AuthorBLL authorBLL)
@@ -56,7 +60,18 @@ namespace Core.DAL
 
         public static AuthorBLL getAuthorItem(AuthorBLL authorBLL)
         {
-                String sql = "SELECT * FROM [tacgia_dausach] WHERE matacgia=" + authorBLL.AuthorId;
+                String sql = "SELECT * FROM [tacgia] WHERE matacgia=" + authorBLL.AuthorId;
+            DataTable dt = TypeOfBookDAL._condb.getDataTable(sql);
+            if (dt.Rows.Count > 0)
+            {
+                DataRow row = dt.Rows[0];
+                return new AuthorBLL(Int32.Parse(row["matacgia"].ToString()), row["tentacgia"].ToString(), row["noicongtac"].ToString());
+            }
+            return null;
+        }
+        public static AuthorBLL getAuthorItem(string authorId)
+        {
+            String sql = "SELECT * FROM [tacgia] WHERE matacgia=" + authorId;
             DataTable dt = TypeOfBookDAL._condb.getDataTable(sql);
             if (dt.Rows.Count > 0)
             {

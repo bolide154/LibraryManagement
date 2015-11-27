@@ -14,6 +14,7 @@ E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.TypeOfBoo
 E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.PublisherGUI.resources
 E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.BookTitleStatusGUI.resources
 E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.BookStatusGUI.resources
+<<<<<<< HEAD
 D:\project\LibraryManagement\WinForm\bin\Debug\WinForm.exe.config
 D:\project\LibraryManagement\WinForm\obj\Debug\WinForm.exe
 D:\project\LibraryManagement\WinForm\obj\Debug\WinForm.pdb
@@ -30,3 +31,6 @@ D:\project\LibraryManagement\WinForm\obj\Debug\WinForm.Properties.Resources.reso
 D:\project\LibraryManagement\WinForm\obj\Debug\WinForm.PublisherGUI.resources
 D:\project\LibraryManagement\WinForm\obj\Debug\WinForm.TypeOfBookGUI.resources
 D:\project\LibraryManagement\WinForm\obj\Debug\WinForm.csproj.GenerateResource.Cache
+=======
+E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.BookTitleGUI.resources
+>>>>>>> origin/master
