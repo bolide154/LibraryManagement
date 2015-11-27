@@ -293,5 +293,15 @@ namespace WinForm
                 MessageBox.Show("Add success!");
             }
         }
+
+        private void btnViewInStore_Click(object sender, EventArgs e)
+        {
+            BookGUI bookGUI = new BookGUI();
+            if (IsFormAlreadyOpen(typeof(BookGUI)) == null)
+            {
+                bookGUI = new BookGUI();
+                bookGUI.Show();
+            }
+        }
     }
 }

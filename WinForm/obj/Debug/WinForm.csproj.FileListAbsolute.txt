@@ -34,3 +34,4 @@ D:\project\LibraryManagement\WinForm\obj\Debug\WinForm.csproj.GenerateResource.C
 =======
 E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.BookTitleGUI.resources
 >>>>>>> origin/master
+E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.BookGUI.resources

@@ -79,8 +79,6 @@ namespace Core.DAL
             {
                 DataRow row = dt.Rows[0];
                 return new TypeOfBookBLL(Int32.Parse(row["matheloai"].ToString()), row["tentheloai"].ToString());
-<<<<<<< HEAD
-=======
             }
             else
             {
@@ -112,7 +110,6 @@ namespace Core.DAL
             {
                 DataRow row = dt.Rows[0];
                 return new TypeOfBookBLL(Int32.Parse(row["matheloai"].ToString()), row["tentheloai"].ToString());
->>>>>>> origin/master
             }
             else
             {

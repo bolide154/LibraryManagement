@@ -45,6 +45,9 @@
             this.cboTypeOfBook = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dgvAuthor = new System.Windows.Forms.DataGridView();
+            this.clmnAuthorId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnAuthorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnWorkPlace = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnTypeOfBookManage = new System.Windows.Forms.Button();
             this.cboPublisher = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -72,9 +75,6 @@
             this.btnPublisherRefresh = new System.Windows.Forms.Button();
             this.btnBookTitleStatusRefresh = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.clmnAuthorId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmnAuthorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmnWorkPlace = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBookTitle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAuthor)).BeginInit();
             this.SuspendLayout();
@@ -83,16 +83,16 @@
             // 
             this.cboSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSearch.FormattingEnabled = true;
-            this.cboSearch.Location = new System.Drawing.Point(164, 22);
+            this.cboSearch.Location = new System.Drawing.Point(12, 22);
             this.cboSearch.Name = "cboSearch";
-            this.cboSearch.Size = new System.Drawing.Size(95, 21);
+            this.cboSearch.Size = new System.Drawing.Size(179, 21);
             this.cboSearch.TabIndex = 0;
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(278, 20);
+            this.txtSearch.Location = new System.Drawing.Point(197, 22);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(196, 20);
+            this.txtSearch.Size = new System.Drawing.Size(276, 20);
             this.txtSearch.TabIndex = 1;
             // 
             // btnSearch
@@ -213,6 +213,24 @@
             this.dgvAuthor.Size = new System.Drawing.Size(296, 297);
             this.dgvAuthor.TabIndex = 9;
             // 
+            // clmnAuthorId
+            // 
+            this.clmnAuthorId.HeaderText = "Author Id";
+            this.clmnAuthorId.Name = "clmnAuthorId";
+            this.clmnAuthorId.Visible = false;
+            // 
+            // clmnAuthorName
+            // 
+            this.clmnAuthorName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clmnAuthorName.HeaderText = "Author Name";
+            this.clmnAuthorName.Name = "clmnAuthorName";
+            // 
+            // clmnWorkPlace
+            // 
+            this.clmnWorkPlace.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clmnWorkPlace.HeaderText = "Work Place";
+            this.clmnWorkPlace.Name = "clmnWorkPlace";
+            // 
             // btnTypeOfBookManage
             // 
             this.btnTypeOfBookManage.Location = new System.Drawing.Point(784, 128);
@@ -323,6 +341,7 @@
             this.btnViewInStore.TabIndex = 25;
             this.btnViewInStore.Text = "View In Store";
             this.btnViewInStore.UseVisualStyleBackColor = true;
+            this.btnViewInStore.Click += new System.EventHandler(this.btnViewInStore_Click);
             // 
             // button8
             // 
@@ -459,24 +478,6 @@
             this.button1.Size = new System.Drawing.Size(44, 23);
             this.button1.TabIndex = 39;
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // clmnAuthorId
-            // 
-            this.clmnAuthorId.HeaderText = "Author Id";
-            this.clmnAuthorId.Name = "clmnAuthorId";
-            this.clmnAuthorId.Visible = false;
-            // 
-            // clmnAuthorName
-            // 
-            this.clmnAuthorName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clmnAuthorName.HeaderText = "Author Name";
-            this.clmnAuthorName.Name = "clmnAuthorName";
-            // 
-            // clmnWorkPlace
-            // 
-            this.clmnWorkPlace.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clmnWorkPlace.HeaderText = "Work Place";
-            this.clmnWorkPlace.Name = "clmnWorkPlace";
             // 
             // BookTitleGUI
             // 
