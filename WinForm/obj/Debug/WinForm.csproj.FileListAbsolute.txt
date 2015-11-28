@@ -30,3 +30,8 @@ D:\project\LibraryManagement\WinForm\obj\Debug\WinForm.Properties.Resources.reso
 D:\project\LibraryManagement\WinForm\obj\Debug\WinForm.PublisherGUI.resources
 D:\project\LibraryManagement\WinForm\obj\Debug\WinForm.TypeOfBookGUI.resources
 D:\project\LibraryManagement\WinForm\obj\Debug\WinForm.csproj.GenerateResource.Cache
+D:\project\LibraryManagement\WinForm\obj\Debug\WinForm.ReaderGUI.resources
+D:\project\LibraryManagement\WinForm\bin\Debug\WinForm.exe
+D:\project\LibraryManagement\WinForm\bin\Debug\WinForm.pdb
+D:\project\LibraryManagement\WinForm\bin\Debug\Core.dll
+D:\project\LibraryManagement\WinForm\bin\Debug\Core.pdb

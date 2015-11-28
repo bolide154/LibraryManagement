@@ -45,6 +45,7 @@
     <Compile Include="BLL\BookTitleBLL.cs" />
     <Compile Include="BLL\BookTitleStatusBLL.cs" />
     <Compile Include="BLL\PublisherBLL.cs" />
+    <Compile Include="BLL\ReaderBLL.cs" />
     <Compile Include="BLL\TypeOfBookBLL.cs" />
     <Compile Include="ComboboxItem.cs" />
     <Compile Include="DAL\AuthorBookTitleDAL.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="DAL\BookTitleStatusDAL.cs" />
     <Compile Include="DAL\Connection.cs" />
     <Compile Include="DAL\PublisherDAL.cs" />
+    <Compile Include="DAL\ReaderDAL.cs" />
     <Compile Include="DAL\TypeOfBookDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

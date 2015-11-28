@@ -93,6 +93,12 @@
     <Compile Include="PublisherGUI.Designer.cs">
       <DependentUpon>PublisherGUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReaderGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReaderGUI.Designer.cs">
+      <DependentUpon>ReaderGUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="TypeOfBookGUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +135,9 @@
     </Compile>
     <EmbeddedResource Include="PublisherGUI.resx">
       <DependentUpon>PublisherGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReaderGUI.resx">
+      <DependentUpon>ReaderGUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TypeOfBookGUI.resx">
       <DependentUpon>TypeOfBookGUI.cs</DependentUpon>

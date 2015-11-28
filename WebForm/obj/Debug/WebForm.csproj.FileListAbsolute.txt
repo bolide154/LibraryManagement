@@ -1,0 +1,5 @@
+D:\project\LibraryManagement\WebForm\bin\WebForm.dll
+D:\project\LibraryManagement\WebForm\bin\WebForm.pdb
+D:\project\LibraryManagement\WebForm\obj\Debug\WebForm.csprojResolveAssemblyReference.cache
+D:\project\LibraryManagement\WebForm\obj\Debug\WebForm.dll
+D:\project\LibraryManagement\WebForm\obj\Debug\WebForm.pdb
