@@ -37,6 +37,7 @@
             this.mnuiPublisher = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuiStatus = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuiTypeOfBook = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuReader = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,7 +45,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuAuthor,
-            this.mnuBook});
+            this.mnuBook,
+            this.mnuReader});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(636, 24);
@@ -89,7 +91,7 @@
             // mnuiBookTitleStatus
             // 
             this.mnuiBookTitleStatus.Name = "mnuiBookTitleStatus";
-            this.mnuiBookTitleStatus.Size = new System.Drawing.Size(152, 22);
+            this.mnuiBookTitleStatus.Size = new System.Drawing.Size(106, 22);
             this.mnuiBookTitleStatus.Text = "Status";
             this.mnuiBookTitleStatus.Click += new System.EventHandler(this.mnuiBookTitleStatus_Click);
             // 
@@ -113,6 +115,13 @@
             this.mnuiTypeOfBook.Size = new System.Drawing.Size(152, 22);
             this.mnuiTypeOfBook.Text = "Type Of Book";
             this.mnuiTypeOfBook.Click += new System.EventHandler(this.mnuiTypeOfBook_Click);
+            // 
+            // mnuReader
+            // 
+            this.mnuReader.Name = "mnuReader";
+            this.mnuReader.Size = new System.Drawing.Size(55, 20);
+            this.mnuReader.Text = "Reader";
+            this.mnuReader.Click += new System.EventHandler(this.mnuReader_Click);
             // 
             // MainGUI
             // 
@@ -141,5 +150,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnuiBookTitle;
         private System.Windows.Forms.ToolStripMenuItem mnuiBookTitleStatus;
         private System.Windows.Forms.ToolStripMenuItem mnuiStatus;
+        private System.Windows.Forms.ToolStripMenuItem mnuReader;
     }
 }

@@ -52,5 +52,11 @@ namespace WinForm
             BookTitleGUI bookTitleGUI = new BookTitleGUI();
             bookTitleGUI.Show();
         }
+
+        private void mnuReader_Click(object sender, EventArgs e)
+        {
+            ReaderGUI reader = new ReaderGUI();
+            reader.Show();
+        }
     }
 }
