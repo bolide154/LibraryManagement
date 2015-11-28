@@ -50,5 +50,10 @@ namespace WinForm
                 this.dgvBook.Rows.Add(row.BookId, bookTitleBLL.Name, bookTitleBLL.BookTitleId, bookStatusBLL.Name, bookStatusBLL.BookStatusId);
             }
         }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
     }
 }

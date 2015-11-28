@@ -31,14 +31,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.dgvBook = new System.Windows.Forms.DataGridView();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.cboSearch = new System.Windows.Forms.ComboBox();
             this.clmnBookId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmnBookTitleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmnBookTitleId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmnBookStatusName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmnBookStatusId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.cboSearch = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBook)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,6 +59,7 @@
             this.btnClose.TabIndex = 26;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // dgvBook
             // 
@@ -73,35 +74,6 @@
             this.dgvBook.Name = "dgvBook";
             this.dgvBook.Size = new System.Drawing.Size(397, 210);
             this.dgvBook.TabIndex = 17;
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Location = new System.Drawing.Point(173, 27);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(166, 20);
-            this.txtSearch.TabIndex = 16;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(345, 25);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(66, 23);
-            this.btnSearch.TabIndex = 15;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            // 
-            // cboSearch
-            // 
-            this.cboSearch.DisplayMember = "a";
-            this.cboSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboSearch.FormattingEnabled = true;
-            this.cboSearch.Items.AddRange(new object[] {
-            "Tên tác giả",
-            "Nơi công tác"});
-            this.cboSearch.Location = new System.Drawing.Point(76, 27);
-            this.cboSearch.Name = "cboSearch";
-            this.cboSearch.Size = new System.Drawing.Size(91, 21);
-            this.cboSearch.TabIndex = 14;
             // 
             // clmnBookId
             // 
@@ -134,6 +106,35 @@
             this.clmnBookStatusId.HeaderText = "Book Status Id";
             this.clmnBookStatusId.Name = "clmnBookStatusId";
             this.clmnBookStatusId.Visible = false;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(173, 27);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(166, 20);
+            this.txtSearch.TabIndex = 16;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(345, 25);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(66, 23);
+            this.btnSearch.TabIndex = 15;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            // 
+            // cboSearch
+            // 
+            this.cboSearch.DisplayMember = "a";
+            this.cboSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboSearch.FormattingEnabled = true;
+            this.cboSearch.Items.AddRange(new object[] {
+            "Tên tác giả",
+            "Nơi công tác"});
+            this.cboSearch.Location = new System.Drawing.Point(76, 27);
+            this.cboSearch.Name = "cboSearch";
+            this.cboSearch.Size = new System.Drawing.Size(91, 21);
+            this.cboSearch.TabIndex = 14;
             // 
             // BookGUI
             // 
