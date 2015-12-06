@@ -85,7 +85,7 @@ namespace WinForm
             foreach (BookTitleBLL row in bookTitleList)
             {
                 typeOfBookBLL = TypeOfBookDAL.getTypeOfBookItem(row.TypeOfBookId);
-                this.dgvBookTitle.Rows.Add(row.BookTitleId, row.Name, row.TypeOfBookId, typeOfBookBLL.Name, row.PublisherId, row.BookTitleStatusId, row.Summary);
+                this.dgvBookTitle.Rows.Add(row.BookTitleId, row.Name, row.TypeOfBookId, typeOfBookBLL.Name, row.PublisherId, row.BookTitleStatusId, row.Summary, row.Reprint);
             }
             GetSelectedValueDataGridViewBookTitle();
             this.dgvBookTitle.SelectionChanged += new EventHandler(dgvBookTitle_SelectionChanged);
@@ -100,6 +100,10 @@ namespace WinForm
         {
             if (this.dgvBookTitle.SelectedCells.Count > 0 && this.dgvBookTitle.CurrentRow.Index < this.dgvBookTitle.Rows.Count - 1)
             {
+                this.btnBookTitleDelete.Enabled = true;
+                this.btnBookTitleSave.Enabled = true;
+                this.btnBookAdd.Enabled = true;
+                this.btnViewInStore.Enabled = true;
                 DataGridViewRow selectedRow = this.dgvBookTitle.Rows[this.dgvBookTitle.CurrentRow.Index];
 
                 int id = Convert.ToInt32(selectedRow.Cells["clmnBookTitleId"].Value);
@@ -107,11 +111,13 @@ namespace WinForm
                 int bookTitleStatusId = Convert.ToInt32(selectedRow.Cells["clmnBookTitleStatusId"].Value.ToString());
                 int publisherId = Convert.ToInt32(selectedRow.Cells["clmnPublisherId"].Value);
                 int typeOfBookId = Convert.ToInt32(selectedRow.Cells["clmnTypeOfBookId"].Value);
+                int reprint = Convert.ToInt32(selectedRow.Cells["clmnReprint"].Value);
                 string summary = Convert.ToString(selectedRow.Cells["clmnSummary"].Value);
 
                 this.lblInfor.Text = id.ToString() + " / " + name;
                 this.txtBookName.Text = name;
                 this.txtSummary.Text = summary;
+                this.lblReprint.Text = reprint.ToString();
 
 
                 foreach (ComboboxItem item in this.cboBookTitleStatus.Items)
@@ -130,7 +136,7 @@ namespace WinForm
                         this.cboTypeOfBook.SelectedItem = item;
                 }
 
-                BookTitleBLL bookTitleBLL = new BookTitleBLL(id, bookTitleStatusId, publisherId, typeOfBookId, name, summary);
+                BookTitleBLL bookTitleBLL = new BookTitleBLL(id, bookTitleStatusId, publisherId, typeOfBookId, name, summary, reprint);
                 List<AuthorBLL> authorList = bookTitleBLL.getAuthor();
                 this.loadDataToDataGridViewAuthor(authorList);
                 this.setSelectedValueComboboxAuthor(authorList[0]);
@@ -147,7 +153,12 @@ namespace WinForm
                 this.cboAuthor.Text = this.cboAuthor.Items[0].ToString();
                 this.txtBookTotal.Text = "";
                 this.txtSummary.Text = "";
+                this.btnBookAdd.Enabled = false;
+                this.btnViewInStore.Enabled = false;
                 this.dgvAuthor.Rows.Clear();
+                this.lblReprint.Text = "0";
+                this.btnBookTitleDelete.Enabled = false;
+                this.btnBookTitleSave.Enabled = false;
             }
         }
         private void loadDataToDataGridViewAuthor(List<AuthorBLL> authorList)
@@ -288,7 +299,7 @@ namespace WinForm
                 BookBLL bookBLL = new BookBLL();
                 bookBLL.BookTitleId = bookTitleId;
                 bookBLL.BookStatusId = 1; //Điều này có thể thay đổi
-                for (int i = 0; i < quantity; i++ )
+                for (int i = 0; i < quantity; i++)
                     BookDAL.addBook(bookBLL);
                 MessageBox.Show("Add success!");
             }
@@ -306,7 +317,8 @@ namespace WinForm
                 int publisherId = Convert.ToInt32(selectedRow.Cells["clmnPublisherId"].Value);
                 int typeOfBookId = Convert.ToInt32(selectedRow.Cells["clmnTypeOfBookId"].Value);
                 string summary = Convert.ToString(selectedRow.Cells["clmnSummary"].Value);
-                BookTitleBLL bookTitleBLL = new BookTitleBLL(id, bookTitleStatusId, publisherId, typeOfBookId, name, summary);
+                int reprint = Convert.ToInt32(selectedRow.Cells["clmnReprint"].Value);
+                BookTitleBLL bookTitleBLL = new BookTitleBLL(id, bookTitleStatusId, publisherId, typeOfBookId, name, summary, reprint);
 
                 BookGUI bookGUI;
                 if (IsFormAlreadyOpen(typeof(BookGUI)) == null)
@@ -315,6 +327,293 @@ namespace WinForm
                     bookGUI.Show();
                 }
             }
+        }
+
+        private void btnAuthorRefresh_Click(object sender, EventArgs e)
+        {
+            this.LoadDataToComboboxAuthor();
+        }
+
+        private void btnAuthorManage_Click(object sender, EventArgs e)
+        {
+            AuthorGUI authorGUI = new AuthorGUI();
+            if (IsFormAlreadyOpen(typeof(AuthorGUI)) == null)
+            {
+                authorGUI = new AuthorGUI();
+                authorGUI.Show();
+            }
+        }
+
+        private void btnAuthorAdd_Click(object sender, EventArgs e)
+        {
+            AuthorBLL authorBLL = new AuthorBLL();
+            authorBLL = AuthorDAL.getAuthorItem(this.cboAuthor.SelectedValue.ToString());
+            foreach (DataGridViewRow row in this.dgvAuthor.Rows)
+            {
+                if (row.Index < this.dgvAuthor.Rows.Count - 1)
+                {
+                    if (Int32.Parse(row.Cells["clmnAuthorId"].Value.ToString()) == authorBLL.AuthorId)
+                    {
+                        MessageBox.Show("Author has already!");
+                        return;
+                    }
+                }
+
+            }
+            this.dgvAuthor.Rows.Add(authorBLL.AuthorId, authorBLL.Name, authorBLL.WorkPlace);
+        }
+
+        private void btnAuthorDelete_Click(object sender, EventArgs e)
+        {
+            if (this.dgvAuthor.SelectedCells.Count > 0 && this.dgvAuthor.CurrentRow.Index < this.dgvAuthor.Rows.Count - 1)
+            {
+                DataGridViewRow selectedRow = this.dgvAuthor.Rows[this.dgvAuthor.CurrentRow.Index];
+                dgvAuthor.Rows.RemoveAt(selectedRow.Index);
+            }
+        }
+
+        private void btnBookTitleAdd_Click(object sender, EventArgs e)
+        {
+            ComboboxItem item = new ComboboxItem();
+            string bookTitleName = this.txtBookName.Text;
+            item = (ComboboxItem)this.cboTypeOfBook.SelectedItem;
+            int typeOfBookId = Int32.Parse(item.Value.ToString());
+            item = (ComboboxItem)this.cboPublisher.SelectedItem;
+            int publisherId = Int32.Parse(item.Value.ToString());
+            item = (ComboboxItem)this.cboBookTitleStatus.SelectedItem;
+            int bookTitleStatusId = Int32.Parse(item.Value.ToString());
+            string summary = this.txtSummary.Text;
+            int quantity = Int32.Parse(this.txtBookTotal.Text);
+            List<AuthorBLL> authorList = new List<AuthorBLL>();
+            foreach (DataGridViewRow row in this.dgvAuthor.Rows)
+            {
+                if (row.Index < this.dgvAuthor.Rows.Count - 1)
+                {
+                    authorList.Add(new AuthorBLL(Int32.Parse(row.Cells["clmnAuthorId"].Value.ToString()), row.Cells["clmnAuthorName"].Value.ToString(), row.Cells["clmnWorkPlace"].Value.ToString()));
+                }
+            }
+            if (this.txtBookName.Text.Trim().Equals(""))
+            {
+                MessageBox.Show("Please enter book name!");
+                return;
+            }
+            if (this.txtSummary.Text.Trim().Equals(""))
+            {
+                MessageBox.Show("Please enter book summary!");
+                return;
+            }
+            if (authorList == null)
+            {
+                MessageBox.Show("Please choose author!");
+                return;
+            }
+            if (quantity < 1)
+            {
+                MessageBox.Show("Quantity mustn't less than 1!");
+                return;
+            }
+            BookTitleBLL bookTitleBLL = new BookTitleBLL();
+            bookTitleBLL.Name = bookTitleName;
+            bookTitleBLL.TypeOfBookId = typeOfBookId;
+            bookTitleBLL.PublisherId = publisherId;
+            bookTitleBLL.BookTitleStatusId = bookTitleStatusId;
+            bookTitleBLL.Name = bookTitleName;
+            bookTitleBLL.Summary = summary;
+            int result = bookTitleBLL.checkCopyright(publisherId, bookTitleName);
+            if (result == 1)
+            {
+                bookTitleBLL.Reprint = 0;
+                int id = BookTitleDAL.addBookTitle(bookTitleBLL);
+                foreach (AuthorBLL authorBLL in authorList)
+                {
+                    AuthorBookTitleDAL.assignAuthorToBookTitle(id, authorBLL);
+                }
+                for (int i = 0; i < quantity; i++)
+                {
+                    BookBLL bookBLL = new BookBLL();
+                    bookBLL.BookTitleId = id;
+                    bookBLL.BookStatusId = 1;
+                    BookDAL.addBook(bookBLL);
+                }
+                MessageBox.Show("Add success!");
+                this.dgvBookTitle.Rows.Clear();
+                this.LoadDataToDataGridViewBookTitle();
+            }
+            else if (result == -1)
+            {
+                List<BookTitleBLL> bookTitleList = new List<BookTitleBLL>();
+                bookTitleList = BookTitleDAL.getBookTitleItem(bookTitleBLL.Name);
+                bookTitleBLL.Reprint += bookTitleList[bookTitleList.Count - 1].Reprint + 1;
+                int id = BookTitleDAL.addBookTitle(bookTitleBLL);
+                foreach (AuthorBLL authorBLL in authorList)
+                {
+                    AuthorBookTitleDAL.delete(id);
+                    AuthorBookTitleDAL.assignAuthorToBookTitle(id, authorBLL);
+                }
+                for (int i = 0; i < quantity; i++)
+                {
+                    BookBLL bookBLL = new BookBLL();
+                    bookBLL.BookTitleId = id;
+                    bookBLL.BookStatusId = 1;
+                    BookDAL.addBook(bookBLL);
+                }
+                MessageBox.Show("Add success!");
+                this.dgvBookTitle.Rows.Clear();
+                this.LoadDataToDataGridViewBookTitle();
+            }
+            else
+            {
+                List<BookTitleBLL> bookTitleList = new List<BookTitleBLL>();
+                bookTitleList = BookTitleDAL.getBookTitleItem(bookTitleBLL.Name);
+                PublisherBLL publisherBLL = new PublisherBLL();
+                publisherBLL = PublisherDAL.getPublisherItem(bookTitleList[0].PublisherId);
+                MessageBox.Show("Can't add this title, because it's published by \"" + publisherBLL.Name + "\" publisher!");
+            }
+        }
+
+        private void btnBookTitleDelete_Click(object sender, EventArgs e)
+        {
+            if (this.dgvBookTitle.SelectedCells.Count > 0 && this.dgvBookTitle.CurrentRow.Index < this.dgvBookTitle.Rows.Count - 1)
+            {
+                DialogResult dialogResult = MessageBox.Show("Are you sure delete this book title!", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    DataGridViewRow selectedRow = this.dgvBookTitle.Rows[this.dgvBookTitle.CurrentRow.Index];
+
+                    int id = Convert.ToInt32(selectedRow.Cells["clmnBookTitleId"].Value);
+                    string name = Convert.ToString(selectedRow.Cells["clmnBookTitleName"].Value);
+                    int bookTitleStatusId = Convert.ToInt32(selectedRow.Cells["clmnBookTitleStatusId"].Value.ToString());
+                    int publisherId = Convert.ToInt32(selectedRow.Cells["clmnPublisherId"].Value);
+                    int typeOfBookId = Convert.ToInt32(selectedRow.Cells["clmnTypeOfBookId"].Value);
+                    string summary = Convert.ToString(selectedRow.Cells["clmnSummary"].Value);
+                    int reprint = Convert.ToInt32(selectedRow.Cells["clmnReprint"].Value);
+                    BookTitleBLL bookTitleBLL = new BookTitleBLL(id, bookTitleStatusId, publisherId, typeOfBookId, name, summary, reprint);
+
+                    // Không thể xóa đầu sách, chỉ có thể thay đổi tình trạng thành không tồn tại
+                    BookTitleStatusBLL bookTitleStatusBLL = new BookTitleStatusBLL();
+                    bookTitleStatusBLL = BookTitleStatusDAL.getBookTitleStatusByName("Không Tồn Tại");
+                    BookStatusBLL bookStatusBLL = new BookStatusBLL();
+                    bookStatusBLL = BookStatusDAL.getBookStatusByName("Không Tồn Tại");
+                    if (bookTitleStatusBLL != null)
+                    {
+                        bookTitleBLL.BookTitleStatusId = bookTitleStatusBLL.BookTitleStatusId;
+                        BookTitleDAL.updateBookTitleStatus(bookTitleBLL);
+                        BookDAL.updateBookStatus(bookTitleBLL, bookStatusBLL.BookStatusId);
+                        MessageBox.Show("Change status success!", "Warning");
+                        this.LoadDataToDataGridViewBookTitle();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please choose book title you want delete!", "Notice");
+            }
+        }
+
+        private void btnBookTitleSave_Click(object sender, EventArgs e)
+        {
+            ComboboxItem item = new ComboboxItem();
+            string bookTitleName = this.txtBookName.Text;
+            item = (ComboboxItem)this.cboTypeOfBook.SelectedItem;
+            int typeOfBookId = Int32.Parse(item.Value.ToString());
+            item = (ComboboxItem)this.cboPublisher.SelectedItem;
+            int publisherId = Int32.Parse(item.Value.ToString());
+            item = (ComboboxItem)this.cboBookTitleStatus.SelectedItem;
+            int bookTitleStatusId = Int32.Parse(item.Value.ToString());
+            string summary = this.txtSummary.Text;
+            int quantity = Int32.Parse(this.txtBookTotal.Text);
+            List<AuthorBLL> authorList = new List<AuthorBLL>();
+            foreach (DataGridViewRow row in this.dgvAuthor.Rows)
+            {
+                if (row.Index < this.dgvAuthor.Rows.Count - 1)
+                {
+                    authorList.Add(new AuthorBLL(Int32.Parse(row.Cells["clmnAuthorId"].Value.ToString()), row.Cells["clmnAuthorName"].Value.ToString(), row.Cells["clmnWorkPlace"].Value.ToString()));
+                }
+            }
+            if (this.txtBookName.Text.Trim().Equals(""))
+            {
+                MessageBox.Show("Please enter book name!");
+                return;
+            }
+            if (this.txtSummary.Text.Trim().Equals(""))
+            {
+                MessageBox.Show("Please enter book summary!");
+                return;
+            }
+            if (authorList == null)
+            {
+                MessageBox.Show("Please choose author!");
+                return;
+            }
+            if (quantity < 1)
+            {
+                MessageBox.Show("Quantity mustn't less than 1!");
+                return;
+            }
+            BookTitleBLL bookTitleBLL = new BookTitleBLL();
+            bookTitleBLL.Name = bookTitleName;
+            bookTitleBLL.TypeOfBookId = typeOfBookId;
+            bookTitleBLL.PublisherId = publisherId;
+            bookTitleBLL.BookTitleStatusId = bookTitleStatusId;
+            bookTitleBLL.Name = bookTitleName;
+            bookTitleBLL.Summary = summary;
+            int result = bookTitleBLL.checkCopyright(publisherId, bookTitleName);
+            if (result == 1)
+            {
+                //Chưa có nhà xuất bản nào phát hành cuốn sách này
+                bookTitleBLL.Reprint = 0;
+                int id = BookTitleDAL.addBookTitle(bookTitleBLL);
+                foreach (AuthorBLL authorBLL in authorList)
+                {
+                    AuthorBookTitleDAL.assignAuthorToBookTitle(id, authorBLL);
+                }
+                for (int i = 0; i < quantity; i++)
+                {
+                    BookBLL bookBLL = new BookBLL();
+                    bookBLL.BookTitleId = id;
+                    bookBLL.BookStatusId = 1;
+                    BookDAL.addBook(bookBLL);
+                }
+                MessageBox.Show("Add success!");
+                this.dgvBookTitle.Rows.Clear();
+                this.LoadDataToDataGridViewBookTitle();
+            }
+            else if (result == -1)
+            {
+                //Nhà xuất bản này đã phát hành cuốn sách này rồi. Tăng lần tái bản lên 1
+                List<BookTitleBLL> bookTitleList = new List<BookTitleBLL>();
+                bookTitleList = BookTitleDAL.getBookTitleItem(bookTitleBLL.Name);
+                bookTitleBLL.Reprint += bookTitleList[bookTitleList.Count - 1].Reprint + 1;
+                int id = BookTitleDAL.addBookTitle(bookTitleBLL);
+                foreach (AuthorBLL authorBLL in authorList)
+                {
+                    AuthorBookTitleDAL.delete(id);
+                    AuthorBookTitleDAL.assignAuthorToBookTitle(id, authorBLL);
+                }
+                for (int i = 0; i < quantity; i++)
+                {
+                    BookBLL bookBLL = new BookBLL();
+                    bookBLL.BookTitleId = id;
+                    bookBLL.BookStatusId = 1;
+                    BookDAL.addBook(bookBLL);
+                }
+                MessageBox.Show("Add success!");
+                this.dgvBookTitle.Rows.Clear();
+                this.LoadDataToDataGridViewBookTitle();
+            }
+            else
+            {
+                List<BookTitleBLL> bookTitleList = new List<BookTitleBLL>();
+                bookTitleList = BookTitleDAL.getBookTitleItem(bookTitleBLL.Name);
+                PublisherBLL publisherBLL = new PublisherBLL();
+                publisherBLL = PublisherDAL.getPublisherItem(bookTitleList[0].PublisherId);
+                MessageBox.Show("Can't add this title, because it's published by \"" + publisherBLL.Name + "\" publisher!");
+            }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }

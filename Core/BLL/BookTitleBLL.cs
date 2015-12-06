@@ -15,6 +15,13 @@ namespace Core.BLL
         private int _typeOfBookId;
         private string _name;
         private string _summary;
+        private int _reprint;
+
+        public int Reprint
+        {
+            get { return _reprint; }
+            set { _reprint = value; }
+        }
 
         public int BookTitleId
         {
@@ -52,13 +59,14 @@ namespace Core.BLL
             set { _summary = value; }
         }
 
-        public BookTitleBLL (int bookTitleId, int bookTitleStatusId, int publisherId, int typeOfBookId, string name, string summary){
+        public BookTitleBLL (int bookTitleId, int bookTitleStatusId, int publisherId, int typeOfBookId, string name, string summary, int reprint){
             this._bookTitleId = bookTitleId;
             this._bookTitleStatusId = bookTitleStatusId;
             this._publisherId = publisherId;
             this._typeOfBookId = typeOfBookId;
             this._name = name;
             this._summary = summary;
+            this._reprint = reprint;
         }
         public BookTitleBLL() { }
 
@@ -154,6 +162,7 @@ namespace Core.BLL
 
         public int getAmountOfBook()
         {
+            
             int totalOfBook = 0;
             List<BookBLL> bookList = new List<BookBLL>();
             
@@ -246,6 +255,22 @@ namespace Core.BLL
                 return bookTitleList;
             }
             return null;
+        }
+        public int checkCopyright(int publisherId, string bookTitleName)
+        {
+            List<BookTitleBLL> bookTitleList= BookTitleDAL.getBookTitleItem(bookTitleName);
+            if (bookTitleList != null)
+            {
+                if (bookTitleList[bookTitleList.Count - 1].PublisherId == publisherId)
+                {
+                    //Trùng nhà xuất bản
+                    return -1;
+                }
+                //Khác nhà xuất bản
+                return 0;
+            }
+            //Không tìm thấy
+            return 1;
         }
     }
 }
