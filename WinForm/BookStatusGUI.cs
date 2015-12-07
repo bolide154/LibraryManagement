@@ -101,9 +101,12 @@ namespace WinForm
             List<BookStatusBLL> bookStatusArr = new List<BookStatusBLL>();
             bookStatusArr = BookStatusDAL.search(catalog, key);
             this.dgvBookStatus.Rows.Clear();
-            foreach (BookStatusBLL row in bookStatusArr)
+            if (bookStatusArr.Count != null)
             {
-                this.dgvBookStatus.Rows.Add(row.BookStatusId, row.Name);
+                foreach (BookStatusBLL row in bookStatusArr)
+                {
+                    this.dgvBookStatus.Rows.Add(row.BookStatusId, row.Name);
+                }
             }
             this.GetSelectedValue();
 
@@ -181,6 +184,14 @@ namespace WinForm
             this.Hide();
         }
 
+        private void dgvBookStatus_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
+        }
+
+        private void cboSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

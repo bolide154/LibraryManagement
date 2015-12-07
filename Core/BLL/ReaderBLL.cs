@@ -9,13 +9,15 @@ namespace Core.BLL
     public class ReaderBLL
     {
         private string _name;
-        private string _code;
+        private Int64 _code;
         private string _address;
         private string _phone;
         private string _email;
+        private DateTime _birthday;
         private DateTime _allocateddate;
         private DateTime _enddate;
-
+        private bool _isStaff;
+        private int _granduation;
         public string Name
         {
             get
@@ -29,7 +31,7 @@ namespace Core.BLL
             }
         }
 
-        public string Code
+        public Int64 Code
         {
             get
             {
@@ -107,7 +109,38 @@ namespace Core.BLL
             }
         }
 
-        public ReaderBLL(string name, string code, string address, string phone, string email, DateTime allocateddate, DateTime enddate)
+        public DateTime Birthday
+        {
+            get
+            {
+                return _birthday;
+            }
+
+            set
+            {
+                _birthday = value;
+            }
+        }
+
+        public bool IsStaff
+        {
+            get
+            {
+                return _isStaff;
+            }
+
+            set
+            {
+                _isStaff = value;
+            }
+        }
+        public int Granduation
+        {
+            get { return _granduation; }
+            set { _granduation = value; }
+        }
+
+        public ReaderBLL(string name, Int64 code, string address, string phone, string email, DateTime allocateddate, DateTime enddate, DateTime birthday, bool staff, int granduation)
         {
             this._name = name;
             this._code = code;
@@ -116,6 +149,9 @@ namespace Core.BLL
             this._email = email;
             this._allocateddate = allocateddate;
             this._enddate = enddate;
+            this._birthday = birthday;
+            this._isStaff = staff;
+            this._granduation = granduation;
         }
         public ReaderBLL() { }
     }

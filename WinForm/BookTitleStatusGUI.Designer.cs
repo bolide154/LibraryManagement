@@ -55,6 +55,7 @@
             this.dgvBookTitleStatus.Name = "dgvBookTitleStatus";
             this.dgvBookTitleStatus.Size = new System.Drawing.Size(397, 210);
             this.dgvBookTitleStatus.TabIndex = 29;
+            this.dgvBookTitleStatus.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBookTitleStatus_CellContentClick);
             // 
             // clmnId
             // 
@@ -115,6 +116,7 @@
             this.txtBookTitleStatusName.Name = "txtBookTitleStatusName";
             this.txtBookTitleStatusName.Size = new System.Drawing.Size(221, 20);
             this.txtBookTitleStatusName.TabIndex = 32;
+            this.txtBookTitleStatusName.TextChanged += new System.EventHandler(this.txtBookTitleStatusName_TextChanged);
             // 
             // lblBookTitleStatusName
             // 
@@ -124,6 +126,7 @@
             this.lblBookTitleStatusName.Size = new System.Drawing.Size(107, 13);
             this.lblBookTitleStatusName.TabIndex = 31;
             this.lblBookTitleStatusName.Text = "Type Of Book Name:";
+            this.lblBookTitleStatusName.Click += new System.EventHandler(this.lblBookTitleStatusName_Click);
             // 
             // lblInfor
             // 
@@ -133,6 +136,7 @@
             this.lblInfor.Size = new System.Drawing.Size(55, 13);
             this.lblInfor.TabIndex = 30;
             this.lblInfor.Text = "Id / Name";
+            this.lblInfor.Click += new System.EventHandler(this.lblInfor_Click);
             // 
             // label1
             // 
@@ -142,6 +146,7 @@
             this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 40;
             this.label1.Text = "Search by:";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // txtSearch
             // 
@@ -149,6 +154,7 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(166, 20);
             this.txtSearch.TabIndex = 39;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // btnSearch
             // 
@@ -158,6 +164,7 @@
             this.btnSearch.TabIndex = 38;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click_1);
             // 
             // cboSearch
             // 
@@ -171,6 +178,7 @@
             this.cboSearch.Name = "cboSearch";
             this.cboSearch.Size = new System.Drawing.Size(91, 21);
             this.cboSearch.TabIndex = 37;
+            this.cboSearch.SelectedIndexChanged += new System.EventHandler(this.cboSearch_SelectedIndexChanged);
             // 
             // BookTitleStatusGUI
             // 

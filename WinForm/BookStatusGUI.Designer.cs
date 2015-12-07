@@ -55,6 +55,7 @@
             this.dgvBookStatus.Name = "dgvBookStatus";
             this.dgvBookStatus.Size = new System.Drawing.Size(397, 210);
             this.dgvBookStatus.TabIndex = 40;
+            this.dgvBookStatus.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBookStatus_CellContentClick);
             // 
             // clmnId
             // 
@@ -162,16 +163,13 @@
             // 
             // cboSearch
             // 
-            this.cboSearch.DisplayMember = "a";
             this.cboSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSearch.FormattingEnabled = true;
-            this.cboSearch.Items.AddRange(new object[] {
-            "Tên tác giả",
-            "Nơi công tác"});
             this.cboSearch.Location = new System.Drawing.Point(82, 22);
             this.cboSearch.Name = "cboSearch";
             this.cboSearch.Size = new System.Drawing.Size(91, 21);
             this.cboSearch.TabIndex = 48;
+            this.cboSearch.SelectedIndexChanged += new System.EventHandler(this.cboSearch_SelectedIndexChanged);
             // 
             // BookStatusGUI
             // 

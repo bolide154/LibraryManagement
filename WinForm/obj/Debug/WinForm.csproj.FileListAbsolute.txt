@@ -35,4 +35,6 @@ D:\project\LibraryManagement\WinForm\bin\Debug\WinForm.exe
 D:\project\LibraryManagement\WinForm\bin\Debug\WinForm.pdb
 D:\project\LibraryManagement\WinForm\bin\Debug\Core.dll
 D:\project\LibraryManagement\WinForm\bin\Debug\Core.pdb
-E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.ReaderGUI.resources
+D:\project\LibraryManagement\WinForm\obj\Debug\WinForm.AspectCertificateGUI.resources
+D:\project\LibraryManagement\WinForm\obj\Debug\WinForm.CertificateGUI.resources
+D:\project\LibraryManagement\WinForm\obj\Debug\WinForm.VoucherGUI.resources

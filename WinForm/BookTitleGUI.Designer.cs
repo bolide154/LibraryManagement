@@ -39,7 +39,6 @@
             this.clmnPublisherId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmnBookTitleStatusId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmnSummary = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmnReprint = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblInfor = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtBookName = new System.Windows.Forms.TextBox();
@@ -61,23 +60,21 @@
             this.label7 = new System.Windows.Forms.Label();
             this.btnBookAdd = new System.Windows.Forms.Button();
             this.btnViewInStore = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.btnBookTitleSave = new System.Windows.Forms.Button();
-            this.btnBookTitleDelete = new System.Windows.Forms.Button();
-            this.btnBookTitleAdd = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.cboAuthor = new System.Windows.Forms.ComboBox();
-            this.btnAuthorManage = new System.Windows.Forms.Button();
-            this.btnAuthorAdd = new System.Windows.Forms.Button();
-            this.btnAuthorDelete = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.txtBookTotal = new System.Windows.Forms.TextBox();
             this.btnTypeOfBookRefresh = new System.Windows.Forms.Button();
             this.btnPublisherRefresh = new System.Windows.Forms.Button();
             this.btnBookTitleStatusRefresh = new System.Windows.Forms.Button();
-            this.btnAuthorRefresh = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblReprint = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBookTitle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAuthor)).BeginInit();
             this.SuspendLayout();
@@ -118,8 +115,7 @@
             this.clmnTypeOfBookName,
             this.clmnPublisherId,
             this.clmnBookTitleStatusId,
-            this.clmnSummary,
-            this.clmnReprint});
+            this.clmnSummary});
             this.dgvBookTitle.Location = new System.Drawing.Point(13, 55);
             this.dgvBookTitle.Name = "dgvBookTitle";
             this.dgvBookTitle.Size = new System.Drawing.Size(542, 398);
@@ -161,13 +157,6 @@
             // 
             this.clmnSummary.HeaderText = "Summary";
             this.clmnSummary.Name = "clmnSummary";
-            this.clmnSummary.Visible = false;
-            // 
-            // clmnReprint
-            // 
-            this.clmnReprint.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clmnReprint.HeaderText = "Reprint";
-            this.clmnReprint.Name = "clmnReprint";
             // 
             // lblInfor
             // 
@@ -221,7 +210,7 @@
             this.clmnWorkPlace});
             this.dgvAuthor.Location = new System.Drawing.Point(897, 108);
             this.dgvAuthor.Name = "dgvAuthor";
-            this.dgvAuthor.Size = new System.Drawing.Size(296, 332);
+            this.dgvAuthor.Size = new System.Drawing.Size(296, 297);
             this.dgvAuthor.TabIndex = 9;
             // 
             // clmnAuthorId
@@ -328,7 +317,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(578, 387);
+            this.label7.Location = new System.Drawing.Point(577, 394);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(26, 13);
             this.label7.TabIndex = 20;
@@ -336,7 +325,7 @@
             // 
             // btnBookAdd
             // 
-            this.btnBookAdd.Location = new System.Drawing.Point(714, 382);
+            this.btnBookAdd.Location = new System.Drawing.Point(713, 389);
             this.btnBookAdd.Name = "btnBookAdd";
             this.btnBookAdd.Size = new System.Drawing.Size(64, 23);
             this.btnBookAdd.TabIndex = 24;
@@ -346,7 +335,7 @@
             // 
             // btnViewInStore
             // 
-            this.btnViewInStore.Location = new System.Drawing.Point(784, 382);
+            this.btnViewInStore.Location = new System.Drawing.Point(783, 389);
             this.btnViewInStore.Name = "btnViewInStore";
             this.btnViewInStore.Size = new System.Drawing.Size(86, 23);
             this.btnViewInStore.TabIndex = 25;
@@ -354,45 +343,41 @@
             this.btnViewInStore.UseVisualStyleBackColor = true;
             this.btnViewInStore.Click += new System.EventHandler(this.btnViewInStore_Click);
             // 
-            // btnClose
+            // button8
             // 
-            this.btnClose.Location = new System.Drawing.Point(1118, 464);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 26;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.button8.Location = new System.Drawing.Point(1119, 430);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(75, 23);
+            this.button8.TabIndex = 26;
+            this.button8.Text = "Close";
+            this.button8.UseVisualStyleBackColor = true;
             // 
-            // btnBookTitleSave
+            // button9
             // 
-            this.btnBookTitleSave.Location = new System.Drawing.Point(1037, 464);
-            this.btnBookTitleSave.Name = "btnBookTitleSave";
-            this.btnBookTitleSave.Size = new System.Drawing.Size(75, 23);
-            this.btnBookTitleSave.TabIndex = 27;
-            this.btnBookTitleSave.Text = "Save";
-            this.btnBookTitleSave.UseVisualStyleBackColor = true;
-            this.btnBookTitleSave.Click += new System.EventHandler(this.btnBookTitleSave_Click);
+            this.button9.Location = new System.Drawing.Point(1038, 430);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(75, 23);
+            this.button9.TabIndex = 27;
+            this.button9.Text = "Save";
+            this.button9.UseVisualStyleBackColor = true;
             // 
-            // btnBookTitleDelete
+            // button10
             // 
-            this.btnBookTitleDelete.Location = new System.Drawing.Point(956, 464);
-            this.btnBookTitleDelete.Name = "btnBookTitleDelete";
-            this.btnBookTitleDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnBookTitleDelete.TabIndex = 28;
-            this.btnBookTitleDelete.Text = "Delete";
-            this.btnBookTitleDelete.UseVisualStyleBackColor = true;
-            this.btnBookTitleDelete.Click += new System.EventHandler(this.btnBookTitleDelete_Click);
+            this.button10.Location = new System.Drawing.Point(957, 430);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(75, 23);
+            this.button10.TabIndex = 28;
+            this.button10.Text = "Delete";
+            this.button10.UseVisualStyleBackColor = true;
             // 
-            // btnBookTitleAdd
+            // button11
             // 
-            this.btnBookTitleAdd.Location = new System.Drawing.Point(875, 464);
-            this.btnBookTitleAdd.Name = "btnBookTitleAdd";
-            this.btnBookTitleAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnBookTitleAdd.TabIndex = 29;
-            this.btnBookTitleAdd.Text = "Add";
-            this.btnBookTitleAdd.UseVisualStyleBackColor = true;
-            this.btnBookTitleAdd.Click += new System.EventHandler(this.btnBookTitleAdd_Click);
+            this.button11.Location = new System.Drawing.Point(876, 430);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(75, 23);
+            this.button11.TabIndex = 29;
+            this.button11.Text = "Add";
+            this.button11.UseVisualStyleBackColor = true;
             // 
             // label9
             // 
@@ -412,40 +397,37 @@
             this.cboAuthor.Size = new System.Drawing.Size(197, 21);
             this.cboAuthor.TabIndex = 31;
             // 
-            // btnAuthorManage
+            // button12
             // 
-            this.btnAuthorManage.Location = new System.Drawing.Point(1100, 44);
-            this.btnAuthorManage.Name = "btnAuthorManage";
-            this.btnAuthorManage.Size = new System.Drawing.Size(43, 23);
-            this.btnAuthorManage.TabIndex = 32;
-            this.btnAuthorManage.Text = "...";
-            this.btnAuthorManage.UseVisualStyleBackColor = true;
-            this.btnAuthorManage.Click += new System.EventHandler(this.btnAuthorManage_Click);
+            this.button12.Location = new System.Drawing.Point(1100, 44);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(43, 23);
+            this.button12.TabIndex = 32;
+            this.button12.Text = "...";
+            this.button12.UseVisualStyleBackColor = true;
             // 
-            // btnAuthorAdd
+            // button13
             // 
-            this.btnAuthorAdd.Location = new System.Drawing.Point(1036, 77);
-            this.btnAuthorAdd.Name = "btnAuthorAdd";
-            this.btnAuthorAdd.Size = new System.Drawing.Size(66, 23);
-            this.btnAuthorAdd.TabIndex = 33;
-            this.btnAuthorAdd.Text = "Add";
-            this.btnAuthorAdd.UseVisualStyleBackColor = true;
-            this.btnAuthorAdd.Click += new System.EventHandler(this.btnAuthorAdd_Click);
+            this.button13.Location = new System.Drawing.Point(1036, 77);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(66, 23);
+            this.button13.TabIndex = 33;
+            this.button13.Text = "Add";
+            this.button13.UseVisualStyleBackColor = true;
             // 
-            // btnAuthorDelete
+            // button14
             // 
-            this.btnAuthorDelete.Location = new System.Drawing.Point(1126, 76);
-            this.btnAuthorDelete.Name = "btnAuthorDelete";
-            this.btnAuthorDelete.Size = new System.Drawing.Size(67, 23);
-            this.btnAuthorDelete.TabIndex = 34;
-            this.btnAuthorDelete.Text = "Delete";
-            this.btnAuthorDelete.UseVisualStyleBackColor = true;
-            this.btnAuthorDelete.Click += new System.EventHandler(this.btnAuthorDelete_Click);
+            this.button14.Location = new System.Drawing.Point(1126, 76);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(67, 23);
+            this.button14.TabIndex = 34;
+            this.button14.Text = "Delete";
+            this.button14.UseVisualStyleBackColor = true;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(667, 387);
+            this.label8.Location = new System.Drawing.Point(666, 394);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(32, 13);
             this.label8.TabIndex = 21;
@@ -453,7 +435,7 @@
             // 
             // txtBookTotal
             // 
-            this.txtBookTotal.Location = new System.Drawing.Point(610, 384);
+            this.txtBookTotal.Location = new System.Drawing.Point(609, 391);
             this.txtBookTotal.Name = "txtBookTotal";
             this.txtBookTotal.Size = new System.Drawing.Size(45, 20);
             this.txtBookTotal.TabIndex = 35;
@@ -488,55 +470,34 @@
             this.btnBookTitleStatusRefresh.UseVisualStyleBackColor = true;
             this.btnBookTitleStatusRefresh.Click += new System.EventHandler(this.btnBookTitleStatusRefresh_Click);
             // 
-            // btnAuthorRefresh
+            // button1
             // 
-            this.btnAuthorRefresh.Image = global::WinForm.Properties.Resources.refresh;
-            this.btnAuthorRefresh.Location = new System.Drawing.Point(1149, 44);
-            this.btnAuthorRefresh.Name = "btnAuthorRefresh";
-            this.btnAuthorRefresh.Size = new System.Drawing.Size(44, 23);
-            this.btnAuthorRefresh.TabIndex = 39;
-            this.btnAuthorRefresh.UseVisualStyleBackColor = true;
-            this.btnAuthorRefresh.Click += new System.EventHandler(this.btnAuthorRefresh_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(578, 427);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
-            this.label1.TabIndex = 40;
-            this.label1.Text = "Reprint:";
-            // 
-            // lblReprint
-            // 
-            this.lblReprint.AutoSize = true;
-            this.lblReprint.Location = new System.Drawing.Point(639, 427);
-            this.lblReprint.Name = "lblReprint";
-            this.lblReprint.Size = new System.Drawing.Size(13, 13);
-            this.lblReprint.TabIndex = 41;
-            this.lblReprint.Text = "0";
+            this.button1.Image = global::WinForm.Properties.Resources.refresh;
+            this.button1.Location = new System.Drawing.Point(1149, 44);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(44, 23);
+            this.button1.TabIndex = 39;
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // BookTitleGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1208, 512);
-            this.Controls.Add(this.lblReprint);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnAuthorRefresh);
+            this.ClientSize = new System.Drawing.Size(1208, 469);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnBookTitleStatusRefresh);
             this.Controls.Add(this.btnPublisherRefresh);
             this.Controls.Add(this.btnTypeOfBookRefresh);
             this.Controls.Add(this.txtBookTotal);
-            this.Controls.Add(this.btnAuthorDelete);
-            this.Controls.Add(this.btnAuthorAdd);
-            this.Controls.Add(this.btnAuthorManage);
+            this.Controls.Add(this.button14);
+            this.Controls.Add(this.button13);
+            this.Controls.Add(this.button12);
             this.Controls.Add(this.cboAuthor);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.btnBookTitleAdd);
-            this.Controls.Add(this.btnBookTitleDelete);
-            this.Controls.Add(this.btnBookTitleSave);
-            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.button11);
+            this.Controls.Add(this.button10);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.button8);
             this.Controls.Add(this.btnViewInStore);
             this.Controls.Add(this.btnBookAdd);
             this.Controls.Add(this.label8);
@@ -594,26 +555,17 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnBookAdd;
         private System.Windows.Forms.Button btnViewInStore;
-        private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Button btnBookTitleSave;
-        private System.Windows.Forms.Button btnBookTitleDelete;
-        private System.Windows.Forms.Button btnBookTitleAdd;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox cboAuthor;
-        private System.Windows.Forms.Button btnAuthorManage;
-        private System.Windows.Forms.Button btnAuthorAdd;
-        private System.Windows.Forms.Button btnAuthorDelete;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtBookTotal;
-        private System.Windows.Forms.Button btnTypeOfBookRefresh;
-        private System.Windows.Forms.Button btnPublisherRefresh;
-        private System.Windows.Forms.Button btnBookTitleStatusRefresh;
-        private System.Windows.Forms.Button btnAuthorRefresh;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmnAuthorId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmnAuthorName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmnWorkPlace;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lblReprint;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnBookTitleId;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnBookTitleName;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnTypeOfBookId;
@@ -621,6 +573,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnPublisherId;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnBookTitleStatusId;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnSummary;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmnReprint;
+        private System.Windows.Forms.Button btnTypeOfBookRefresh;
+        private System.Windows.Forms.Button btnPublisherRefresh;
+        private System.Windows.Forms.Button btnBookTitleStatusRefresh;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmnAuthorId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmnAuthorName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmnWorkPlace;
     }
 }

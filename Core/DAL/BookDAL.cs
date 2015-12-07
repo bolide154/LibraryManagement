@@ -45,15 +45,10 @@ namespace Core.DAL
         }
         public static void addBook(BookBLL bookBLL)
         {
-            String sql = "INSERT INTO [sach] (madausach, matinhtrangsach) VALUES ( " + bookBLL.BookTitleId + ", " + bookBLL.BookStatusId + ")";
+            String sql = "INSERT INTO [sach] (madausach, matinhtrangsach) VALUES ( '" + bookBLL.BookTitleId + "', '" + bookBLL.BookStatusId + "')";
             BookDAL._condb.ExecuteNonQuery(sql);
         }
 
-        public static void updateBookStatus(BookTitleBLL bookTitleBLL, int bookStatusId)
-        {
-            String sql = "UPDATE [sach] SET matinhtrangsach=" + bookStatusId + "  WHERE madausach=" + bookTitleBLL.BookTitleId;
-            BookTitleDAL._condb.ExecuteNonQuery(sql);
-        }
 
         public static List<BookBLL> getBookList(BookTitleBLL bookTitleBLL)
         {

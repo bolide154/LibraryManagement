@@ -58,5 +58,23 @@ namespace WinForm
             ReaderGUI reader = new ReaderGUI();
             reader.Show();
         }
+
+        private void mnuiCertificateStt_Click(object sender, EventArgs e)
+        {
+            AspectCertificateGUI certificate = new AspectCertificateGUI();
+            certificate.Show();
+        }
+
+        private void certificateManagementToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CertificateGUI certificate = new CertificateGUI();
+            certificate.Show();
+        }
+
+        private void voucherToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VoucherGUI voucher = new VoucherGUI();
+            voucher.Show();
+        }
     }
 }

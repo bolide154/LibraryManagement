@@ -20,18 +20,17 @@ namespace Core.DAL
                 List<BookTitleBLL> bookTitleList = new List<BookTitleBLL>();
                 foreach (DataRow row in dt.Rows)
                 {
-                    BookTitleBLL bookTitleBLL = new BookTitleBLL(Int32.Parse(row["madausach"].ToString()), Int32.Parse(row["matinhtrang"].ToString()), Int32.Parse(row["manxb"].ToString()), Int32.Parse(row["matheloai"].ToString()), row["tensach"].ToString(), row["tomtat"].ToString(), Int32.Parse(row["lantaiban"].ToString()));
+                    BookTitleBLL bookTitleBLL = new BookTitleBLL(Int32.Parse(row["madausach"].ToString()), Int32.Parse(row["matinhtrang"].ToString()), Int32.Parse(row["manxb"].ToString()), Int32.Parse(row["matheloai"].ToString()), row["tensach"].ToString(), row["tomtat"].ToString());
                     bookTitleList.Add(bookTitleBLL);
                 }
                 return bookTitleList;
             }
             return null;
         }
-        public static int addBookTitle(BookTitleBLL bookTitleBLL)
+        public static void addBookTitle(BookTitleBLL bookTitleBLL)
         {
-            String sql = "INSERT INTO [dausach] (matinhtrang, manxb, matheloai, tensach, tomtat, lantaiban) VALUES ( " + bookTitleBLL.BookTitleStatusId + ", " + bookTitleBLL.PublisherId + ", " + bookTitleBLL.TypeOfBookId + ", N'" + bookTitleBLL.Name + "', N'" + bookTitleBLL.Summary + "', " + bookTitleBLL.Reprint + ") SELECT SCOPE_IDENTITY() as madausach;";
-            DataTable dt = BookTitleDAL._condb.getDataTable(sql);
-            return Int32.Parse(dt.Rows[0]["madausach"].ToString());
+            String sql = "INSERT INTO [dausach] (matinhtrang, manxb, matheloai, tensach, tomtat) VALUES ( " + bookTitleBLL.BookTitleStatusId + ", " + bookTitleBLL.PublisherId + ", " + bookTitleBLL.TypeOfBookId + ", N'" + bookTitleBLL.Name + "', N'" + bookTitleBLL.Summary + "')";
+            BookTitleDAL._condb.ExecuteNonQuery(sql);
         }
         public static void deleteBookTitle(BookTitleBLL bookTitleBLL)
         {
@@ -40,12 +39,7 @@ namespace Core.DAL
         }
         public static void updateBookTitle(BookTitleBLL bookTitleBLL)
         {
-            String sql = "UPDATE [dausach] SET matinhtrang=" + bookTitleBLL.BookTitleStatusId + ", manxb=" + bookTitleBLL.PublisherId + ", matheloai=" + bookTitleBLL.TypeOfBookId + ", tensach=N'" + bookTitleBLL.Name + "', tomtat=N'" + bookTitleBLL.Summary + "',  WHERE madausach=" + bookTitleBLL.BookTitleId;
-            BookTitleDAL._condb.ExecuteNonQuery(sql);
-        }
-        public static void updateBookTitleStatus(BookTitleBLL bookTitleBLL)
-        {
-            String sql = "UPDATE [dausach] SET matinhtrang=" + bookTitleBLL.BookTitleStatusId + "  WHERE madausach=" + bookTitleBLL.BookTitleId;
+            String sql = "UPDATE [dausach] SET matinhtrang=" + bookTitleBLL.BookTitleStatusId + ", manxb=" + bookTitleBLL.PublisherId + ", matheloai=" + bookTitleBLL.TypeOfBookId + ", tensach=N'" + bookTitleBLL.Name + "', tomtat=N'" + bookTitleBLL.Summary + "' WHERE madausach=" + bookTitleBLL.BookTitleId;
             BookTitleDAL._condb.ExecuteNonQuery(sql);
         }
         public static List<BookTitleBLL> search(string catalog, string key)
@@ -57,7 +51,7 @@ namespace Core.DAL
                 List<BookTitleBLL> bookTitleList = new List<BookTitleBLL>();
                 foreach (DataRow row in dt.Rows)
                 {
-                    bookTitleList.Add(new BookTitleBLL(Int32.Parse(row["madausach"].ToString()), Int32.Parse(row["matinhtrang"].ToString()), Int32.Parse(row["manxb"].ToString()), Int32.Parse(row["matheloai"].ToString()), row["tensach"].ToString(), row["tomtat"].ToString(), Int32.Parse(row["lantaiban"].ToString())));
+                    bookTitleList.Add(new BookTitleBLL(Int32.Parse(row["madausach"].ToString()), Int32.Parse(row["matinhtrang"].ToString()), Int32.Parse(row["manxb"].ToString()), Int32.Parse(row["matheloai"].ToString()), row["tensach"].ToString(), row["tomtat"].ToString()));
                 }
                 return bookTitleList;
             }
@@ -71,7 +65,7 @@ namespace Core.DAL
             if (dt.Rows.Count > 0)
             {
                 DataRow row = dt.Rows[0];
-                return new BookTitleBLL(Int32.Parse(row["madausach"].ToString()), Int32.Parse(row["matinhtrang"].ToString()), Int32.Parse(row["manxb"].ToString()), Int32.Parse(row["matheloai"].ToString()), row["tensach"].ToString(), row["tomtat"].ToString(), Int32.Parse(row["lantaiban"].ToString()));
+                return new BookTitleBLL(Int32.Parse(row["madausach"].ToString()), Int32.Parse(row["matinhtrang"].ToString()), Int32.Parse(row["manxb"].ToString()), Int32.Parse(row["matheloai"].ToString()), row["tensach"].ToString(), row["tomtat"].ToString());
             }
             return null;
         }
@@ -85,7 +79,7 @@ namespace Core.DAL
             {
                 foreach (DataRow row in dt.Rows)
                 {
-                    bookTitleList.Add(new BookTitleBLL(Int32.Parse(row["madausach"].ToString()), Int32.Parse(row["matinhtrang"].ToString()), Int32.Parse(row["manxb"].ToString()), Int32.Parse(row["matheloai"].ToString()), row["tensach"].ToString(), row["tomtat"].ToString(), Int32.Parse(row["lantaiban"].ToString())));
+                    bookTitleList.Add(new BookTitleBLL(Int32.Parse(row["madausach"].ToString()), Int32.Parse(row["matinhtrang"].ToString()), Int32.Parse(row["manxb"].ToString()), Int32.Parse(row["matheloai"].ToString()), row["tensach"].ToString(), row["tomtat"].ToString()));
                 }
                 return bookTitleList;
             }
@@ -99,25 +93,9 @@ namespace Core.DAL
             if (dt.Rows.Count > 0)
             {
                 DataRow row = dt.Rows[0];
-                return new BookTitleBLL(Int32.Parse(row["madausach"].ToString()), Int32.Parse(row["matinhtrang"].ToString()), Int32.Parse(row["manxb"].ToString()), Int32.Parse(row["matheloai"].ToString()), row["tensach"].ToString(), row["tomtat"].ToString(), Int32.Parse(row["lantaiban"].ToString()));
+                return new BookTitleBLL(Int32.Parse(row["madausach"].ToString()), Int32.Parse(row["matinhtrang"].ToString()), Int32.Parse(row["manxb"].ToString()), Int32.Parse(row["matheloai"].ToString()), row["tensach"].ToString(), row["tomtat"].ToString());
             }
             return null;
         }
-        public static List<BookTitleBLL> getBookTitleItem(string bookTitleName)
-        {
-            String sql = "SELECT * FROM [dausach] WHERE tensach=N'" + bookTitleName+"'";
-            DataTable dt = BookTitleDAL._condb.getDataTable(sql);
-            if (dt.Rows.Count > 0)
-            {
-                List<BookTitleBLL> bookTitleList = new List<BookTitleBLL>();
-                foreach (DataRow row in dt.Rows)
-                {
-                    bookTitleList.Add(new BookTitleBLL(Int32.Parse(row["madausach"].ToString()), Int32.Parse(row["matinhtrang"].ToString()), Int32.Parse(row["manxb"].ToString()), Int32.Parse(row["matheloai"].ToString()), row["tensach"].ToString(), row["tomtat"].ToString(), Int32.Parse(row["lantaiban"].ToString())));
-                }
-                return bookTitleList;
-            }
-            return null;
-        }
-
     }
 }

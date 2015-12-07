@@ -177,5 +177,45 @@ namespace WinForm
         {
             this.Hide();
         }
+
+        private void dgvBookTitleStatus_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cboSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSearch_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblInfor_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblBookTitleStatusName_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtBookTitleStatusName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -39,15 +39,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\AspectCertificateBLL.cs" />
     <Compile Include="BLL\AuthorBLL.cs" />
     <Compile Include="BLL\BookBLL.cs" />
     <Compile Include="BLL\BookStatusBLL.cs" />
     <Compile Include="BLL\BookTitleBLL.cs" />
     <Compile Include="BLL\BookTitleStatusBLL.cs" />
+    <Compile Include="BLL\CertificateBLL.cs" />
+    <Compile Include="BLL\DetailCertificateBLL.cs" />
+    <Compile Include="BLL\DetailVoucherBLL.cs" />
     <Compile Include="BLL\PublisherBLL.cs" />
     <Compile Include="BLL\ReaderBLL.cs" />
     <Compile Include="BLL\TypeOfBookBLL.cs" />
+    <Compile Include="BLL\VoucherBLL.cs" />
     <Compile Include="ComboboxItem.cs" />
+    <Compile Include="DAL\AspectCertificateDAL.cs" />
     <Compile Include="DAL\AuthorBookTitleDAL.cs" />
     <Compile Include="DAL\AuthorDAL.cs" />
     <Compile Include="DAL\BookDAL.cs" />
@@ -55,9 +61,11 @@
     <Compile Include="DAL\BookTitleDAL.cs" />
     <Compile Include="DAL\BookTitleStatusDAL.cs" />
     <Compile Include="DAL\Connection.cs" />
+    <Compile Include="DAL\CertificateDAL.cs" />
     <Compile Include="DAL\PublisherDAL.cs" />
     <Compile Include="DAL\ReaderDAL.cs" />
     <Compile Include="DAL\TypeOfBookDAL.cs" />
+    <Compile Include="DAL\VoucherDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

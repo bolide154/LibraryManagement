@@ -90,16 +90,5 @@ namespace Core.DAL
             }
             return null;
         }
-        public static BookTitleStatusBLL getBookTitleStatusByName(string bookTitleStatusName)
-        {
-            String sql = "SELECT * FROM [tinhtrangdausach] WHERE tentinhtrang = N'"+bookTitleStatusName+"'";
-            DataTable dt = BookTitleStatusDAL._condb.getDataTable(sql);
-            if (dt.Rows.Count > 0)
-            {
-                DataRow row = dt.Rows[0];
-                return new BookTitleStatusBLL(Int32.Parse(row["matinhtrang"].ToString()), row["tentinhtrang"].ToString());
-            }
-            return null;
-        }
     }
 }

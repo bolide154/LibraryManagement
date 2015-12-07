@@ -44,6 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AspectCertificateGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AspectCertificateGUI.Designer.cs">
+      <DependentUpon>AspectCertificateGUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="AuthorGUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +91,12 @@
     <Compile Include="MainGUI.Designer.cs">
       <DependentUpon>MainGUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="CertificateGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CertificateGUI.Designer.cs">
+      <DependentUpon>CertificateGUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublisherGUI.cs">
@@ -105,6 +117,15 @@
     <Compile Include="TypeOfBookGUI.Designer.cs">
       <DependentUpon>TypeOfBookGUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="VoucherGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VoucherGUI.Designer.cs">
+      <DependentUpon>VoucherGUI.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AspectCertificateGUI.resx">
+      <DependentUpon>AspectCertificateGUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AuthorGUI.resx">
       <DependentUpon>AuthorGUI.cs</DependentUpon>
     </EmbeddedResource>
@@ -122,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainGUI.resx">
       <DependentUpon>MainGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CertificateGUI.resx">
+      <DependentUpon>CertificateGUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -141,6 +165,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TypeOfBookGUI.resx">
       <DependentUpon>TypeOfBookGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VoucherGUI.resx">
+      <DependentUpon>VoucherGUI.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="library_management_dbDataSet.xsc">
       <DependentUpon>library_management_dbDataSet.xsd</DependentUpon>

@@ -35,7 +35,7 @@ namespace Core.DAL
 
         public static List<BookStatusBLL> search(string key, string value)
         {
-                string sql = "SELECT * FROM [tinhtrangsach] WHERE " + key + " LIKE '%" + value + "%'";
+                string sql = "SELECT * FROM [tinhtrangsach] WHERE " + key + " LIKE N'%" + value + "%'";
                 DataTable dt = BookStatusDAL._condb.getDataTable(sql);
                 List<BookStatusBLL> bookStatusBLLList = new List<BookStatusBLL>();
                 if (dt.Rows.Count > 0)
@@ -79,7 +79,6 @@ namespace Core.DAL
                 if (dt.Rows.Count > 0)
                 {
                     DataRow row = dt.Rows[0];
-
                     return new BookStatusBLL(Int32.Parse(row["matinhtrangsach"].ToString()), row["tentinhtrangsach"].ToString());
                 }
                 else
@@ -99,18 +98,6 @@ namespace Core.DAL
                 return new BookStatusBLL(Int32.Parse(row["matinhtrangsach"].ToString()), row["tentinhtrangsach"].ToString());
             }
                 return null;
-        }
-
-        public static BookStatusBLL getBookStatusByName(string bookStatusName)
-        {
-            String sql = "SELECT * FROM [tinhtrangsach] WHERE tentinhtrangsach=N'" + bookStatusName+"'";
-            DataTable dt = BookStatusDAL._condb.getDataTable(sql);
-            if (dt.Rows.Count > 0)
-            {
-                DataRow row = dt.Rows[0];
-                return new BookStatusBLL(Int32.Parse(row["matinhtrangsach"].ToString()), row["tentinhtrangsach"].ToString());
-            }
-            return null;
         }
     }
 }

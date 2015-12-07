@@ -38,6 +38,10 @@
             this.mnuiStatus = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuiTypeOfBook = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuReader = new System.Windows.Forms.ToolStripMenuItem();
+            this.certificateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuiCertificateStt = new System.Windows.Forms.ToolStripMenuItem();
+            this.certificateManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.voucherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,7 +50,9 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuAuthor,
             this.mnuBook,
-            this.mnuReader});
+            this.mnuReader,
+            this.certificateToolStripMenuItem,
+            this.voucherToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(636, 24);
@@ -84,7 +90,7 @@
             this.mnuiBookTitle.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuiBookTitleStatus});
             this.mnuiBookTitle.Name = "mnuiBookTitle";
-            this.mnuiBookTitle.Size = new System.Drawing.Size(152, 22);
+            this.mnuiBookTitle.Size = new System.Drawing.Size(146, 22);
             this.mnuiBookTitle.Text = "Book Title";
             this.mnuiBookTitle.Click += new System.EventHandler(this.mnuiBookTitle_Click);
             // 
@@ -98,21 +104,21 @@
             // mnuiPublisher
             // 
             this.mnuiPublisher.Name = "mnuiPublisher";
-            this.mnuiPublisher.Size = new System.Drawing.Size(152, 22);
+            this.mnuiPublisher.Size = new System.Drawing.Size(146, 22);
             this.mnuiPublisher.Text = "Publisher";
             this.mnuiPublisher.Click += new System.EventHandler(this.mnuiPublisher_Click);
             // 
             // mnuiStatus
             // 
             this.mnuiStatus.Name = "mnuiStatus";
-            this.mnuiStatus.Size = new System.Drawing.Size(152, 22);
+            this.mnuiStatus.Size = new System.Drawing.Size(146, 22);
             this.mnuiStatus.Text = "Status";
             this.mnuiStatus.Click += new System.EventHandler(this.mnuiStatus_Click);
             // 
             // mnuiTypeOfBook
             // 
             this.mnuiTypeOfBook.Name = "mnuiTypeOfBook";
-            this.mnuiTypeOfBook.Size = new System.Drawing.Size(152, 22);
+            this.mnuiTypeOfBook.Size = new System.Drawing.Size(146, 22);
             this.mnuiTypeOfBook.Text = "Type Of Book";
             this.mnuiTypeOfBook.Click += new System.EventHandler(this.mnuiTypeOfBook_Click);
             // 
@@ -122,6 +128,36 @@
             this.mnuReader.Size = new System.Drawing.Size(55, 20);
             this.mnuReader.Text = "Reader";
             this.mnuReader.Click += new System.EventHandler(this.mnuReader_Click);
+            // 
+            // certificateToolStripMenuItem
+            // 
+            this.certificateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuiCertificateStt,
+            this.certificateManagementToolStripMenuItem});
+            this.certificateToolStripMenuItem.Name = "certificateToolStripMenuItem";
+            this.certificateToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
+            this.certificateToolStripMenuItem.Text = "Certificate";
+            // 
+            // mnuiCertificateStt
+            // 
+            this.mnuiCertificateStt.Name = "mnuiCertificateStt";
+            this.mnuiCertificateStt.Size = new System.Drawing.Size(202, 22);
+            this.mnuiCertificateStt.Text = "Certificate Status";
+            this.mnuiCertificateStt.Click += new System.EventHandler(this.mnuiCertificateStt_Click);
+            // 
+            // certificateManagementToolStripMenuItem
+            // 
+            this.certificateManagementToolStripMenuItem.Name = "certificateManagementToolStripMenuItem";
+            this.certificateManagementToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.certificateManagementToolStripMenuItem.Text = "Certificate Management";
+            this.certificateManagementToolStripMenuItem.Click += new System.EventHandler(this.certificateManagementToolStripMenuItem_Click);
+            // 
+            // voucherToolStripMenuItem
+            // 
+            this.voucherToolStripMenuItem.Name = "voucherToolStripMenuItem";
+            this.voucherToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.voucherToolStripMenuItem.Text = "Voucher";
+            this.voucherToolStripMenuItem.Click += new System.EventHandler(this.voucherToolStripMenuItem_Click);
             // 
             // MainGUI
             // 
@@ -151,5 +187,9 @@
         private System.Windows.Forms.ToolStripMenuItem mnuiBookTitleStatus;
         private System.Windows.Forms.ToolStripMenuItem mnuiStatus;
         private System.Windows.Forms.ToolStripMenuItem mnuReader;
+        private System.Windows.Forms.ToolStripMenuItem certificateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuiCertificateStt;
+        private System.Windows.Forms.ToolStripMenuItem certificateManagementToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem voucherToolStripMenuItem;
     }
 }

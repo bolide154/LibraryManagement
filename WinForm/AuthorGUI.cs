@@ -186,7 +186,7 @@ namespace WinForm
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            this.Dispose();
+            this.Hide();
         }
         private void RemoveDataGridView()
         {
