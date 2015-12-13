@@ -70,6 +70,7 @@
             this.cboGranduationyear = new System.Windows.Forms.ComboBox();
             this.cboStaff = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnExportEx = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReader)).BeginInit();
             this.SuspendLayout();
             // 
@@ -237,6 +238,7 @@
             this.btnSearch.TabIndex = 20;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // cboTimtheo
             // 
@@ -263,6 +265,7 @@
             this.clmnGraduation});
             this.dgvReader.Location = new System.Drawing.Point(12, 362);
             this.dgvReader.Name = "dgvReader";
+            this.dgvReader.ReadOnly = true;
             this.dgvReader.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.dgvReader.Size = new System.Drawing.Size(893, 225);
             this.dgvReader.TabIndex = 22;
@@ -272,6 +275,7 @@
             this.clmnReaderId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.clmnReaderId.HeaderText = "Reader Id";
             this.clmnReaderId.Name = "clmnReaderId";
+            this.clmnReaderId.ReadOnly = true;
             this.clmnReaderId.Visible = false;
             // 
             // clmnReaderName
@@ -279,46 +283,54 @@
             this.clmnReaderName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.clmnReaderName.HeaderText = "Reader Name";
             this.clmnReaderName.Name = "clmnReaderName";
+            this.clmnReaderName.ReadOnly = true;
             // 
             // clmnAddress
             // 
             this.clmnAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.clmnAddress.HeaderText = "Address";
             this.clmnAddress.Name = "clmnAddress";
+            this.clmnAddress.ReadOnly = true;
             // 
             // clmnPhone
             // 
             this.clmnPhone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.clmnPhone.HeaderText = "Phone";
             this.clmnPhone.Name = "clmnPhone";
+            this.clmnPhone.ReadOnly = true;
             // 
             // clmnEmail
             // 
             this.clmnEmail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.clmnEmail.HeaderText = "Email";
             this.clmnEmail.Name = "clmnEmail";
+            this.clmnEmail.ReadOnly = true;
             // 
             // clmnDateAllocated
             // 
             this.clmnDateAllocated.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.clmnDateAllocated.HeaderText = "Date Allocated";
             this.clmnDateAllocated.Name = "clmnDateAllocated";
+            this.clmnDateAllocated.ReadOnly = true;
             // 
             // clmnDateEnd
             // 
             this.clmnDateEnd.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.clmnDateEnd.HeaderText = "Date End";
             this.clmnDateEnd.Name = "clmnDateEnd";
+            this.clmnDateEnd.ReadOnly = true;
             // 
             // clmnBirthday
             // 
             this.clmnBirthday.HeaderText = "Birthday";
             this.clmnBirthday.Name = "clmnBirthday";
+            this.clmnBirthday.ReadOnly = true;
             // 
             // clmnStaff
             // 
             this.clmnStaff.HeaderText = "Staff";
             this.clmnStaff.Name = "clmnStaff";
+            this.clmnStaff.ReadOnly = true;
             this.clmnStaff.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.clmnStaff.Visible = false;
             // 
@@ -326,6 +338,7 @@
             // 
             this.clmnGraduation.HeaderText = "Graduation year";
             this.clmnGraduation.Name = "clmnGraduation";
+            this.clmnGraduation.ReadOnly = true;
             this.clmnGraduation.Visible = false;
             // 
             // btnAdd
@@ -422,11 +435,22 @@
             this.label2.TabIndex = 31;
             this.label2.Text = "Staff";
             // 
+            // btnExportEx
+            // 
+            this.btnExportEx.Location = new System.Drawing.Point(333, 324);
+            this.btnExportEx.Name = "btnExportEx";
+            this.btnExportEx.Size = new System.Drawing.Size(82, 23);
+            this.btnExportEx.TabIndex = 74;
+            this.btnExportEx.Text = "Export Excel";
+            this.btnExportEx.UseVisualStyleBackColor = true;
+            this.btnExportEx.Click += new System.EventHandler(this.btnExportEx_Click_1);
+            // 
             // ReaderGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(917, 595);
+            this.Controls.Add(this.btnExportEx);
             this.Controls.Add(this.cboStaff);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cboGranduationyear);
@@ -512,5 +536,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnBirthday;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnStaff;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnGraduation;
+        private System.Windows.Forms.Button btnExportEx;
     }
 }

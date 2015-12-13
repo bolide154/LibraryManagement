@@ -125,6 +125,7 @@
             this.clmnBookName});
             this.dgvDetailVoucher.Location = new System.Drawing.Point(336, 270);
             this.dgvDetailVoucher.Name = "dgvDetailVoucher";
+            this.dgvDetailVoucher.ReadOnly = true;
             this.dgvDetailVoucher.RowHeadersVisible = false;
             this.dgvDetailVoucher.Size = new System.Drawing.Size(518, 186);
             this.dgvDetailVoucher.TabIndex = 72;
@@ -133,11 +134,13 @@
             // 
             this.clmnCode.HeaderText = "Book Id";
             this.clmnCode.Name = "clmnCode";
+            this.clmnCode.ReadOnly = true;
             // 
             // clmnBookName
             // 
             this.clmnBookName.HeaderText = "Book Name";
             this.clmnBookName.Name = "clmnBookName";
+            this.clmnBookName.ReadOnly = true;
             this.clmnBookName.Width = 415;
             // 
             // dgvVoucherStt
@@ -151,6 +154,7 @@
             this.clmnObject});
             this.dgvVoucherStt.Location = new System.Drawing.Point(4, 33);
             this.dgvVoucherStt.Name = "dgvVoucherStt";
+            this.dgvVoucherStt.ReadOnly = true;
             this.dgvVoucherStt.RowHeadersVisible = false;
             this.dgvVoucherStt.Size = new System.Drawing.Size(279, 423);
             this.dgvVoucherStt.TabIndex = 71;
@@ -159,6 +163,7 @@
             // 
             this.clmnVoucherId.HeaderText = "Voucher";
             this.clmnVoucherId.Name = "clmnVoucherId";
+            this.clmnVoucherId.ReadOnly = true;
             this.clmnVoucherId.Width = 140;
             // 
             // clmnCertificateId
@@ -172,18 +177,21 @@
             // 
             this.clmnPayday.HeaderText = "Pay Day";
             this.clmnPayday.Name = "clmnPayday";
+            this.clmnPayday.ReadOnly = true;
             this.clmnPayday.Visible = false;
             // 
             // clmnReader
             // 
             this.clmnReader.HeaderText = "Reader";
             this.clmnReader.Name = "clmnReader";
+            this.clmnReader.ReadOnly = true;
             this.clmnReader.Visible = false;
             // 
             // clmnObject
             // 
             this.clmnObject.HeaderText = "Ob";
             this.clmnObject.Name = "clmnObject";
+            this.clmnObject.ReadOnly = true;
             this.clmnObject.Visible = false;
             // 
             // txtCertificate

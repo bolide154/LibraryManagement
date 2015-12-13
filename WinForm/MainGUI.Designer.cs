@@ -42,6 +42,7 @@
             this.mnuiCertificateStt = new System.Windows.Forms.ToolStripMenuItem();
             this.certificateManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.voucherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,7 +53,8 @@
             this.mnuBook,
             this.mnuReader,
             this.certificateToolStripMenuItem,
-            this.voucherToolStripMenuItem});
+            this.voucherToolStripMenuItem,
+            this.backBookToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(636, 24);
@@ -159,6 +161,13 @@
             this.voucherToolStripMenuItem.Text = "Voucher";
             this.voucherToolStripMenuItem.Click += new System.EventHandler(this.voucherToolStripMenuItem_Click);
             // 
+            // backBookToolStripMenuItem
+            // 
+            this.backBookToolStripMenuItem.Name = "backBookToolStripMenuItem";
+            this.backBookToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
+            this.backBookToolStripMenuItem.Text = "Back Book";
+            this.backBookToolStripMenuItem.Click += new System.EventHandler(this.backBookToolStripMenuItem_Click);
+            // 
             // MainGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -191,5 +200,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnuiCertificateStt;
         private System.Windows.Forms.ToolStripMenuItem certificateManagementToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem voucherToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem backBookToolStripMenuItem;
     }
 }

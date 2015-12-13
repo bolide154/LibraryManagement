@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace WinForm
 {
@@ -54,7 +55,6 @@ namespace WinForm
             readerList = ReaderDAL.getReaderList();
             foreach (ReaderBLL row in readerList)
             {
-                
                 //MessageBox.Show(row.IsStaff.ToString());
                 this.dgvReader.Rows.Add(row.Code, row.Name, row.Address, row.Phone, row.Email, row.Allocateddate.ToShortDateString(), row.Enddate.ToShortDateString(),row.Birthday.ToShortDateString(),row.IsStaff, row.Granduation);
             }
@@ -288,6 +288,112 @@ namespace WinForm
                 MessageBox.Show("Update success!", "Success");
                 this.LoadDataToDataGridView();
             }
+        }
+        private void ToCsV(DataGridView dGV, string filename)
+        {
+            string stOutput = "";
+            // Export titles:
+            string sHeaders = "";
+            DateTime current = new DateTime();
+            DateTime endtime = new DateTime();
+            TimeSpan tg;
+            current = DateTime.Now;
+            for (int j = 0; j < dGV.Columns.Count; j++)
+            {
+                sHeaders = sHeaders.ToString() + Convert.ToString(dGV.Columns[j].HeaderText) + "\t";
+                if (j == dGV.Columns.Count - 1)
+                {
+                    sHeaders = sHeaders.ToString() + "Out Of Date\t";
+                }
+            }
+            stOutput += sHeaders + "\r\n";
+            // Export data.
+            for (int i = 0; i < dGV.RowCount - 1; i++)
+            {
+                string stLine = "";
+                endtime = Convert.ToDateTime(dGV.Rows[i].Cells["clmnDateEnd"].Value);
+                tg = current - endtime;
+                int songay = Convert.ToInt16(tg.Days);
+                if (songay >= 0)
+                {
+                    for (int j = 0; j < dGV.Rows[i].Cells.Count; j++)
+                    {
+                        stLine = stLine.ToString() + dGV.Rows[i].Cells[j].Value.ToString() + "\t";
+                        if (j == dGV.Rows[i].Cells.Count - 1)
+                        {
+                            stLine = stLine.ToString() + songay + "\t";
+                        }
+                    }
+                    stOutput += stLine + "\r\n";
+                }
+            }
+            FileStream fs = new FileStream(filename, FileMode.Create);
+            StreamWriter bw = new StreamWriter(fs, Encoding.Unicode);
+            bw.Write(stOutput); //write the encoded file
+            bw.Flush();
+            bw.Close();
+            fs.Close();
+        }
+        private void btnExportEx_Click_1(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Excel Documents (*.xls)|*.xls";
+            sfd.FileName = "Reader.xls";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                ToCsV(this.dgvReader, sfd.FileName);
+                //ToCsV(nHANVIEN_DTODataGridView, sfd.FileName); // Here dataGridview1 is your grid view name 
+            }
+        }
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            string key = this.txtSearch.Text;
+            if (key == "".Trim())
+            {
+                MessageBox.Show("Please enter keyword!", "Notice");
+                return;
+            }
+            string catalog = "";
+            //MessageBox.Show(this.cboSearch.SelectedItem.ToString());
+            if (this.cboTimtheo.SelectedItem.ToString() == "Reader Name")
+            {
+                catalog += "docgia.tendocgia";
+                //MessageBox.Show(catalog);
+            }
+            else if (this.cboTimtheo.SelectedItem.ToString() == "Reader Id")
+            {
+                catalog += "docgia.madocgia";
+                //MessageBox.Show(catalog);
+            }
+            else if (this.cboTimtheo.SelectedItem.ToString() == "Phone Number")
+            {
+                catalog += "docgia.sdtdocgia";
+                //MessageBox.Show(catalog);
+            }
+            else if (this.cboTimtheo.SelectedItem.ToString() == "E-mail")
+            {
+                catalog += "docgia.emaildocgia";
+                //MessageBox.Show(catalog);
+            }
+            ReaderBLL readerBLL = new ReaderBLL();
+            List<ReaderBLL> readerArr = new List<ReaderBLL>();
+            readerArr = ReaderDAL.search(key, catalog);
+            this.dgvReader.Rows.Clear();
+            if (readerArr != null)
+            {
+                //MessageBox.Show("ok");
+                foreach (ReaderBLL row in readerArr)
+                {
+                    this.dgvReader.Rows.Add(row.Code, row.Name, row.Address, row.Phone, row.Email, row.Allocateddate.ToShortDateString(), row.Enddate.ToShortDateString(), row.Birthday.ToShortDateString(), row.IsStaff, row.Granduation);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Sorry! Can't find this reader");
+                return;
+            }
+            this.dgvReader.SelectionChanged += new EventHandler(dgvReader_SelectionChanged);
+            this.GetSelectedValue();
         }
     }
 }

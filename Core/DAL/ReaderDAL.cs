@@ -126,5 +126,25 @@ namespace Core.DAL
             }*/
             return null;
         }
+        public static List<ReaderBLL> search(string value, string catalog)
+        {
+            string sql = "SELECT * FROM [docgia] where " + catalog + " LIKE '%" + value + "%'";
+            DataTable dt = ReaderDAL._condb.getDataTable(sql);
+            List<ReaderBLL> readerBLLList = new List<ReaderBLL>();
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReaderBLL readerBLL = new ReaderBLL(row["tendocgia"].ToString(), Convert.ToInt64(row["madocgia"]), row["diachidocgia"].ToString(), row["sdtdocgia"].ToString(), row["emaildocgia"].ToString(), DateTime.Parse(row["ngaycap"].ToString()), DateTime.Parse(row["ngayhethan"].ToString()), DateTime.Parse(row["ngaysinhdocgia"].ToString()), bool.Parse(row["lacbcnv"].ToString()), Int32.Parse(row["namtotnghiep"].ToString()));
+                    readerBLLList.Add(readerBLL);
+
+                }
+                return readerBLLList;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

@@ -3,3 +3,15 @@ D:\project\LibraryManagement\WebForm\bin\WebForm.pdb
 D:\project\LibraryManagement\WebForm\obj\Debug\WebForm.csprojResolveAssemblyReference.cache
 D:\project\LibraryManagement\WebForm\obj\Debug\WebForm.dll
 D:\project\LibraryManagement\WebForm\obj\Debug\WebForm.pdb
+D:\temp librabry\LibraryManagement\WebForm\bin\WebForm.dll.config
+D:\temp librabry\LibraryManagement\WebForm\bin\WebForm.dll
+D:\temp librabry\LibraryManagement\WebForm\bin\WebForm.pdb
+D:\temp librabry\LibraryManagement\WebForm\obj\Debug\WebForm.csprojResolveAssemblyReference.cache
+D:\temp librabry\LibraryManagement\WebForm\obj\Debug\WebForm.dll
+D:\temp librabry\LibraryManagement\WebForm\obj\Debug\WebForm.pdb
+D:\temp librabry\LibraryManagementc01\WebForm\bin\WebForm.dll.config
+D:\temp librabry\LibraryManagementc01\WebForm\bin\WebForm.dll
+D:\temp librabry\LibraryManagementc01\WebForm\bin\WebForm.pdb
+D:\temp librabry\LibraryManagementc01\WebForm\obj\Debug\WebForm.csprojResolveAssemblyReference.cache
+D:\temp librabry\LibraryManagementc01\WebForm\obj\Debug\WebForm.dll
+D:\temp librabry\LibraryManagementc01\WebForm\obj\Debug\WebForm.pdb

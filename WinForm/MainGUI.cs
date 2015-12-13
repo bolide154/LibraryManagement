@@ -76,5 +76,11 @@ namespace WinForm
             VoucherGUI voucher = new VoucherGUI();
             voucher.Show();
         }
+
+        private void backBookToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BackBookGUI backbook = new BackBookGUI();
+            backbook.Show();
+        }
     }
 }

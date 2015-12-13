@@ -14,7 +14,7 @@ namespace Core.DAL
 
         public static List<VoucherBLL> getManageVoucherList()
         {
-            String sql = "SELECT * FROM [phieutra] INNER JOIN [sachmuon] ON sachmuon.maphieutra = phieutra.maphieutra INNER JOIN [docgia] ON phieutra.madocgia = docgia.madocgia";
+            String sql = "SELECT DISTINCT phieutra.maphieutra, sachmuon.maphieumuon, tendocgia, lacbcnv, ngaytra FROM [phieutra] INNER JOIN [sachmuon] ON sachmuon.maphieutra = phieutra.maphieutra INNER JOIN [docgia] ON phieutra.madocgia = docgia.madocgia";
             DataTable dt = VoucherDAL._condb.getDataTable(sql);
             List<VoucherBLL> manageVoucherBLLList = new List<VoucherBLL>();
             if (dt.Rows.Count > 0)

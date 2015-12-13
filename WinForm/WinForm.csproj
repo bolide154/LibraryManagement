@@ -56,6 +56,12 @@
     <Compile Include="AuthorGUI.Designer.cs">
       <DependentUpon>AuthorGUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="BackBookGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BackBookGUI.Designer.cs">
+      <DependentUpon>BackBookGUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="BookGUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AuthorGUI.resx">
       <DependentUpon>AuthorGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BackBookGUI.resx">
+      <DependentUpon>BackBookGUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BookGUI.resx">
       <DependentUpon>BookGUI.cs</DependentUpon>

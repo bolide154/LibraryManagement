@@ -55,6 +55,7 @@
             this.txtDayEnd = new System.Windows.Forms.TextBox();
             this.lblId = new System.Windows.Forms.Label();
             this.cboSearch = new System.Windows.Forms.ComboBox();
+            this.btnExportEx = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCertificateStt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetailCertificate)).BeginInit();
             this.SuspendLayout();
@@ -72,6 +73,7 @@
             this.clmnReaderCode});
             this.dgvCertificateStt.Location = new System.Drawing.Point(9, 30);
             this.dgvCertificateStt.Name = "dgvCertificateStt";
+            this.dgvCertificateStt.ReadOnly = true;
             this.dgvCertificateStt.RowHeadersVisible = false;
             this.dgvCertificateStt.Size = new System.Drawing.Size(279, 423);
             this.dgvCertificateStt.TabIndex = 53;
@@ -81,6 +83,7 @@
             // 
             this.clmnId.HeaderText = "Certificate";
             this.clmnId.Name = "clmnId";
+            this.clmnId.ReadOnly = true;
             this.clmnId.Width = 140;
             // 
             // clmnStt
@@ -94,30 +97,35 @@
             // 
             this.clmnDayStart.HeaderText = "Day Start";
             this.clmnDayStart.Name = "clmnDayStart";
+            this.clmnDayStart.ReadOnly = true;
             this.clmnDayStart.Visible = false;
             // 
             // clmnDayEnd
             // 
             this.clmnDayEnd.HeaderText = "Day End";
             this.clmnDayEnd.Name = "clmnDayEnd";
+            this.clmnDayEnd.ReadOnly = true;
             this.clmnDayEnd.Visible = false;
             // 
             // clmnReaderName
             // 
             this.clmnReaderName.HeaderText = "Name";
             this.clmnReaderName.Name = "clmnReaderName";
+            this.clmnReaderName.ReadOnly = true;
             this.clmnReaderName.Visible = false;
             // 
             // clmnObject
             // 
             this.clmnObject.HeaderText = "Object";
             this.clmnObject.Name = "clmnObject";
+            this.clmnObject.ReadOnly = true;
             this.clmnObject.Visible = false;
             // 
             // clmnReaderCode
             // 
             this.clmnReaderCode.HeaderText = "Code";
             this.clmnReaderCode.Name = "clmnReaderCode";
+            this.clmnReaderCode.ReadOnly = true;
             this.clmnReaderCode.Visible = false;
             // 
             // dgvDetailCertificate
@@ -128,6 +136,7 @@
             this.clmnBookName});
             this.dgvDetailCertificate.Location = new System.Drawing.Point(341, 267);
             this.dgvDetailCertificate.Name = "dgvDetailCertificate";
+            this.dgvDetailCertificate.ReadOnly = true;
             this.dgvDetailCertificate.RowHeadersVisible = false;
             this.dgvDetailCertificate.Size = new System.Drawing.Size(518, 186);
             this.dgvDetailCertificate.TabIndex = 56;
@@ -136,11 +145,13 @@
             // 
             this.clmnCode.HeaderText = "Book Id";
             this.clmnCode.Name = "clmnCode";
+            this.clmnCode.ReadOnly = true;
             // 
             // clmnBookName
             // 
             this.clmnBookName.HeaderText = "Book Name";
             this.clmnBookName.Name = "clmnBookName";
+            this.clmnBookName.ReadOnly = true;
             this.clmnBookName.Width = 415;
             // 
             // txtSearch
@@ -275,11 +286,22 @@
             this.cboSearch.Size = new System.Drawing.Size(90, 21);
             this.cboSearch.TabIndex = 72;
             // 
+            // btnExportEx
+            // 
+            this.btnExportEx.Location = new System.Drawing.Point(760, 235);
+            this.btnExportEx.Name = "btnExportEx";
+            this.btnExportEx.Size = new System.Drawing.Size(93, 26);
+            this.btnExportEx.TabIndex = 73;
+            this.btnExportEx.Text = "Export Excel";
+            this.btnExportEx.UseVisualStyleBackColor = true;
+            this.btnExportEx.Click += new System.EventHandler(this.btnExportEx_Click);
+            // 
             // CertificateGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(865, 459);
+            this.Controls.Add(this.btnExportEx);
             this.Controls.Add(this.cboSearch);
             this.Controls.Add(this.lblId);
             this.Controls.Add(this.txtDayEnd);
@@ -337,5 +359,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnBookName;
         private System.Windows.Forms.Label lblId;
         private System.Windows.Forms.ComboBox cboSearch;
+        private System.Windows.Forms.Button btnExportEx;
     }
 }

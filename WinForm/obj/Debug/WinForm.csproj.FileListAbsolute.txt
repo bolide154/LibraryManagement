@@ -38,3 +38,26 @@ D:\project\LibraryManagement\WinForm\bin\Debug\Core.pdb
 D:\project\LibraryManagement\WinForm\obj\Debug\WinForm.AspectCertificateGUI.resources
 D:\project\LibraryManagement\WinForm\obj\Debug\WinForm.CertificateGUI.resources
 D:\project\LibraryManagement\WinForm\obj\Debug\WinForm.VoucherGUI.resources
+D:\temp librabry\LibraryManagement\WinForm\bin\Debug\WinForm.exe.config
+D:\temp librabry\LibraryManagement\WinForm\obj\Debug\WinForm.exe
+D:\temp librabry\LibraryManagement\WinForm\obj\Debug\WinForm.pdb
+D:\temp librabry\LibraryManagement\WinForm\bin\Debug\WinForm.exe
+D:\temp librabry\LibraryManagement\WinForm\bin\Debug\WinForm.pdb
+D:\temp librabry\LibraryManagement\WinForm\bin\Debug\Core.dll
+D:\temp librabry\LibraryManagement\WinForm\bin\Debug\Core.pdb
+D:\temp librabry\LibraryManagement\WinForm\obj\Debug\WinForm.csprojResolveAssemblyReference.cache
+D:\temp librabry\LibraryManagement\WinForm\obj\Debug\WinForm.AspectCertificateGUI.resources
+D:\temp librabry\LibraryManagement\WinForm\obj\Debug\WinForm.AuthorGUI.resources
+D:\temp librabry\LibraryManagement\WinForm\obj\Debug\WinForm.BackBookGUI.resources
+D:\temp librabry\LibraryManagement\WinForm\obj\Debug\WinForm.BookGUI.resources
+D:\temp librabry\LibraryManagement\WinForm\obj\Debug\WinForm.BookStatusGUI.resources
+D:\temp librabry\LibraryManagement\WinForm\obj\Debug\WinForm.BookTitleGUI.resources
+D:\temp librabry\LibraryManagement\WinForm\obj\Debug\WinForm.BookTitleStatusGUI.resources
+D:\temp librabry\LibraryManagement\WinForm\obj\Debug\WinForm.MainGUI.resources
+D:\temp librabry\LibraryManagement\WinForm\obj\Debug\WinForm.CertificateGUI.resources
+D:\temp librabry\LibraryManagement\WinForm\obj\Debug\WinForm.Properties.Resources.resources
+D:\temp librabry\LibraryManagement\WinForm\obj\Debug\WinForm.PublisherGUI.resources
+D:\temp librabry\LibraryManagement\WinForm\obj\Debug\WinForm.ReaderGUI.resources
+D:\temp librabry\LibraryManagement\WinForm\obj\Debug\WinForm.TypeOfBookGUI.resources
+D:\temp librabry\LibraryManagement\WinForm\obj\Debug\WinForm.VoucherGUI.resources
+D:\temp librabry\LibraryManagement\WinForm\obj\Debug\WinForm.csproj.GenerateResource.Cache
