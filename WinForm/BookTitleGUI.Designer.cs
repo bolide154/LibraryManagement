@@ -32,13 +32,6 @@
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.dgvBookTitle = new System.Windows.Forms.DataGridView();
-            this.clmnBookTitleId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmnBookTitleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmnTypeOfBookId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmnTypeOfBookName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmnPublisherId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmnBookTitleStatusId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmnSummary = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblInfor = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtBookName = new System.Windows.Forms.TextBox();
@@ -75,6 +68,16 @@
             this.btnPublisherRefresh = new System.Windows.Forms.Button();
             this.btnBookTitleStatusRefresh = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
+            this.clmnBookTitleId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnBookTitleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnTypeOfBookId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnTypeOfBookName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnPublisherId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnPublisherName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnBookTitleStatusId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnBookTitleStatusName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnSummary = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBookTitle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAuthor)).BeginInit();
             this.SuspendLayout();
@@ -114,49 +117,14 @@
             this.clmnTypeOfBookId,
             this.clmnTypeOfBookName,
             this.clmnPublisherId,
+            this.clmnPublisherName,
             this.clmnBookTitleStatusId,
+            this.clmnBookTitleStatusName,
             this.clmnSummary});
             this.dgvBookTitle.Location = new System.Drawing.Point(13, 55);
             this.dgvBookTitle.Name = "dgvBookTitle";
             this.dgvBookTitle.Size = new System.Drawing.Size(542, 398);
             this.dgvBookTitle.TabIndex = 3;
-            // 
-            // clmnBookTitleId
-            // 
-            this.clmnBookTitleId.HeaderText = "Book Title Id";
-            this.clmnBookTitleId.Name = "clmnBookTitleId";
-            this.clmnBookTitleId.Visible = false;
-            // 
-            // clmnBookTitleName
-            // 
-            this.clmnBookTitleName.HeaderText = "Book Name";
-            this.clmnBookTitleName.Name = "clmnBookTitleName";
-            // 
-            // clmnTypeOfBookId
-            // 
-            this.clmnTypeOfBookId.HeaderText = "Type Of Book";
-            this.clmnTypeOfBookId.Name = "clmnTypeOfBookId";
-            this.clmnTypeOfBookId.Visible = false;
-            // 
-            // clmnTypeOfBookName
-            // 
-            this.clmnTypeOfBookName.HeaderText = "Type Of Book";
-            this.clmnTypeOfBookName.Name = "clmnTypeOfBookName";
-            // 
-            // clmnPublisherId
-            // 
-            this.clmnPublisherId.HeaderText = "Publisher";
-            this.clmnPublisherId.Name = "clmnPublisherId";
-            // 
-            // clmnBookTitleStatusId
-            // 
-            this.clmnBookTitleStatusId.HeaderText = "Book Title Status";
-            this.clmnBookTitleStatusId.Name = "clmnBookTitleStatusId";
-            // 
-            // clmnSummary
-            // 
-            this.clmnSummary.HeaderText = "Summary";
-            this.clmnSummary.Name = "clmnSummary";
             // 
             // lblInfor
             // 
@@ -479,11 +447,71 @@
             this.button1.TabIndex = 39;
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(794, 430);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(75, 23);
+            this.btnExport.TabIndex = 40;
+            this.btnExport.Text = "Export Exel";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // clmnBookTitleId
+            // 
+            this.clmnBookTitleId.HeaderText = "Book Title Id";
+            this.clmnBookTitleId.Name = "clmnBookTitleId";
+            this.clmnBookTitleId.Visible = false;
+            // 
+            // clmnBookTitleName
+            // 
+            this.clmnBookTitleName.HeaderText = "Book Name";
+            this.clmnBookTitleName.Name = "clmnBookTitleName";
+            // 
+            // clmnTypeOfBookId
+            // 
+            this.clmnTypeOfBookId.HeaderText = "Type Of Book";
+            this.clmnTypeOfBookId.Name = "clmnTypeOfBookId";
+            this.clmnTypeOfBookId.Visible = false;
+            // 
+            // clmnTypeOfBookName
+            // 
+            this.clmnTypeOfBookName.HeaderText = "Type Of Book";
+            this.clmnTypeOfBookName.Name = "clmnTypeOfBookName";
+            // 
+            // clmnPublisherId
+            // 
+            this.clmnPublisherId.HeaderText = "Publisher";
+            this.clmnPublisherId.Name = "clmnPublisherId";
+            this.clmnPublisherId.Visible = false;
+            // 
+            // clmnPublisherName
+            // 
+            this.clmnPublisherName.HeaderText = "Publisher Name";
+            this.clmnPublisherName.Name = "clmnPublisherName";
+            // 
+            // clmnBookTitleStatusId
+            // 
+            this.clmnBookTitleStatusId.HeaderText = "Book Title Status";
+            this.clmnBookTitleStatusId.Name = "clmnBookTitleStatusId";
+            this.clmnBookTitleStatusId.Visible = false;
+            // 
+            // clmnBookTitleStatusName
+            // 
+            this.clmnBookTitleStatusName.HeaderText = "Status Name";
+            this.clmnBookTitleStatusName.Name = "clmnBookTitleStatusName";
+            // 
+            // clmnSummary
+            // 
+            this.clmnSummary.HeaderText = "Summary";
+            this.clmnSummary.Name = "clmnSummary";
+            // 
             // BookTitleGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1208, 469);
+            this.Controls.Add(this.btnExport);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnBookTitleStatusRefresh);
             this.Controls.Add(this.btnPublisherRefresh);
@@ -566,13 +594,6 @@
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtBookTotal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmnBookTitleId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmnBookTitleName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmnTypeOfBookId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmnTypeOfBookName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmnPublisherId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmnBookTitleStatusId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmnSummary;
         private System.Windows.Forms.Button btnTypeOfBookRefresh;
         private System.Windows.Forms.Button btnPublisherRefresh;
         private System.Windows.Forms.Button btnBookTitleStatusRefresh;
@@ -580,5 +601,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnAuthorId;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnAuthorName;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnWorkPlace;
+        private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmnBookTitleId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmnBookTitleName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmnTypeOfBookId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmnTypeOfBookName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmnPublisherId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmnPublisherName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmnBookTitleStatusId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmnBookTitleStatusName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmnSummary;
     }
 }
