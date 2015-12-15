@@ -67,5 +67,24 @@ namespace Core.DAL
             return null;
             
         }
+
+        internal static BookBLL getBookByBookId(int bookId)
+        {
+            string sql = "SELECT * FROM [sach] WHERE masach=" + bookId + " AND matinhtrangsach=" + 1;
+            DataTable dt = new DataTable();
+            dt = BookDAL._condb.getDataTable(sql);
+            if (dt.Rows.Count > 0)
+            {
+                DataRow row = dt.Rows[0];
+                return new BookBLL(Int32.Parse(row["masach"].ToString()), Int32.Parse(row["madausach"].ToString()), Int32.Parse(row["matinhtrangsach"].ToString()));
+            }
+            return null;
+        }
+
+        internal static void changeStatus(int bookId)
+        {
+            string sql = "UPDATE [sach] SET matinhtrangsach=2 WHERE masach=" + bookId;
+            BookDAL._condb.ExecuteNonQuery(sql);
+        }
     }
 }

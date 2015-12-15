@@ -111,20 +111,20 @@ namespace Core.DAL
                     return new ReaderBLL(row_02["tendocgia"].ToString(), Convert.ToInt64(row_02["madocgia"].ToString()), row_02["diachidocgia"].ToString(), row_02["sdtdocgia"].ToString(), row_02["emaildocgia"].ToString(), DateTime.Parse(row_02["ngaycap"].ToString()), DateTime.Parse(row_02["ngayhethan"].ToString()), DateTime.Parse(row_02["ngaysinhdocgia"].ToString()), bool.Parse(row_02["lacbcnv"].ToString()), Int32.Parse(row_02["namtotnghiep"].ToString()));
                 }
             }
-            /*DataRow row_02;
-            for (int i=0;i<dt_02.Rows.Count;i++)
-            {
-                row_02 = dt_02.Rows[i];
-                if (Int32.Parse(row_02["idtinhtrang"].ToString()) != 4)
-                {
-                    return null;
-                }
-                if (Int32.Parse(row_02["idtinhtrang"].ToString()) == 4 && i == dt_02.Rows.Count)
-                {
-                    return new ReaderBLL(row_02["tendocgia"].ToString(), Convert.ToInt64(row_02["madocgia"].ToString()), row_02["diachidocgia"].ToString(), row_02["sdtdocgia"].ToString(), row_02["emaildocgia"].ToString(), DateTime.Parse(row_02["ngaycap"].ToString()), DateTime.Parse(row_02["ngayhethan"].ToString()), DateTime.Parse(row_02["ngaysinhdocgia"].ToString()), bool.Parse(row_02["lacbcnv"].ToString()), Int32.Parse(row_02["namtotnghiep"].ToString()));
-                }
-            }*/
             return null;
+        }
+        public static ReaderBLL getReaderByReaderId(Int64 readerId)
+        {
+            string sql = "SELECT * FROM [docgia] WHERE madocgia=" + readerId;
+            DataTable dt = new DataTable();
+            dt = ReaderDAL._condb.getDataTable(sql);
+            if (dt.Rows.Count > 0)
+            {
+                DataRow row = dt.Rows[0];
+                return new ReaderBLL(row["tendocgia"].ToString(), Convert.ToInt64(row["madocgia"]), row["diachidocgia"].ToString(), row["sdtdocgia"].ToString(), row["emaildocgia"].ToString(), DateTime.Parse(row["ngaycap"].ToString()), DateTime.Parse(row["ngayhethan"].ToString()), DateTime.Parse(row["ngaysinhdocgia"].ToString()), bool.Parse(row["lacbcnv"].ToString()), Int32.Parse(row["namtotnghiep"].ToString()));
+            }
+            return null;
+
         }
         public static List<ReaderBLL> search(string value, string catalog)
         {

@@ -15,3 +15,5 @@ D:\temp librabry\LibraryManagement\Core\obj\Debug\Core.dll
 D:\temp librabry\LibraryManagement\Core\obj\Debug\Core.pdb
 D:\temp librabry\LibraryManagement\Core\obj\Debug\Interop.LCC11.dll
 D:\temp librabry\LibraryManagement\Core\obj\Debug\Core.csproj.ResolveComReference.cache
+E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\Core\obj\Debug\Interop.LCC11.dll
+E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\Core\obj\Debug\Core.csproj.ResolveComReference.cache

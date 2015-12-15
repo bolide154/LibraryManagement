@@ -61,3 +61,8 @@ D:\temp librabry\LibraryManagement\WinForm\obj\Debug\WinForm.ReaderGUI.resources
 D:\temp librabry\LibraryManagement\WinForm\obj\Debug\WinForm.TypeOfBookGUI.resources
 D:\temp librabry\LibraryManagement\WinForm\obj\Debug\WinForm.VoucherGUI.resources
 D:\temp librabry\LibraryManagement\WinForm\obj\Debug\WinForm.csproj.GenerateResource.Cache
+E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.AspectCertificateGUI.resources
+E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.BackBookGUI.resources
+E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.CertificateGUI.resources
+E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.ReaderGUI.resources
+E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WinForm\obj\Debug\WinForm.VoucherGUI.resources

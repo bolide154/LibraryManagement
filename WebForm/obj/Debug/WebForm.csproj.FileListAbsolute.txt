@@ -15,3 +15,11 @@ D:\temp librabry\LibraryManagementc01\WebForm\bin\WebForm.pdb
 D:\temp librabry\LibraryManagementc01\WebForm\obj\Debug\WebForm.csprojResolveAssemblyReference.cache
 D:\temp librabry\LibraryManagementc01\WebForm\obj\Debug\WebForm.dll
 D:\temp librabry\LibraryManagementc01\WebForm\obj\Debug\WebForm.pdb
+E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WebForm\bin\WebForm.dll.config
+E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WebForm\bin\WebForm.dll
+E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WebForm\bin\WebForm.pdb
+E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WebForm\obj\Debug\WebForm.csprojResolveAssemblyReference.cache
+E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WebForm\obj\Debug\WebForm.dll
+E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WebForm\obj\Debug\WebForm.pdb
+E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WebForm\bin\Core.dll
+E:\VIEN\Dropbox\STUDY\XDPM\LibraryManagement\WebForm\bin\Core.pdb

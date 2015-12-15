@@ -71,5 +71,44 @@ namespace Core.DAL
                 return null;
             }
         }
+        public static List<CertificateBLL> getCertificateByReaderId(Int64 readerId)
+        {
+            string sql = "SELECT * FROM [phieumuon] pm INNER JOIN [sachmuon] sm ON pm.maphieumuon = sm.maphieumuon WHERE sm.maphieutra IS NULL AND pm.madocgia=" + readerId;
+            DataTable dt = new DataTable();
+            dt = CertificateDAL._condb.getDataTable(sql);
+            if (dt.Rows.Count > 0)
+            {
+                List<CertificateBLL> certificateList = new List<CertificateBLL>();
+                foreach (DataRow row in dt.Rows)
+                {
+                    certificateList.Add(new CertificateBLL(Int32.Parse(row["maphieumuon"].ToString()), Int32.Parse(row["idtinhtrang"].ToString()), Int64.Parse(row["madocgia"].ToString()), Convert.ToDateTime(row["ngaymuon"].ToString()), Convert.ToDateTime(row["hantra"].ToString())));
+                }
+                return certificateList;
+            }
+            return null;
+        }
+
+        public static void insert(CertificateBLL certificateBLL)
+        {
+            string sql = "INSERT INTO [phieumuon] (idtinhtrang, madocgia, ngaymuon, hantra) VALUES ("+certificateBLL.Idtinhtrang+", "+certificateBLL.Iddocgia+", '"+certificateBLL.Ngaymuon+"', '"+certificateBLL.Hantra+"')";
+            CertificateDAL._condb.ExecuteNonQuery(sql);
+        }
+
+        public static List<CertificateBLL> getLastCertificateByReaderId(Int64 readerId)
+        {
+            string sql = "SELECT * FROM [phieumuon] WHERE madocgia=" + readerId;
+            DataTable dt = new DataTable();
+            dt = CertificateDAL._condb.getDataTable(sql);
+            List<CertificateBLL> certificatList = new List<CertificateBLL>();
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    certificatList.Add(new CertificateBLL(Int32.Parse(row["maphieumuon"].ToString()), Int32.Parse(row["idtinhtrang"].ToString()), Int64.Parse(row["madocgia"].ToString()), Convert.ToDateTime(row["ngaymuon"].ToString()), Convert.ToDateTime(row["hantra"].ToString())));
+                }
+                return certificatList;
+            }
+            return null;
+        }
     }
 }

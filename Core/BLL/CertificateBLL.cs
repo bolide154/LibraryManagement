@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -130,6 +131,25 @@ namespace Core.BLL
             this._ngaymuon = ngayMuon;
             this._hantra = hanTra;
         }
+
+        public CertificateBLL(int idPhieumuon, int idTinhtrang, Int64 idDocgia, DateTime ngayMuon, DateTime hanTra)
+        {
+            this._idphieumuon = idPhieumuon;
+            this._idtinhtrang = idTinhtrang;
+            this._iddocgia = idDocgia;
+            this._ngaymuon = ngayMuon;
+            this._hantra = hanTra;
+        }
+        public CertificateBLL(int idTinhtrang, Int64 idDocgia, DateTime ngayMuon, DateTime hanTra)
+        {
+            this._idtinhtrang = idTinhtrang;
+            this._iddocgia = idDocgia;
+            this._ngaymuon = ngayMuon;
+            this._hantra = hanTra;
+        }
+
         public CertificateBLL() { }
+
+        
     }
 }
